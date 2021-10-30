@@ -14,8 +14,8 @@ class Purchase(models.Model):
     )
 
     id = models.AutoField(null=False,blank=False,primary_key=True)
-    shopping_cart_id = models.ForeignKey(Shopping_cart, on_delete=models.RESTRICT)
-    shopping_cart_product = models.ForeignKey(Shopping_cart_product,on_delete= models.RESTRICT ,related_name='+')
+    #shopping_cart_id = models.ForeignKey(Shopping_cart, on_delete=models.RESTRICT)
+    #shopping_cart_product = models.ForeignKey(Shopping_cart_product,on_delete= models.RESTRICT ,related_name='+')
     status = models.CharField(null= False, blank= False,default='',max_length=50, choices=status_option)
     created_at = models.DateTimeField(null= False, blank= False, auto_now=True)
     updated_at = models.DateTimeField( null=False,blank=False ,  auto_now=True)
@@ -25,7 +25,7 @@ class Purchase(models.Model):
 
    
    
-    def __str__(self):
-        return str('shopping_cart:{}'.format(self.shopping_cart_id))
+   # def __str__(self):
+   #     return str('shopping_cart:{}'.format(self.shopping_cart_id))
 
 

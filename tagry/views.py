@@ -25,7 +25,6 @@ def home_view(request):
         }
         return render(request, 'admin/base.html', context)
     else:
-    
         return redirect('login')
 
 
