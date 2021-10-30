@@ -6,8 +6,7 @@ from seller_user.models import Seller
 from buyer.models import Buyer
 
 @login_required(login_url='login')
-def home_view(request):
-    
+def home_view(request):    
     if request.user.is_authenticated == True:
         orders = get_orders()
         revenue = get_revenue()
@@ -23,9 +22,8 @@ def home_view(request):
             'seller' : len(sellers),
             'buyer' : len(buyer)
         }
-        return render(request, 'admin/base.html', context)
+        return  render(request, 'admin/base.html', context)
     else:
-    
         return redirect('login')
 
 

@@ -12,23 +12,24 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import json
+
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kzzma349a2#b#x695awc31#bv-!e$-e5rv401j7*q&5=!j0t_9'
-
+SECRET_KEY = config['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
-ALLOWED_HOSTS = ['desktop-ji02tuq', '127.0.0.1']
+ALLOWED_HOSTS = ['162.0.236.152','server1.tajiry.com']
 
 
 # Application definition
@@ -156,11 +157,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL ='/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+#STATICFILES_DIRS = [
+ #   os.path.join(BASE_DIR, 'static'),
+#]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
