@@ -29,7 +29,7 @@ SECRET_KEY = config['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ['162.0.236.152','server1.tajiry.com']
+ALLOWED_HOSTS = ['162.0.236.152','tajiry.com']
 
 
 # Application definition
