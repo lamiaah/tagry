@@ -22,7 +22,7 @@ def home_view(request):
             'seller' : len(sellers),
             'buyer' : len(buyer)
         }
-        return  render(request, 'admin/base.html', context)
+        return render(request, 'Templates/admin/base.html', context)
     else:
         return redirect('login')
 
