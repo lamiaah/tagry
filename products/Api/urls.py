@@ -7,4 +7,5 @@ urlpatterns = [
     path ('searchtitle/<str:product_title>/',SearchApiProduct.as_view()),
     path ('add/', AddProduct.as_view()),
     path ('put/<int:id>/', PutProduct.as_view()),
+    path ('delete/<int:id>/', PutProduct.as_view()),
 ]
