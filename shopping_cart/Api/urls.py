@@ -5,5 +5,6 @@ urlpatterns = [
     path('shopping/<int:user_id>/',ShoppingApi.as_view()),
     path('add/', AddShopping.as_view()),
     path('put/<int:id>/', ShoppingPut.as_view()),
+    path('delete/<int:id>/', ShoppingPut.as_view()),
     
 ]
