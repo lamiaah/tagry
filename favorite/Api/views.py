@@ -59,7 +59,7 @@ class Delete(APIView):
         return Response(serializer.data)
 
 
-    def delete(self ,id):
+    def delete(self ,request,id):
         favorite= self.get_object(id)
         if favorite == Http404:
             return  Response(status= status.HTTP_400_BAD_REQUEST)
