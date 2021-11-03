@@ -5,4 +5,5 @@ urlpatterns = [
     path ('all/',  OfferApiList.as_view()),
     path ('add/',  PostOffer.as_view()),
     path ('put/<int:id>/', UpdatOffer.as_view()),
+    path ('delete/<int:id>/', UpdatOffer.as_view()),
 ]
