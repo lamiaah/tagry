@@ -16,7 +16,6 @@ class Offers(models.Model):
     end_at = models.DateField(null= True, blank= True)
     created_user = models.ForeignKey(CustomUser, on_delete= models.RESTRICT, related_name= '+')
     updated_user = models.ForeignKey(CustomUser, on_delete= models.RESTRICT, related_name= '+')
-
     link = models.URLField()
 
 

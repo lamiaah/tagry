@@ -6,7 +6,6 @@ from users.models import CustomUser
 class KeySerializer(serializers.Serializer):
 
   keyword_title = serializers.CharField(read_only =False)
-  id = serializers.PrimaryKeyRelatedField(read_only = True)
   created_user = serializers.PrimaryKeyRelatedField(queryset = CustomUser.objects.all())
   updated_user = serializers.PrimaryKeyRelatedField(queryset = CustomUser.objects.all())
 
