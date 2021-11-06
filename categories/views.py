@@ -68,7 +68,7 @@ def post_sub(request ,pk):
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
                 form.save()
-                return redirect('sub_home ')
+                return redirect('sub_home')
             else: 
                 print(form.errors.as_data()) 
                 return render(request,'sub_category/new_sub.html',{'form':form})
