@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css' %}" />
     <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}"/>
+    <link rel="shortcut icon" href="{% static 'images/face.png'%}" />
   </head>
 
   <body>
@@ -137,7 +137,7 @@
                   <h5 class="card-title">Languages</h5>
                 </a>
               </li>
-               <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{% url 'key' %}">
                   <div class="clearfix">
                   <h4 class="text">
@@ -146,6 +146,10 @@
                 </div> 
                   <h5 class="card-title">key Words</h5>
                 </a>
+              </li>
+              <li class="nav-item">
+                 <a class="btn btn-outline-danger btn-lg mr-2"href="{% url 'logout'  %}" >
+                 <i class="fa fa-sign-out icon-big" ></i> Log out</a> 
               </li>
           </nav>
           

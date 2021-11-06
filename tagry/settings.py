@@ -15,7 +15,7 @@ import os
 import json
 
 with open('/etc/config.json') as config_file:
-    config = json.load(config_file)
+   config = json.load(config_file)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,10 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config['SECRET_KEY']
+#SECRET_KEY = 'django-insecure-kzzma349a2#b#x695awc31#bv-!e$-e5rv401j7*q&5=!j0t_9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = ['162.0.236.152','tajiry.com']
+ALLOWED_HOSTS = ['162.0.236.152','tajiry.com', '127.0.0.1']
 
 
 # Application definition
@@ -157,9 +158,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL ='/static/'
-#STATICFILES_DIRS = [
- #   os.path.join(BASE_DIR, 'static'),
-#]
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+# ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

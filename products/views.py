@@ -5,10 +5,13 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
-def get_products(self, request):
+def get_products(request):
     if request.user.is_authenticated == True:
-        product = Products.objects.all()
-        return HttpResponse(product)
+        product = Products.objects.filter(is_archive=False)
+        context ={
+            'product':product
+        }
+        return render(request,'products.html',context)
     else:
         return redirect('login')    
 

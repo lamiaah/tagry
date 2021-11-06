@@ -1,5 +1,5 @@
 from django import forms
-from categories.models import Categories
+from categories.models import Categories ,SubCategory
 
 
 class CategoryForm(forms.ModelForm):
@@ -8,3 +8,10 @@ class CategoryForm(forms.ModelForm):
         fields =["category_title","category_image"]
         
  
+
+
+class SubCategoryForm(forms.ModelForm):
+    class Meta : 
+        model = SubCategory
+        fields =["sub_title","sub_image"]
+        
