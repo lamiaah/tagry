@@ -60,10 +60,10 @@ def sub_category_list(request ,pk):
 
 
 @login_required(login_url='login')
-def post_sub(request ,pk):
+def post_sub(request ,sub_catgorey):
     if request.user.is_authenticated ==True :
         if request.method == 'POST':
-            form =SubCategoryForm(request.POST, request.FILES ,category_id=pk)
+            form =SubCategoryForm(request.POST, request.FILES ,category_id =sub_catgorey )
             if form.is_valid():
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
