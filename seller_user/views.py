@@ -2,9 +2,10 @@ from django.http.response import Http404
 from products.models import Products
 from django.shortcuts import render ,redirect ,get_object_or_404
 from seller_user.models import Seller
-from.forms import  SellerForm
+from.forms import  SellerForm ,RegisterForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from users.models import CustomUser
 
 @login_required(login_url='login')
 def seller(request):
@@ -33,12 +34,27 @@ def seller_details(request, pk):
     else:
         return redirect('login')
 
+
+def seller_regieter(request):
+     if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('login')
+        else:
+            form = RegisterForm()
+        return render(request,'seller/register_seller.html',{'form':form})    
+
+
 @login_required(login_url='login')
-def post(request):
+def post(request ,user_id):
     if request.user.is_authenticated :
+        user =CustomUser .objects.get(pk = user_id)
         if request.method == 'POST':
             form = SellerForm(request.POST, request.FILES or None)
             if form.is_valid():
+                form .instance.user = user
                 form.save()
                 print(form.data)
                 return redirect('seller_user:seller_list')
