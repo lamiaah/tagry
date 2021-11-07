@@ -71,7 +71,7 @@ def post_sub(request ,cateid):
             if form.is_valid():
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
-                form.instance.category_id = cateid
+                form.category_id = cateid
                 
                 form.save()
                 return redirect('sub_home')
