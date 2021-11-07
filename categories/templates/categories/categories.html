@@ -165,8 +165,8 @@
                                   <div class="text-center">
                                     <img src="{{category.category_image.url}}" class="rounded-circle" width="100" height="100" />
                                     <div style="display: flex;">
-                                        <input class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete/> 
-                                        <input class="btn btn-outline-info" href="{% url 'edit' category.id  %}">edit Category/>
+                                       <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
+                                       <a class="btn btn-outline-info" href="{% url 'edit' category.id  %}">edit Category</a>
                                     </div>
                                     {% comment %} <div align="right">
                                       <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
