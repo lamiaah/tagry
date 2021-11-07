@@ -41,7 +41,7 @@ def seller_regieter(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('login')
+            return redirect('seller_user:add_seller')
         else:
             return render(request ,'seller/register_seller.html',{'form':form})      
     else:
