@@ -14,6 +14,6 @@ class RegisterForm(UserCreationForm):
 class SellerForm(forms.ModelForm):
     class Meta : 
         model = Seller
-        fields = '_all__'
-        exclude =('user')
+        fields =  '__all__'
+       
         
