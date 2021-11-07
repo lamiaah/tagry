@@ -11,6 +11,8 @@ class CategoryForm(forms.ModelForm):
 
 
 class SubCategoryForm(forms.ModelForm):
+
+ 
     class Meta : 
         model = SubCategory
         fields =["sub_title","sub_image"]

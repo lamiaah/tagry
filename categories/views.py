@@ -66,15 +66,17 @@ def sub_category_list(request ,pk):
 @login_required(login_url='login')
 def post_sub(request ,cateid):
     if request.user.is_authenticated ==True :
+        category = Categories.objects.get(pk=cateid)
         if request.method == 'POST':
             form =SubCategoryForm(request.POST, request.FILES )
             if form.is_valid():
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
-                form.category_id = cateid
-                
+                form.instance.category_id = category
+
                 form.save()
-                return redirect('sub_home')
+                print("lllv")
+                return redirect('home')
             else: 
                 print(form.errors.as_data()) 
                 return render(request,'sub_category/new_sub.html',{'form':form})
@@ -88,7 +90,7 @@ def post_sub(request ,cateid):
 
 def deletesub(request ,pk):
     subcate = SubCategory.objects.get(pk=pk)
-    template_name  ='categories/category_delete.html'  
+    template_name  ='sub_category/sub_cate_delete.html'  
     if request.method == "POST":
         subcate.is_archive = True
         subcate.save()

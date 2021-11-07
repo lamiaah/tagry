@@ -35,6 +35,7 @@ SECRET_KEY = config['SECRET_KEY']
 DEBUG =True
 
 ALLOWED_HOSTS = ['162.0.236.152','tajiry.com']
+#'127.0.0.1'
 
 
 # Application definition

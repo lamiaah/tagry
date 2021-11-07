@@ -9,6 +9,6 @@ urlpatterns = [
     path('cate/<int:pk>/delete',views.delete,name='delete'),
     path('sub_list/<int:pk>/', views.sub_category_list ,name='sub_home'),
     path('subadd/<int:cateid>/',views.post_sub,name='addsub'),
-  
+    path('delete_sub/<int:pk>/',views.deletesub,name='delete_sub'),
 ]
 
