@@ -1,7 +1,7 @@
 
 from django.contrib.auth.decorators import login_required
 from categories.models import Categories ,SubCategory
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect ,get_object_or_404
 from.forms import  CategoryForm ,SubCategoryForm
 
 
@@ -45,6 +45,24 @@ def delete(request ,pk):
         return redirect('home')
     context = {"cate": cate}
     return render(request, template_name, context)  
+
+
+def edit(request ,pk):
+    cate = get_object_or_404(Categories ,pk=pk)
+    form = CategoryForm(request.POST ,request.FILES , instance= cate)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.created_by =request.user
+            form.instance.updated_by =request.user
+            form.save()
+            return redirect('home')
+        else:
+            print(form.errors.as_data()) 
+            return render(request,'categories/category_edit.html',{'form':form})   
+    else:
+        form = CategoryForm()
+    return render(request,'categories/category_edit.html',{'form':form})
+
 
 
 @login_required(login_url='login')
