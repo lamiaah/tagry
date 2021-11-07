@@ -1,6 +1,6 @@
 from django.http.response import Http404
 from products.models import Products
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect ,get_object_or_404
 from seller_user.models import Seller
 from.forms import  SellerForm
 from django.urls import reverse
@@ -64,3 +64,22 @@ def delete(request ,pk):
         return render(request, template_name, context)  
     else:
         return redirect('login')    
+
+
+
+@login_required(login_url='login')
+def edit(request ,pk):
+    if request.user.is_authenticated ==True :
+        seller = get_object_or_404(Seller ,pk=pk)
+        form = SellerForm(request.POST ,request.FILES , instance= seller)
+        if request.method == 'POST':
+            if form.is_valid():
+                return redirect('seller_user:seller_list')
+            else:
+                print(form.errors.as_data()) 
+                return render(request,'seller/seller_edit.html',{'form':form})   
+        else:
+            form = SellerForm()
+        return render(request,'seller/seller_edit.html',{'form':form})
+    else:
+      return redirect('login')        

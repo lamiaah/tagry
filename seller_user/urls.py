@@ -6,4 +6,5 @@ urlpatterns = [
     path('<int:pk>/seller', views.seller_details, name= 'seller_detail'),
     path('add_seller/',views.post ,name= 'add_seller'),
     path('<int:pk>/delete',views.delete ,name= 'delete'),
+    path('edit/<int:pk>/',views.edit,name='edit'),
     ]
