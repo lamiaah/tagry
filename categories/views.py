@@ -51,7 +51,11 @@ def delete(request ,pk):
 def sub_category_list(request ,pk):
     if request.user.is_authenticated:
         sub_category = SubCategory.objects.filter(category_id=pk ,is_archive =False)
-        context ={'sub_cate':sub_category }
+        category = Categories.objects.get(pk=pk)
+        context ={
+            'sub_cate':sub_category ,
+            'cate' :category,
+        }
         return render (request ,'sub_category/sub_category.html',context)
     else:
         return redirect('login')
@@ -60,13 +64,15 @@ def sub_category_list(request ,pk):
 
 
 @login_required(login_url='login')
-def post_sub(request):
+def post_sub(request ,cateid):
     if request.user.is_authenticated ==True :
         if request.method == 'POST':
             form =SubCategoryForm(request.POST, request.FILES )
             if form.is_valid():
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
+                form.instance.category = cateid
+                
                 form.save()
                 return redirect('home')
             else: 
