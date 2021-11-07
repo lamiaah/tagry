@@ -77,3 +77,15 @@ def post_sub(request):
         return render(request,'sub_category/new_sub.html',{'form':form})
     else:
         return redirect('login')
+
+
+
+def deletesub(request ,pk):
+    subcate = SubCategory.objects.get(pk=pk)
+    template_name  ='categories/category_delete.html'  
+    if request.method == "POST":
+        subcate.is_archive = True
+        subcate.save()
+        return redirect('home')
+    context = {"cate": subcate}
+    return render(request, template_name, context)  

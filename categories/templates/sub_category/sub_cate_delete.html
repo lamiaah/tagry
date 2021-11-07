@@ -1,6 +1,5 @@
 {% load static %}
 {% load crispy_forms_tags %}
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,25 +10,22 @@
     <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css' %}" />
     <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="shortcut icon" href="{% static 'images/face.png'%}"  />
+    <link rel="shortcut icon" href="{% static 'images/face.png'%}" />
   </head>
-
   <body>
-
     <div class=" container-scroller">
       <!-- partial:../partials/_navbar.html -->
       <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="bg-white text-center navbar-brand-wrapper">
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
+          <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
-          
           </button> 
           <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
             <li class="nav-item">
               <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{%static 'images/face.png' %}" alt=""></a>
             </li>
-          
+
           </ul>
           <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
@@ -86,17 +82,17 @@
                 </div>
                   <h5 class="card-title">Buyer</h5>
                 </a>
-            </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users_list' %}">
-                  <div class="clearfix">
-                  <h4 class="text-primary">
-                    <i class="fa fa-users highlight-icon-big" aria-hidden="true"></i>
-                  </h4>
-                </div>
-                  <h5 class="card-title">Users</h5>
-                </a>
               </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users_list' %}">
+                    <div class="clearfix">
+                    <h4 class="text-primary">
+                      <i class="fa fa-users highlight-icon-big" aria-hidden="true"></i>
+                    </h4>
+                  </div>
+                    <h5 class="card-title">Users</h5>
+                  </a>
+                </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'area' %}">
                    <div class="clearfix">
@@ -149,33 +145,30 @@
               </li>
           </nav>
           <div class="content-wrapper">
-            <h1 class="page-heading mb-4">{{category.category_title}}</h1>
-            <div class="row mb-10">
+            <h1 class="page-heading mb-4">Delete !</h1>
+            <div class="row mb-6">
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-body">
-                    {% block content %}
-                      <div class="content-fluid">
-                        <div class="row">
-                          {% for sub_category in sub_cate %}
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
-                              <div class="card">
-                                <div class="card-body">
-                                  <h2 class="card-subtitle mb-4">{{sub_category.sub_title}}</h2>
-                                  <div class="text-center">
-                                    <img src="{{sub_category.sub_image.url}}" class="rounded-circle" width="100" height="100" />
-                                    <div align="right">
-                                      <a class="btn btn-outline-danger" href="{% url 'delete' sub_category.id  %}">Delete</a>
-                                    </div>
-                                  </div>  
+                    {% block  content %}
+                      <section class="probootstrap-section">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <form method ="POST" >
+                                {% csrf_token %}
+                                <fieldset class ="form-group">    
+                                  <h1> Are You Want to Delete This Sub-Category?</h1>
+                                </fieldset>
+                                <div class="form-group">
+                                  <button type="submit" class="btn btn-danger btn-lg mr-2">Done</button>
                                 </div>
-                              </div>
+                              </form>
                             </div>
-                          {%endfor%}
+                          </div>
                         </div>
-                      </div>
-                      <a class="btn-lg btn-primary" href="{% url 'addsub'  %}">New subCategory</a>
-                    {% endblock content %}
+                      </section>
+                   {% endblock content %}
                  </div>
                </div>
              </div>
@@ -197,7 +190,6 @@
     <script src="{%static 'node_modules/bootstrap/dist/js/bootstrap.min.js'%}"></script>
     <script src="{%static 'node_modules/chart.js/dist/Chart.min.js'%}"></script>
     <script src="{%static 'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js'%}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script>
     <script src="{%static 'js/off-canvas.js'%}"></script>
     <script src="{%static 'js/hoverable-collapse.js'%}"></script>
     <script src="{%static 'js/misc.js'%}"></script>
@@ -205,4 +197,4 @@
     <script src="{%static 'js/maps.js'%}"></script>
   </body>
 
-</html>
+</html> 
