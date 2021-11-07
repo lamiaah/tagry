@@ -22,7 +22,7 @@ class Categories(models.Model):
 
 class SubCategory(models.Model):
     id = models.AutoField(null=False ,blank= False,primary_key= True)
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE,related_name='+',default='')
     sub_title = models.CharField(null= False,blank=False,default='',max_length=75, unique= True)
     is_archive = models.BooleanField(null= False ,blank= False ,default= False)
     sub_image = models.ImageField(upload_to='subcate_pic/') 
