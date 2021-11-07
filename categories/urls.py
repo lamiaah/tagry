@@ -11,5 +11,7 @@ urlpatterns = [
     path('subadd/<int:cateid>/',views.post_sub,name='addsub'),
     path('delete_sub/<int:pk>/',views.deletesub,name='delete_sub'),
     path('edit/<int:pk>/',views.edit,name='edit'),
+    path('edit_sub/<int:pk>/',views.edit_sub,name='edit_sub'),
 ]
+
 

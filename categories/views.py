@@ -35,33 +35,61 @@ def post(request):
     else:
         return redirect('login')
 
-
+@login_required(login_url='login')
 def delete(request ,pk):
-    cate = Categories.objects.get(pk=pk)
-    template_name  ='categories/category_delete.html'  
-    if request.method == "POST":
-        cate.is_archive = True
-        cate.save()
-        return redirect('home')
-    context = {"cate": cate}
-    return render(request, template_name, context)  
-
-
-def edit(request ,pk):
-    cate = get_object_or_404(Categories ,pk=pk)
-    form = CategoryForm(request.POST ,request.FILES , instance= cate)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.instance.created_by =request.user
-            form.instance.updated_by =request.user
-            form.save()
+    if request.user.is_authenticated ==True :
+        cate = Categories.objects.get(pk=pk)
+        template_name  ='categories/category_delete.html'  
+        if request.method == "POST":
+            cate.is_archive = True
+            cate.save()
             return redirect('home')
-        else:
-            print(form.errors.as_data()) 
-            return render(request,'categories/category_edit.html',{'form':form})   
+        context = {"cate": cate}
+        return render(request, template_name, context)  
     else:
-        form = CategoryForm()
-    return render(request,'categories/category_edit.html',{'form':form})
+        return redirect('login')
+
+
+@login_required(login_url='login')
+def edit(request ,pk):
+    if request.user.is_authenticated ==True :
+        cate = get_object_or_404(Categories ,pk=pk)
+        form = CategoryForm(request.POST ,request.FILES , instance= cate)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.instance.created_by =request.user
+                form.instance.updated_by =request.user
+                form.save()
+                return redirect('home')
+            else:
+                print(form.errors.as_data()) 
+                return render(request,'categories/category_edit.html',{'form':form})   
+        else:
+            form = CategoryForm()
+        return render(request,'categories/category_edit.html',{'form':form})
+    else:
+      return redirect('login')
+
+@login_required(login_url='login')
+def edit_sub(request ,pk):
+    if request.user.is_authenticated ==True :
+        subcate = get_object_or_404(SubCategory,pk=pk)
+        form = SubCategoryForm(request.POST ,request.FILES , instance= subcate)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.instance.created_by =request.user
+                form.instance.updated_by =request.user
+                form.save()
+                return redirect('home')
+            else:
+                print(form.errors.as_data()) 
+                return render(request,'sub_category/sub_cate_edit.html',{'form':form})   
+        else:
+            form = CategoryForm()
+        return render(request,'sub_category/sub_cate_edit.html',{'form':form})
+    else:
+      return redirect('login')
+
 
 
 
