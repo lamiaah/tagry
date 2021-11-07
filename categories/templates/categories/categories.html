@@ -164,12 +164,16 @@
                                 <h1><a class ="article-title"  href="{% url 'sub_home' category.id %}">{{category.category_title}}</a></h1> 
                                   <div class="text-center">
                                     <img src="{{category.category_image.url}}" class="rounded-circle" width="100" height="100" />
-                                    <div align="right">
+                                    <div style="display: flex;">
+                                        <input class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete/> 
+                                        <input class="btn btn-outline-info" href="{% url 'edit' category.id  %}">edit Category/>
+                                    </div>
+                                    {% comment %} <div align="right">
                                       <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
                                     </div>
                                     <div align="left">
                                      <a class="btn btn-outline-info" href="{% url 'edit' category.id  %}">edit Category</a>
-                                    </div>
+                                    </div> {% endcomment %}
                                   </div>  
                                 </div>
                               </div>
