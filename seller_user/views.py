@@ -39,9 +39,11 @@ def seller_regieter(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            pk=form.instance
+            
+            pk.save()
             username = form.cleaned_data.get('username')
-            return redirect('seller_user:add_seller')
+            return redirect('seller_user:add_seller',args=(pk) )
         else:
             return render(request ,'seller/register_seller.html',{'form':form})      
     else:
