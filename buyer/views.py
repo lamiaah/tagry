@@ -1,6 +1,6 @@
 from django.http.response import Http404
 from products.models import Products
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect ,get_object_or_404
 from buyer.models import Buyer
 from.forms import  BuyerForm
 from django.urls import reverse
@@ -21,12 +21,9 @@ def buyer(request):
 @login_required(login_url='login')
 def buyer_details(request, pk):
     if request.user.is_authenticated :
-
         buyer_data = Buyer.objects.get(pk = pk)
-        # seller_products = Products.objects.filter(seller_id = pk)
         context = {
             'buyer_data' : buyer_data,
-            # 'seller_products' : seller_products
         }
 
         return render(request, 'buyer/buyer_detail.html', context)
@@ -64,3 +61,21 @@ def delete(request ,pk):
         return render(request, template_name, context)  
     else:
         return redirect('login')    
+
+@login_required(login_url='login')
+def edit(request ,pk):
+    if request.user.is_authenticated ==True :
+        buyer = get_object_or_404(Buyer ,pk=pk)
+        form = BuyerForm(request.POST ,request.FILES , instance= buyer)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect('buyer_list')
+            else:
+                print(form.errors.as_data()) 
+                return render(request,'buyer/edit_buyer.html',{'form':form})   
+        else:
+            form = BuyerForm()
+        return render(request,'buyer/edit_buyer.html',{'form':form})
+    else:
+      return redirect('login')
