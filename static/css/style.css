@@ -7542,7 +7542,7 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0;
+  margin-left :5px;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit; }
@@ -7742,7 +7742,7 @@ mark,
   display: inline-block; }
 
 .figure-img {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   line-height: 1; }
 
 .figure-caption {
