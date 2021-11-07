@@ -166,6 +166,7 @@
                                     <img src="{{category.category_image.url}}" class="rounded-circle" width="100" height="100" />
                                     <div align="right">
                                       <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
+                                      <a class="btn-lg btn-primary" href="{% url 'edit' category.id  %}">edit Category</a>
                                     </div>
                                   </div>  
                                 </div>
@@ -175,7 +176,7 @@
                         </div>
                       </div>
                       <a class="btn-lg btn-primary" href="{% url 'addcate'  %}">New Category</a>
-                      <a class="btn-lg btn-primary" href="{% url 'edit' category.id  %}">edit Category</a>
+                      
                     {% endblock content %}
                  </div>
                </div>
