@@ -36,15 +36,17 @@ def seller_details(request, pk):
 
 
 def seller_regieter(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             return redirect('login')
         else:
-            form = RegisterForm()
-        return render(request,'seller/register_seller.html',{'form':form})    
+            return render(request ,'seller/register_seller.html',{'form':form})      
+    else:
+        form = RegisterForm()
+    return render(request,'seller/register_seller.html',{'form':form})    
 
 
 @login_required(login_url='login')
