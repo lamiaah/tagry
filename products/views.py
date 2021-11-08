@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def get_products(request):
     if request.user.is_authenticated == True:
-        product = Products.objects.filter(is_archive=False)
+        product = Products.objects.filter(is_archived=False)
         image = ProductImage.objects.filter(pk = product['id'])
         context ={
             'product':product,
