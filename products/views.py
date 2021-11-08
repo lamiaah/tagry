@@ -61,8 +61,9 @@ def delete(request ,pk ,seller_id):
         template_name  ='product/delete_pro.html'  
         if request.method == "POST":
             product.is_archive = True
+            seller.id =seller_id
             product.save()
-            return redirect('seller_user:seller_detail',pk =seller)
+            return redirect('seller_user:seller_detail',pk=seller_id)
         context = {'product':product}
         return render(request, template_name, context)  
     else:
