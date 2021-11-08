@@ -57,12 +57,11 @@ def post(request):
 def delete(request ,pk ):
     if request.user.is_authenticated :
         product = Products.objects.get(pk=pk)
-        
         template_name  ='product/delete_pro.html'  
         if request.method == "POST":
-            product.is_archive = True
+            product.is_archived = True
             product.save()
-            return redirect('seller_user:seller_list')
+            return redirect('all_product')
         context = {
             'product':product,
             
