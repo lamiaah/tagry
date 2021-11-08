@@ -1,6 +1,7 @@
 from datetime import date
 from django.shortcuts import redirect, render ,get_object_or_404
 from products.models import Products ,ProductImage
+from seller_user.models import Seller
 from.forms import  ProductForm ,ImageForm
 from django.views.generic import ListView
 from django.http import HttpResponse
@@ -53,14 +54,15 @@ def post(request):
 
    
 @login_required(login_url='login')  
-def delete(request ,pk):
+def delete(request ,pk ,seller_id):
     if request.user.is_authenticated :
         product = Products.objects.get(pk=pk)
+        seller = Seller.objects.get(seller_id=seller_id)
         template_name  ='product/delete_pro.html'  
         if request.method == "POST":
             product.is_archive = True
             product.save()
-            return redirect('seller_user:seller_detail')
+            return redirect('seller_user:seller_detail',pk =seller)
         context = {'product':product}
         return render(request, template_name, context)  
     else:

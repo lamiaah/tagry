@@ -119,9 +119,7 @@ def post_sub(request ,cateid):
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
                 form.instance.category_id = category
-
                 form.save()
-                print("lllv")
                 return redirect('home')
             else: 
                 print(form.errors.as_data()) 
