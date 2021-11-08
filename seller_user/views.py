@@ -103,3 +103,8 @@ def edit(request ,pk):
         return render(request,'seller/seller_edit.html',{'form':form})
     else:
       return redirect('login')        
+
+
+
+
+      

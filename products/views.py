@@ -1,5 +1,5 @@
 from datetime import date
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render ,get_object_or_404
 from products.models import Products ,ProductImage
 from.forms import  ProductForm ,ImageForm
 from django.views.generic import ListView
@@ -50,6 +50,40 @@ def post(request):
     else:
         return redirect('login')
 
+
+   
+@login_required(login_url='login')  
+def delete(request ,pk):
+    if request.user.is_authenticated :
+        product = Products.objects.get(pk=pk)
+        template_name  ='product/delete_pro.html'  
+        if request.method == "POST":
+            product.is_archive = True
+            product.save()
+            return redirect('all_product')
+        context = {'product':product}
+        return render(request, template_name, context)  
+    else:
+        return redirect('login')    
+
+
+
+@login_required(login_url='login')
+def edit(request ,pk):
+    if request.user.is_authenticated ==True :
+        Product = get_object_or_404(Products ,pk=pk)
+        form = ProductForm(request.POST ,request.FILES , instance= Product)
+        if request.method == 'POST':
+            if form.is_valid():
+                return redirect('all_product')
+            else:
+                print(form.errors.as_data()) 
+                return render(request,'product/product_edit.html',{'form':form})   
+        else:
+            form = ProductForm()
+        return render(request,'product/product_edit.html',{'form':form})
+    else:
+      return redirect('login')        
 
 
 
