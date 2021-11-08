@@ -175,31 +175,40 @@
                               <button type="button" class="btn btn-link"> Website:{{seller_data.website}}</button>
                             </div>
                           </div>
-                            <div class="card-deck">
-                              <div class="card col-xl-12 col-lg-10 col-md-12 col-sm-12 mb-4" style="min-height:395px;">
-                                <div class="card-body">
-                                  <h5 class="card-title mb-4"> our product</h5>
-                                  {% for seller_products in seller_products %}
-                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                               <div class="content-wrapper">
+                                  <h1 class="page-heading mb-4">OUR PRODUCTS</h1>
+                                  <div class="row mb-10">
+                                    <div class="col-lg-12">
                                       <div class="card">
                                         <div class="card-body">
-                                        <h1><a class ="article-title" >{{seller_products.product_title}}</a></h1> 
-                                          <div class="text-center">
-                                            <img src="{{image.image.url}}" class="rounded-circle" width="100" height="100" />
-                                             {% comment %} <div style="display: flex;"class="row justify-content-right mt-5">
-                                              <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
-                                              <a class="btn btn-outline-info ml-3" href="{% url 'edit_cate' category.id  %}"> Edit</a>
-                                            </div>  {% endcomment %}
-                                          </div>  
-                                        </div>
+                                          {% block content %}
+                                            <div class="content-fluid">
+                                              <div class="row">
+                                                {% for seller_products in seller_products %}
+                                                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                                                    <div class="card">
+                                                      <div class="card-body">
+                                                      <h1><a class ="article-title" >{{seller_product.product_title}}</a></h1> 
+                                                        <div class="text-center">
+                                                          <img src="{{image.image.url}}" class="rounded-circle" width="100" height="100" />
+                                                          {% comment %} <div style="display: flex;"class="row justify-content-right mt-5">
+                                                            <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
+                                                            <a class="btn btn-outline-info ml-3" href="{% url 'edit_cate' category.id  %}"> Edit</a>
+                                                          </div> {% endcomment %}
+                                                        </div>  
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                {%endfor%}
+                                              </div>
+                                            </div>
+                                            {% comment %} <a class="btn-lg btn-primary" href="{% url 'addcate'  %}">New Category</a> {% endcomment %}
+                                          {% endblock content %}
                                       </div>
                                     </div>
-                                  {%endfor%}
+                                  </div>
                                 </div>
-                              </div>
-                              {% comment %} <a class="btn-lg btn-primary" href="{% url 'addcate'  %}">New Category</a> {% endcomment %}
-                                </div>
-                              </div>
+                              </div>  
                             </div>
                         </div>
                       </section>
