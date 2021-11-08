@@ -1,5 +1,5 @@
 from django.http.response import Http404
-from products.models import Products
+from products.models import Products , ProductImage
 from django.shortcuts import render ,redirect ,get_object_or_404
 from seller_user.models import Seller
 from.forms import  SellerForm ,RegisterForm
@@ -24,10 +24,12 @@ def seller_details(request, pk):
     if request.user.is_authenticated :
 
         seller_data = Seller.objects.get(pk = pk)
-        seller_products = Products.objects.filter(seller_id = pk)
+        seller_products = Products.objects.filter(seller_id = pk ,is_archived=False)
+        image = ProductImage.objects.filter(product = seller_products)
         context = {
             'seller_data' : seller_data,
-            'seller_products' : seller_products
+            'seller_products' :seller_products,
+            'image':image
         }
 
         return render(request, 'seller/seller_detail.html', context)

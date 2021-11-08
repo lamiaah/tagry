@@ -162,25 +162,45 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <h3 class="  card-title mb-8">-{{seller_data.name}}</h3>
+                              <h3 class="  card-title mb-8">->{{seller_data.name}}</h3>
                               <h5> About : </h5>
-                              <p class="lead">
+                              <h6 class="lead">
                                 {{seller_data.about}}
-                              </p>
+                              </h6>
                               <h5> Address : </h5>
-                              <p class="lead">
+                              <h6 class="lead">
                                 {{seller_data.seller_address}}
-                              </p>
-                              <h5> Products : </h5>
-                              <p class="lead">
-                                {% for seller_products in seller_products%}
-                                  <span class="menu-title">{{seller_products}}</span>
-                                {% endfor%} 
-                              </p>
+                              </h6>
                               <h5> Website : </h5>
                               <button type="button" class="btn btn-link"> Website:{{seller_data.website}}</button>
                             </div>
                           </div>
+                            <div class="card-deck">
+                              <div class="card col-xl-12 col-lg-10 col-md-12 col-sm-12 mb-4" style="min-height:395px;">
+                                <div class="card-body">
+                                  <h5 class="card-title mb-4"> our product</h5>
+                                  {% for seller_products in seller_products %}
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                                      <div class="card">
+                                        <div class="card-body">
+                                        <h1><a class ="article-title" >{{seller_products.product_title}}</a></h1> 
+                                          <div class="text-center">
+                                            <img src="{{image.image.url}}" class="rounded-circle" width="100" height="100" />
+                                             {% comment %} <div style="display: flex;"class="row justify-content-right mt-5">
+                                              <a class="btn btn-outline-danger" href="{% url 'delete' category.id  %}">Delete</a>
+                                              <a class="btn btn-outline-info ml-3" href="{% url 'edit_cate' category.id  %}"> Edit</a>
+                                            </div>  {% endcomment %}
+                                          </div>  
+                                        </div>
+                                      </div>
+                                    </div>
+                                  {%endfor%}
+                                </div>
+                              </div>
+                              {% comment %} <a class="btn-lg btn-primary" href="{% url 'addcate'  %}">New Category</a> {% endcomment %}
+                                </div>
+                              </div>
+                            </div>
                         </div>
                       </section>
                   {% endblock content%}
