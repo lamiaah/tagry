@@ -60,7 +60,7 @@ def delete(request ,pk):
         if request.method == "POST":
             product.is_archive = True
             product.save()
-            return redirect('all_product')
+            return redirect('seller_user:seller_detail')
         context = {'product':product}
         return render(request, template_name, context)  
     else:
@@ -75,7 +75,7 @@ def edit(request ,pk):
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
-                return redirect('all_product')
+                return redirect('seller_user:seller_detail')
             else:
                 print(form.errors.as_data()) 
                 return render(request,'product/product_edit.html',{'form':form})   
