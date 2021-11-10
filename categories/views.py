@@ -76,13 +76,14 @@ def edit(request ,pk):
 def edit_sub(request ,pk):
     if request.user.is_authenticated ==True :
         subcate = get_object_or_404(SubCategory,pk=pk)
+        cate = subcate.category_id.id
         form = SubCategoryForm(request.POST ,request.FILES , instance= subcate)
         if request.method == 'POST':
             if form.is_valid():
                 form.instance.created_by =request.user
                 form.instance.updated_by =request.user
                 form.save()
-                return redirect('home')
+                return redirect(reverse('sub_home',args=(cate,)))
             else:
                 print(form.errors.as_data()) 
                 return render(request,'sub_category/sub_cate_edit.html',{'form':form})   
