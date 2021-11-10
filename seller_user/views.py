@@ -42,14 +42,16 @@ def seller_regieter(request ):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            user_id =form.cleaned_data.get('id')
-            username = form.cleaned_data.get('username')
-            return redirect('seller_user:add_seller',args=(user_id,))
+            user = form.instance.id
+            # user_id = form.cleaned_data.get('id')
+            # username = form.cleaned_data.get('username')
+            
+            return redirect('seller_user:add_seller',args=(user,))
         else:
             return render(request ,'seller/register_seller.html',{'form':form})      
     else:
         form = RegisterForm()
-    return render(request,'seller/register_seller.html',{'form':form})    
+    return render(request,'seller/register_seller.html',{'form':form })    
 
 
 @login_required(login_url='login')
