@@ -107,19 +107,19 @@ def product_details(request, pk):
 
 
 
-@login_required(login_url='login')
-def get_bycategory(self, request, category_id):
-    if request.user.is_authenticated == True:
-        product = Products.objects.filter(category_id=category_id)
-        return HttpResponse(product)
-    else:
-        return redirect('login')
+# @login_required(login_url='login')
+# def get_bycategory(self, request, category_id):
+#     if request.user.is_authenticated == True:
+#         product = Products.objects.filter(category_id=category_id)
+#         return HttpResponse(product)
+#     else:
+#         return redirect('login')
 
-@login_required(login_url='login')
-def get_byproduct(self, request, product_title):
-    if request.user.is_authenticated == True:
-        product = Products.objects.filter( product_title=product_title)
-        return HttpResponse(product)
-    else: 
-        return redirect('login')
+# @login_required(login_url='login')
+# def get_byproduct(self, request, product_title):
+#     if request.user.is_authenticated == True:
+#         product = Products.objects.filter( product_title=product_title)
+#         return HttpResponse(product)
+#     else: 
+#         return redirect('login')
 
