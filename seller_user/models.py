@@ -4,6 +4,7 @@ from countries.models import Countries
 from area.models import Area
 from categories.models import Categories
 from users.models import CustomUser
+from django.urls import reverse
 
 class Seller(models.Model):
     id = models.AutoField(null=False,blank=False,primary_key=True)
@@ -23,3 +24,5 @@ class Seller(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def get_absolute_url(self):
+        return reverse('seller_user:seller_detail', kwargs={ "pk": self.pk })   

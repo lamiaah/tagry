@@ -71,7 +71,7 @@ def delete(request ,pk):
 @login_required(login_url='login')
 def edit(request ,pk):
     if request.user.is_authenticated ==True :
-        Product = get_object_or_404(Products ,pk=pk)
+        Product = Products.objects.get(pk=pk)
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
