@@ -122,7 +122,7 @@ def post_sub(request ,cateid):
                 form.instance.updated_by =request.user
                 form.instance.category_id = category
                 form.save()
-                return redirect(reverse('sub_home',pk=cateid))
+                return redirect(reverse('sub_home',args=(cateid)))
             else: 
                 print(form.errors.as_data()) 
                 return render(request,'sub_category/new_sub.html',{'form':form})
