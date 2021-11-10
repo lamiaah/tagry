@@ -70,7 +70,7 @@ def delete(request ,pk ,seller):
 
 
 @login_required(login_url='login')
-def edit(request ,pk ,seller):
+def edit(request ,pk ,seller ):
     if request.user.is_authenticated ==True :
         Product = Products.objects.get(pk=pk)
         form = ProductForm(request.POST ,request.FILES , instance= Product)
@@ -86,6 +86,23 @@ def edit(request ,pk ,seller):
         return render(request,'product/product_edit.html',{'form':form})
     else:
       return redirect('login')        
+
+
+
+@login_required(login_url='login')
+def product_details(request, pk):
+    if request.user.is_authenticated :
+
+        product_data = Products.objects.get(pk = pk)
+        image = ProductImage.objects.filter(product = product_data)
+        context = {
+            'product_data' : product_data,
+            'image':image
+        }
+
+        return render(request, 'product/product_detail.html', context)
+    else:
+        return redirect('login')      
 
 
 
