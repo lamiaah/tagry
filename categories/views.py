@@ -137,10 +137,11 @@ def post_sub(request ,cateid):
 
 def deletesub(request ,pk):
     subcate = SubCategory.objects.get(pk=pk)
+    cate = subcate.category_id.id
     template_name  ='sub_category/sub_cate_delete.html'  
     if request.method == "POST":
         subcate.is_archive = True
         subcate.save()
-        return redirect('home')
+        return redirect(reverse('sub_home',args=(cate,)))
     context = {"cate": subcate}
     return render(request, template_name, context)  
