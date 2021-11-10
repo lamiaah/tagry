@@ -1,5 +1,6 @@
 from datetime import date
 from django.shortcuts import redirect, render ,get_object_or_404
+from django.urls.base import reverse
 from products.models import Products ,ProductImage
 from seller_user.models import Seller
 from.forms import  ProductForm ,ImageForm
@@ -74,7 +75,7 @@ def edit(request ,pk):
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
-                return redirect('seller_user:seller_detail')
+                return redirect(reverse('seller_user:seller_detail' ,args=(Product.seller_id,)))
             else:
                 print(form.errors.as_data()) 
                 return render(request,'product/product_edit.html',{'form':form})   
