@@ -77,7 +77,7 @@ def edit(request ,pk ,seller):
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
-                form.instance.seller_id = seller
+                #form.instance.seller_id = seller
                 form.save()
                 return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
             else:
