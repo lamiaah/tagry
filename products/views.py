@@ -73,9 +73,12 @@ def delete(request ,pk):
 def edit(request ,pk):
     if request.user.is_authenticated ==True :
         Product = Products.objects.get(pk=pk)
+        # seller = Product.seller_id.id
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
+                # form.instance.seller_id = seller
+                form.save()
                 return redirect(reverse('seller_user:seller_detail' ,args=(Product.seller_id.id,)))
             else:
                 print(form.errors.as_data()) 
