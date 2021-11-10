@@ -3,6 +3,7 @@ from categories.models import Categories
 from seller_user.models import Seller
 from users.models import CustomUser
 from  productkeyword.models import Product_keyword
+from django.urls import reverse
 
 
 class Products(models.Model):
@@ -27,6 +28,9 @@ class Products(models.Model):
 
     def __str__(self):
         return str(self.product_title)
+
+    def get_absolute_url(self):
+        return reverse('product_details', kwargs={ "pk": self.pk })        
 
  
 class ProductImage(models.Model):
