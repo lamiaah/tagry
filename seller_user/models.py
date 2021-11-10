@@ -5,7 +5,7 @@ from area.models import Area
 from categories.models import Categories
 from users.models import CustomUser
 from django.urls import reverse
-from products.models import Products
+
 
 class Seller(models.Model):
     id = models.AutoField(null=False,blank=False,primary_key=True)
