@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from categories.models import Categories ,SubCategory
 from django.shortcuts import render ,redirect ,get_object_or_404
 from.forms import  CategoryForm ,SubCategoryForm
+from flask import session, url_for
 
 
 
@@ -120,7 +121,7 @@ def post_sub(request ,cateid):
                 form.instance.updated_by =request.user
                 form.instance.category_id = category
                 form.save()
-                return redirect('home')
+                return redirect(url_for('sub_home',pk=cateid))
             else: 
                 print(form.errors.as_data()) 
                 return render(request,'sub_category/new_sub.html',{'form':form})
