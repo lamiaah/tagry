@@ -70,7 +70,7 @@ def delete(request ,pk):
 
 
 @login_required(login_url='login')
-def edit(request ,pk):
+def edit(request ,pk ,seller):
     if request.user.is_authenticated ==True :
         Product = Products.objects.get(pk=pk)
         seller = Product.seller_id.id
@@ -79,7 +79,7 @@ def edit(request ,pk):
             if form.is_valid():
                 form.instance.seller_id = seller
                 form.save()
-                return redirect(reverse('seller_user:seller_detail' ,args=(Product.seller_id.id,)))
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
             else:
                 print(form.errors.as_data()) 
                 return render(request,'product/product_edit.html',{'form':form})   
