@@ -5,6 +5,7 @@ from area.models import Area
 from categories.models import Categories
 from users.models import CustomUser
 from django.urls import reverse
+from products.models import Products
 
 class Seller(models.Model):
     id = models.AutoField(null=False,blank=False,primary_key=True)
@@ -19,6 +20,7 @@ class Seller(models.Model):
     area_name = models.ForeignKey(Area, on_delete= models.RESTRICT, related_name='+')
     category_id = models.ForeignKey(Categories, on_delete=models.RESTRICT, related_name='+')
     is_archive = models.BooleanField(null=False,blank= False, default= False)
+    products =models.ForeignKey(Products,on_delete=models.RESTRICT ,default='+')
 
 
     def __str__(self):
