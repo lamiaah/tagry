@@ -55,14 +55,14 @@ def post(request):
 
 
 @login_required(login_url='login')  
-def delete(request ,pk):
+def delete(request ,pk ,seller):
     if request.user.is_authenticated ==True :
         product = Products.objects.get(pk=pk)
         template_name  ='product/delete_pro.html'  
         if request.method == "POST":
             product.is_archived = True
             product.save()
-            return redirect('all_product')
+            return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
         context = {'product':product}
         return render(request, template_name, context) 
     else:
@@ -73,11 +73,9 @@ def delete(request ,pk):
 def edit(request ,pk ,seller):
     if request.user.is_authenticated ==True :
         Product = Products.objects.get(pk=pk)
-        # seller = Product.seller_id.id
         form = ProductForm(request.POST ,request.FILES , instance= Product)
         if request.method == 'POST':
             if form.is_valid():
-                #form.instance.seller_id = seller
                 form.save()
                 return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
             else:
