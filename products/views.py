@@ -79,7 +79,7 @@ def edit(request ,pk ,seller):
             if form.is_valid():
                 #form.instance.seller_id = seller
                 form.save()
-                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
             else:
                 print(form.errors.as_data()) 
                 return render(request,'product/product_edit.html',{'form':form})   
