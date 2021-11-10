@@ -6,6 +6,7 @@ from seller_user.models import Seller
 from.forms import  ProductForm ,ImageForm
 from django.views.generic import ListView
 from django.http import HttpResponse
+from seller_user.models import Seller
 from django.contrib.auth.decorators import login_required
 
 
@@ -21,6 +22,7 @@ def get_products(request):
     if request.user.is_authenticated == True:
         product = Products.objects.filter(is_archived=False)
         image = ProductImage.objects.filter(product = product)
+        
         context ={
             'product':product,
             'image':image,
