@@ -99,7 +99,6 @@ def product_details(request, pk):
             'product_data' : product_data,
             'image':image
         }
-
         return render(request, 'product/product_detail.html', context)
     else:
         return redirect('login')      
