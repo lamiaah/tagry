@@ -162,6 +162,7 @@
                                   <th> User Name</th>
                                   <th> Email</th>
                                   <th> Delete</th>
+                                  <th> Staff</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -169,7 +170,17 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-                                    <td class="btn btn-outline-danger btn-sm" href="{% url 'delete' users.id  %}">Delete</td>
+                                    
+                                    <label class="container">staff
+                                    <input type="checkbox" checked="checked">
+                                    <span class="checkmark"></span>
+                                    </label>
+
+                                    <label class="container">not
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    </label>
+                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete' users.id  %}">Delete</a></td>
                                   </tr>
                                 {% endfor %}
                               </tbody>
