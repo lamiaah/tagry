@@ -45,16 +45,14 @@
                                         {{ form|crispy }}
                                     </fieldset>
                                     <div class="form-group">
-                                        <button class="btn btn-outline-info" type="submit">Sing Up</button>
-                                        
+                                        <button class="btn btn-outline-info" href="{%url 'seller_user:add_seller' form.id %}" type="submit">Sing Up</button> 
                                     </div>
                                  </form>
                                   <div class="border-top pt-3">
                                     <small class="text-muted">
                                       Already Have An Account? <a class="ml-2">Sign In</a>
                                     </small>
-                                 </div> 
-                                                                
+                                 </div>                              
                               </div>
                             </div>
                           </div>

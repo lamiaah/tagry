@@ -55,9 +55,9 @@ def seller_regieter(request ):
 
 
 @login_required(login_url='login')
-def post(request ,user_id):
+def post(request ,user):
     if request.user.is_authenticated :
-        user =CustomUser.objects.get(pk = user_id)
+        user =CustomUser.objects.get(pk = user)
         if request.method == 'POST':
             form = SellerForm(request.POST, request.FILES or None)
             if form.is_valid():
