@@ -34,7 +34,7 @@ class Products(models.Model):
 
  
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to ='image_pic/')
+    image = models.ImageField(upload_to ='buyer_pic/')
     product = models.ForeignKey(Products,on_delete= models.RESTRICT ,related_name='+') 
   
     def get_absolute_url(self):
