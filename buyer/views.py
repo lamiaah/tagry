@@ -10,11 +10,14 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def buyer(request):
     if request.user.is_authenticated :
-        buyer = Buyer.objects.filter(is_archive=False)
-        context = {
-            'buyer':buyer  
-        }
-        return render(request,'buyer/buyer.html',context)
+        if request.user.is_superuser:
+            buyer = Buyer.objects.filter(is_archive=False)
+            context = {
+                'buyer':buyer  
+            }
+            return render(request,'buyer/buyer.html',context)
+        else:    
+             return redirect('login')
     else:
         return redirect('login')
 
