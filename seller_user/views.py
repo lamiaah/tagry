@@ -1,3 +1,4 @@
+from django.db.models import query_utils
 from django.http.response import Http404
 from products.models import Products , ProductImage
 from django.shortcuts import render ,redirect ,get_object_or_404
@@ -127,4 +128,13 @@ def edit(request ,pk):
 
 
 
+def search(request):
+    query = request.GET.get('q','')
+    if query:
+            queryset = (query_utils(product_title=query))
+
+            results = Products.objects.filter(queryset).distinct()
+    else:
+       results = []
+    return render(request,  'seller/seller_detail.html', {'results':results, 'query':query})
 

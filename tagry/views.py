@@ -5,6 +5,7 @@ from users.models import CustomUser
 from seller_user.models import Seller
 from buyer.models import Buyer
 
+
 @login_required(login_url='login')
 def home_view(request):    
     if request.user.is_authenticated == True:
