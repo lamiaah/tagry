@@ -88,17 +88,20 @@ def edit(request ,pk ,seller ):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             Product = Products.objects.get(pk=pk)
-            form = ProductForm(request.POST ,request.FILES , instance= Product)
+            Imageform = ImageForm(request.POST, request.FILES)
+            productform = ProductForm(request.POST ,request.FILES , instance= Product)
             if request.method == 'POST':
-                if form.is_valid():
-                    form.save()
+                if Imageform.is_valid() and  productform.is_valid() :
+                    productform .save()
+                    Imageform.save()
                     return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
                 else:
-                    print(form.errors.as_data()) 
-                    return render(request,'product/product_edit.html',{'form':form})   
+                   
+                    return render(request,'product/product_edit.html',{'Productform':productform,'Imageform':Imageform})   
             else:
-                form = ProductForm()
-            return render(request,'product/product_edit.html',{'form':form})
+                productform = ProductForm()
+                Imageform = ImageForm()
+            return render(request,'product/product_edit.html',{'Productform':productform,'Imageform':Imageform})
         else:
            return redirect('login')
     else:
