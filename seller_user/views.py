@@ -36,21 +36,23 @@ def seller_details(request, pk):
     else:
         return redirect('login')
 
-
+@login_required(login_url='login')
 def seller_regieter(request ):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.instance
+    if request.user.is_authenticated :
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.instance
 
-            return redirect(reverse('seller_user:add_seller',args=(user.id,)))
+                return redirect(reverse('seller_user:add_seller',args=(user.id,)))
+            else:
+                return render(request ,'seller/register_seller.html',{'form':form})      
         else:
-            return render(request ,'seller/register_seller.html',{'form':form})      
+            form = RegisterForm()
+        return render(request,'seller/register_seller.html',{'form':form })    
     else:
-        form = RegisterForm()
-    return render(request,'seller/register_seller.html',{'form':form })    
-
+      return redirect('login')
 
 @login_required(login_url='login')
 def post(request ,pk):
