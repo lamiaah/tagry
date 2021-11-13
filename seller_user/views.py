@@ -134,6 +134,5 @@ def search_product(request):
         if query_name:
             results = Products.objects.filter(product_title__contains=query_name)
             return render(request, 'seller/seller.html', {"results":results})
-
     return render(request, 'seller/seller.html')
 

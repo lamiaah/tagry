@@ -29,7 +29,7 @@
           <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <form action="{% url 'search' %}" method="POST">
+          <form href="{% url 'search' %}" method="POST">
             {% csrf_token %} 
             <input type="text" name="name">
             <input type="submit" name="submit" value="Search">
