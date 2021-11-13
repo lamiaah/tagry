@@ -11,16 +11,16 @@ from rest_framework.authtoken.models import Token
 
 class CustomAuth(BaseUserManager):
 
-    def _create_user(self, email,  password, is_staff, is_superuser, **extra_fields):
+    def _create_user(self, email,  password, is_staff, is_superuser,is_archive, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
         now = timezone.now()
         email = self.normalize_email(email)
         user = self.model(
             email=email,
-
             is_staff=is_staff, 
             is_active=True,
+            is_archive =False,  
             is_superuser=is_superuser, 
             last_login=now,
             date_joined=now,
@@ -42,7 +42,7 @@ class CustomAuth(BaseUserManager):
 
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length= 50, null= False, blank= False,unique= True)
- 
+    is_archive = models.BooleanField(null=False,blank= False, default= False)
 
 
     USERNAME_FIELD = 'email'
