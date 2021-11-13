@@ -46,7 +46,7 @@ def seller_regieter(request ):
             # user_id = form.cleaned_data.get('id')
             # username = form.cleaned_data.get('username')
             
-            return redirect('seller_user:add_seller',args=(form.id,))
+            return redirect(reverse('seller_user:add_seller',args=(form.id,)))
         else:
             return render(request ,'seller/register_seller.html',{'form':form})      
     else:
@@ -55,9 +55,9 @@ def seller_regieter(request ):
 
 
 @login_required(login_url='login')
-def post(request ,user):
+def post(request ,pk):
     if request.user.is_authenticated :
-        user =CustomUser.objects.get(pk = user)
+        user =CustomUser.objects.get(pk = pk)
         if request.method == 'POST':
             form = SellerForm(request.POST, request.FILES or None)
             if form.is_valid():
