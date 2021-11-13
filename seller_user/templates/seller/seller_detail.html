@@ -24,26 +24,9 @@
           
           </button> 
           <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
-            <form method='GET' action=".">
-              {% if query %}
-                  {% if results %}
-                    <ul>
-                    {% for results in results %}
-                        <li>{{ results|escape }}</li>
-                    {% endfor %}
-                    </ul>
-                    {% else %}
-                      <p>Query returned no results.</p>
-                    {% endif %}
-              {% endif %}
-              <input type="text">
-              <input type="submit"  value="{{ query|escape }}"/>
-            </form>
-
             <li class="nav-item">
               <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{% static 'images/face.png' %}" alt=""></a>
             </li>
-           
           </ul>
           <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
