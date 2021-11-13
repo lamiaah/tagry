@@ -100,7 +100,7 @@ def edit(request ,pk ,seller ):
                     product = productform.instance
                     Imageform.instance.product_id =product.id
                     Imageform.save()
-                    return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
+                    return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
                 else:
                    
                     return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
