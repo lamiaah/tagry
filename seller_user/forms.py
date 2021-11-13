@@ -14,6 +14,6 @@ class RegisterForm(UserCreationForm):
 class SellerForm(forms.ModelForm):
     class Meta : 
         model = Seller
-        fields =  '__all__'
+        fields =  ['name','about','image','website','seller_address','country_name','city_name','area_name','category_id']
        
         
