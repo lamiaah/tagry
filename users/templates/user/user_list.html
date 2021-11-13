@@ -173,9 +173,10 @@
                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
                                      <td>
                                      {%if users.is_superuser%}
-                                        <label class="customcheck">
+                                        <span style="font-family: wingdings; font-size: 200%;">&#252;</span>
+                                        {% comment %} <label class="customcheck">
                                           <input type="checkbox" checked="checked">
-                                        </label>
+                                        </label> {% endcomment %}
                                       {%endif%}
                                      </td>  
                                   </tr>
