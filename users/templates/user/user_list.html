@@ -170,7 +170,7 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-                                    
+{% comment %}                                     
                                     <label class="container">staff
                                     <input type="checkbox" checked="checked">
                                     <span class="checkmark"></span>
@@ -179,7 +179,7 @@
                                     <label class="container">not
                                     <input type="checkbox">
                                     <span class="checkmark"></span>
-                                    </label>
+                                    </label> {% endcomment %}
                                     <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete' users.id  %}">Delete</a></td>
                                   </tr>
                                 {% endfor %}
