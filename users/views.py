@@ -39,7 +39,7 @@ def delete(request ,pk):
             user.is_archive = True
             user.save()
             return redirect('user_list')
-        context = {'user':user}
+        context = {'users':users}
         return render(request, template_name, context)  
     else:
         return redirect('login')    
