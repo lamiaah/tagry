@@ -44,7 +44,7 @@ def post_product(request,pk):
                 Productform = ProductForm(request.POST, request.FILES)
                 Imageform = ImageForm(request.POST, request.FILES)
                 if Productform.is_valid() and Imageform.is_valid() :
-                    ProductForm.instance.seller_id = seller
+                    Productform.instance.seller_id = seller
                     Productform.save()
                     Imageform.save()
                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
