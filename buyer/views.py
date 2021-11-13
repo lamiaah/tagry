@@ -16,8 +16,8 @@ def buyer(request):
                 'buyer':buyer  
             }
             return render(request,'buyer/buyer.html',context)
-        else:    
-             return redirect('login')
+        else: 
+            return redirect('login')
     else:
         return redirect('login')
 

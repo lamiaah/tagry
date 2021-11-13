@@ -30,3 +30,16 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
+@login_required(login_url='login')  
+def delete(request ,pk):
+    if request.user.is_authenticated :
+        user = CustomUser.objects.get(pk=pk)
+        template_name  ='user/delete_user.html'  
+        if request.method == "POST":
+            user.is_archive = True
+            user.save()
+            return redirect('user_list')
+        context = {'user':user}
+        return render(request, template_name, context)  
+    else:
+        return redirect('login')    
