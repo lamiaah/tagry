@@ -170,16 +170,12 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-{% comment %}                                     
-                                    <label class="container">staff
-                                    <input type="checkbox" checked="checked">
-                                    <span class="checkmark"></span>
+                                    {% if users.is_superuser%}
+                                    <label class="customcheck">
+                                      <input type="checkbox" checked="checked">
+                                      <span class="checkmark"></span> Label Text
                                     </label>
 
-                                    <label class="container">not
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                    </label> {% endcomment %}
                                     <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
                                   </tr>
                                 {% endfor %}
