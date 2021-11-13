@@ -44,7 +44,7 @@ def delete_user(request ,pk):
             if request.method == "POST":
                 users.is_active = False
                 users.save()
-                return redirect('user_list')
+                return redirect('users_list')
             context = {'users':users}
             return render(request, template_name, context)  
         else:
