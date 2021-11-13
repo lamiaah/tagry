@@ -161,8 +161,8 @@
                                   <div class="card-body">
                                     <h1><a class ="article-title"  href="{% url 'buyer_detail' buyer.id %}">{{buyer.name}}</a></h1>
                                     <div class="text-center">
-                                    <img src="{{buyer.image.url}}" class="left" width="110" height="100" />
-                                    <div style="display: flex;"class="row justify-content-right mt-5">
+                                    <img src="{{buyer.image.url}}" class="circle" width="110" height="100" />
+                                    <div style="display: flex;"class="row justify-content-right mt-4">
                                        <a class="btn btn-outline-danger" href="{% url 'delete_buyer' buyer.id  %}">Delete</a>
                                        <a class="btn btn-outline-info ml-3" href="{% url 'edit_buyer' buyer.id  %}"> Edit</a>
                                     </div>
