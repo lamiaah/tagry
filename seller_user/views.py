@@ -128,13 +128,12 @@ def edit(request ,pk):
 
 
 
-def search(request):
-    query = request.GET.get('q','')
-    if query:
-            queryset = (query_utils(product_title=query))
+def search_product(request):
+    if request.method == "POST":
+        query_name = request.POST.get('product_title', None)
+        if query_name:
+            results = Products.objects.filter(product_title__contains=query_name)
+            return render(request, 'seller/seller.html', {"results":results})
 
-            results = Products.objects.filter(queryset).distinct()
-    else:
-       results = []
-    return render(request,  'seller/seller_detail.html', {'results':results, 'query':query})
+    return render(request, 'seller/seller.html')
 
