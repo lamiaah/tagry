@@ -36,23 +36,24 @@ def get_products(request):
 
 
 @login_required(login_url='login')
-def post(request):
+def post(request,seller):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             if request.method == 'POST':
-                form = ProductForm(request.POST, request.FILES)
-                if form.is_valid():
-                    form.instance.created_by =request.user
-                    form.instance.updated_by =request.user
-
-                    form.save()
-                    return redirect('')
+                Productform = ProductForm(request.POST, request.FILES)
+                Imageform = ImageForm(request.POST, request.FILES)
+                if Productform.is_valid() and Imageform.is_valid() :
+                    Productform.save()
+                    Imageform.save()
+                    return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
                 else: 
-                    print(form.errors.as_data()) 
-                    return render(request,'categories/category_add.html',{'form':form})
+                    #print(form.errors.as_data()) 
+                    return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
+                    
             else:
-                form = ProductForm()
-            return render(request,'categories/category_add.html',{'form':form})
+                Productform = ProductForm()
+                Imageform = ImageForm()
+            return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
         else:
             return redirect('login')     
     else:
