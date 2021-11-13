@@ -180,13 +180,13 @@
                                     <input type="checkbox">
                                     <span class="checkmark"></span>
                                     </label> {% endcomment %}
-                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete' users.id  %}">Delete</a></td>
+                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
                                   </tr>
                                 {% endfor %}
                               </tbody>
                             </table>
                           </div>
-                           <a class="btn-lg btn-primary" href="{% url 'register'  %}">New User</a>
+                           <a class="btn-lg btn-primary" href="{% url 'new_user'  %}">New User</a>
                         </div>
                       </div>
                     

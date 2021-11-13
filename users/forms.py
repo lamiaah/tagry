@@ -8,3 +8,12 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2']
+
+
+
+class NewUserForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'password1', 'password2' ,'is_superuser']

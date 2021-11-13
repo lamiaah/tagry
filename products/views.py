@@ -19,14 +19,16 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def get_products(request):
     if request.user.is_authenticated == True:
-        product = Products.objects.filter(is_archived=False)
-        image = ProductImage.objects.filter(product = product)
-        seller= Seller
-        context ={
-            'product':product,
-            'image':image,
-        }
-        return render(request,'product/products.html',context)
+        if request.user.is_superuser:
+            product = Products.objects.filter(is_archived=False)
+            image = ProductImage.objects.filter(product = product)
+            context ={
+                'product':product,
+                'image':image,
+            }
+            return render(request,'product/products.html',context)
+        else:
+           return redirect('login')      
     else:
         return redirect('login')    
 
@@ -36,20 +38,23 @@ def get_products(request):
 @login_required(login_url='login')
 def post(request):
     if request.user.is_authenticated ==True :
-        if request.method == 'POST':
-            form = ProductForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.instance.created_by =request.user
-                form.instance.updated_by =request.user
+        if request.user.is_superuser:
+            if request.method == 'POST':
+                form = ProductForm(request.POST, request.FILES)
+                if form.is_valid():
+                    form.instance.created_by =request.user
+                    form.instance.updated_by =request.user
 
-                form.save()
-                return redirect('')
-            else: 
-                print(form.errors.as_data()) 
-                return render(request,'categories/category_add.html',{'form':form})
+                    form.save()
+                    return redirect('')
+                else: 
+                    print(form.errors.as_data()) 
+                    return render(request,'categories/category_add.html',{'form':form})
+            else:
+                form = ProductForm()
+            return render(request,'categories/category_add.html',{'form':form})
         else:
-            form = ProductForm()
-        return render(request,'categories/category_add.html',{'form':form})
+            return redirect('login')     
     else:
         return redirect('login')
 
@@ -57,14 +62,17 @@ def post(request):
 @login_required(login_url='login')  
 def delete(request ,pk ,seller):
     if request.user.is_authenticated ==True :
-        product = Products.objects.get(pk=pk)
-        template_name  ='product/delete_pro.html'  
-        if request.method == "POST":
-            product.is_archived = True
-            product.save()
-            return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
-        context = {'product':product}
-        return render(request, template_name, context) 
+        if request.user.is_superuser:
+            product = Products.objects.get(pk=pk)
+            template_name  ='product/delete_pro.html'  
+            if request.method == "POST":
+                product.is_archived = True
+                product.save()
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
+            context = {'product':product}
+            return render(request, template_name, context) 
+        else:
+           return redirect('login')
     else:
       return redirect('login')
 
@@ -72,18 +80,21 @@ def delete(request ,pk ,seller):
 @login_required(login_url='login')
 def edit(request ,pk ,seller ):
     if request.user.is_authenticated ==True :
-        Product = Products.objects.get(pk=pk)
-        form = ProductForm(request.POST ,request.FILES , instance= Product)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
+        if request.user.is_superuser:
+            Product = Products.objects.get(pk=pk)
+            form = ProductForm(request.POST ,request.FILES , instance= Product)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.save()
+                    return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
+                else:
+                    print(form.errors.as_data()) 
+                    return render(request,'product/product_edit.html',{'form':form})   
             else:
-                print(form.errors.as_data()) 
-                return render(request,'product/product_edit.html',{'form':form})   
+                form = ProductForm()
+            return render(request,'product/product_edit.html',{'form':form})
         else:
-            form = ProductForm()
-        return render(request,'product/product_edit.html',{'form':form})
+           return redirect('login')
     else:
       return redirect('login')        
 
@@ -92,14 +103,16 @@ def edit(request ,pk ,seller ):
 @login_required(login_url='login')
 def product_details(request, pk):
     if request.user.is_authenticated :
-
-        product_data = Products.objects.get(pk = pk)
-        image = ProductImage.objects.filter(product = product_data)
-        context = {
-            'product_data' : product_data,
-            'image':image
-        }
-        return render(request, 'product/product_detail.html', context)
+       if request.user.is_superuser:
+            product_data = Products.objects.get(pk = pk)
+            image = ProductImage.objects.filter(product = product_data)
+            context = {
+                'product_data' : product_data,
+                'image':image
+            }
+            return render(request, 'product/product_detail.html', context)
+       else:
+            return redirect('login')
     else:
         return redirect('login')      
 

@@ -11,9 +11,12 @@ from.forms import  CategoryForm ,SubCategoryForm
 @login_required(login_url='login')
 def category_list(request):
     if request.user.is_authenticated:
-        category = Categories.objects.filter(is_archive =False)
-        context ={'cate':category }
-        return render (request ,'categories/categories.html',context)
+        if request.user.is_superuser:
+            category = Categories.objects.filter(is_archive =False)
+            context ={'cate':category }
+            return render (request ,'categories/categories.html',context)
+        else:
+            return redirect('login')    
     else:
         return redirect('login')
 
@@ -21,33 +24,39 @@ def category_list(request):
 @login_required(login_url='login')
 def post(request):
     if request.user.is_authenticated ==True :
-        if request.method == 'POST':
-            form = CategoryForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.instance.created_by =request.user
-                form.instance.updated_by =request.user
-                form.save()
-                return redirect('home')
-            else: 
-                print(form.errors.as_data()) 
-                return render(request,'categories/category_add.html',{'form':form})
+        if request.user.is_superuser:
+            if request.method == 'POST':
+                form = CategoryForm(request.POST, request.FILES)
+                if form.is_valid():
+                    form.instance.created_by =request.user
+                    form.instance.updated_by =request.user
+                    form.save()
+                    return redirect('home')
+                else: 
+                    print(form.errors.as_data()) 
+                    return render(request,'categories/category_add.html',{'form':form})
+            else:
+                form = CategoryForm()
+            return render(request,'categories/category_add.html',{'form':form})
         else:
-            form = CategoryForm()
-        return render(request,'categories/category_add.html',{'form':form})
+          return redirect('login')
     else:
         return redirect('login')
 
 @login_required(login_url='login')
 def delete(request ,pk):
     if request.user.is_authenticated ==True :
-        cate = Categories.objects.get(pk=pk)
-        template_name  ='categories/category_delete.html'  
-        if request.method == "POST":
-            cate.is_archive = True
-            cate.save()
-            return redirect('home')
-        context = {"cate": cate}
-        return render(request, template_name, context)  
+        if request.user.is_superuser:
+            cate = Categories.objects.get(pk=pk)
+            template_name  ='categories/category_delete.html'  
+            if request.method == "POST":
+                cate.is_archive = True
+                cate.save()
+                return redirect('home')
+            context = {"cate": cate}
+            return render(request, template_name, context)  
+        else:
+           return redirect('login')    
     else:
         return redirect('login')
 
@@ -55,41 +64,47 @@ def delete(request ,pk):
 @login_required(login_url='login')
 def edit(request ,pk):
     if request.user.is_authenticated ==True :
-        cate = get_object_or_404(Categories ,pk=pk)
-        form = CategoryForm(request.POST ,request.FILES , instance= cate)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.instance.created_by =request.user
-                form.instance.updated_by =request.user
-                form.save()
-                return redirect('home')
+        if request.user.is_superuser:
+            cate = get_object_or_404(Categories ,pk=pk)
+            form = CategoryForm(request.POST ,request.FILES , instance= cate)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.instance.created_by =request.user
+                    form.instance.updated_by =request.user
+                    form.save()
+                    return redirect('home')
+                else:
+                    print(form.errors.as_data()) 
+                    return render(request,'categories/category_edit.html',{'form':form})   
             else:
-                print(form.errors.as_data()) 
-                return render(request,'categories/category_edit.html',{'form':form})   
+                form = CategoryForm()
+            return render(request,'categories/category_edit.html',{'form':form})
         else:
-            form = CategoryForm()
-        return render(request,'categories/category_edit.html',{'form':form})
+            return redirect('login')
     else:
       return redirect('login')
 
 @login_required(login_url='login')
 def edit_sub(request ,pk):
     if request.user.is_authenticated ==True :
-        subcate = get_object_or_404(SubCategory,pk=pk)
-        cate = subcate.category_id.id
-        form = SubCategoryForm(request.POST ,request.FILES , instance= subcate)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.instance.created_by =request.user
-                form.instance.updated_by =request.user
-                form.save()
-                return redirect(reverse('sub_home',args=(cate,)))
+        if request.user.is_superuser:
+            subcate = get_object_or_404(SubCategory,pk=pk)
+            cate = subcate.category_id.id
+            form = SubCategoryForm(request.POST ,request.FILES , instance= subcate)
+            if request.method == 'POST':
+                if form.is_valid():
+                    form.instance.created_by =request.user
+                    form.instance.updated_by =request.user
+                    form.save()
+                    return redirect(reverse('sub_home',args=(cate,)))
+                else:
+                    print(form.errors.as_data()) 
+                    return render(request,'sub_category/sub_cate_edit.html',{'form':form})   
             else:
-                print(form.errors.as_data()) 
-                return render(request,'sub_category/sub_cate_edit.html',{'form':form})   
+                form = CategoryForm()
+            return render(request,'sub_category/sub_cate_edit.html',{'form':form})
         else:
-            form = CategoryForm()
-        return render(request,'sub_category/sub_cate_edit.html',{'form':form})
+            return redirect('login')
     else:
       return redirect('login')
 
@@ -99,13 +114,16 @@ def edit_sub(request ,pk):
 @login_required(login_url='login')
 def sub_category_list(request ,pk):
     if request.user.is_authenticated:
-        sub_category = SubCategory.objects.filter(category_id=pk ,is_archive =False)
-        category = Categories.objects.get(pk=pk)
-        context ={
-            'sub_cate':sub_category ,
-            'cate' :category,
-        }
-        return render (request ,'sub_category/sub_category.html',context)
+        if request.user.is_superuser:
+            sub_category = SubCategory.objects.filter(category_id=pk ,is_archive =False)
+            category = Categories.objects.get(pk=pk)
+            context ={
+                'sub_cate':sub_category ,
+                'cate' :category,
+            }
+            return render (request ,'sub_category/sub_category.html',context)
+        else:
+           return redirect('login')
     else:
         return redirect('login')
 
@@ -115,33 +133,42 @@ def sub_category_list(request ,pk):
 @login_required(login_url='login')
 def post_sub(request ,cateid):
     if request.user.is_authenticated ==True :
-        category = Categories.objects.get(pk=cateid)
-        if request.method == 'POST':
-            form =SubCategoryForm(request.POST, request.FILES )
-            if form.is_valid():
-                form.instance.created_by =request.user
-                form.instance.updated_by =request.user
-                form.instance.category_id = category
-                form.save()
-                return redirect(reverse('sub_home',args=(category.id,)))
-            else: 
-                print(form.errors.as_data()) 
-                return render(request,'sub_category/new_sub.html',{'form':form})
+        if request.user.is_superuser:
+            category = Categories.objects.get(pk=cateid)
+            if request.method == 'POST':
+                form =SubCategoryForm(request.POST, request.FILES )
+                if form.is_valid():
+                    form.instance.created_by =request.user
+                    form.instance.updated_by =request.user
+                    form.instance.category_id = category
+                    form.save()
+                    return redirect(reverse('sub_home',args=(category.id,)))
+                else: 
+                    print(form.errors.as_data()) 
+                    return render(request,'sub_category/new_sub.html',{'form':form})
+            else:
+                form = SubCategoryForm()
+            return render(request,'sub_category/new_sub.html',{'form':form})
         else:
-            form = SubCategoryForm()
-        return render(request,'sub_category/new_sub.html',{'form':form})
+           return redirect('login')    
     else:
         return redirect('login')
 
 
-
+@login_required(login_url='login')
 def deletesub(request ,pk):
-    subcate = SubCategory.objects.get(pk=pk)
-    cate = subcate.category_id.id
-    template_name  ='sub_category/sub_cate_delete.html'  
-    if request.method == "POST":
-        subcate.is_archive = True
-        subcate.save()
-        return redirect(reverse('sub_home',args=(cate,)))
-    context = {"cate": subcate}
-    return render(request, template_name, context)  
+    if request.user.is_authenticated ==True :
+        if request.user.is_superuser:
+            subcate = SubCategory.objects.get(pk=pk)
+            cate = subcate.category_id.id
+            template_name  ='sub_category/sub_cate_delete.html'  
+            if request.method == "POST":
+                subcate.is_archive = True
+                subcate.save()
+                return redirect(reverse('sub_home',args=(cate,)))
+            context = {"cate": subcate}
+            return render(request, template_name, context)  
+        else:
+           return redirect('login')    
+    else:
+        return redirect('login')
