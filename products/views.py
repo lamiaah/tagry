@@ -92,7 +92,12 @@ def edit(request ,pk ,seller ):
             productform = ProductForm(request.POST ,request.FILES , instance= Product)
             if request.method == 'POST':
                 if Imageform.is_valid() and  productform.is_valid() :
-                    productform .save()
+                    productform.instance.created_user =request.user
+                    productform.instance.updated_user =request.user
+                    productform.instance.seller_id = seller
+                    productform.save()
+                    product = productform.instance
+                    Imageform.instance.product_id =product.id
                     Imageform.save()
                     return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
                 else:
