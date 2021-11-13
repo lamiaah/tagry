@@ -44,6 +44,10 @@ def post_product(request,pk):
                 Productform = ProductForm(request.POST, request.FILES)
                 Imageform = ImageForm(request.POST, request.FILES)
                 if Productform.is_valid() and Imageform.is_valid() :
+                    Productform.instance.created_by =request.user
+                    Productform.instance.updated_by =request.user
+                    Imageform.instance.created_by =request.user
+                    Imageform.instance.updated_by =request.user
                     Productform.instance.seller_id = seller
                     Productform.save()
                     Imageform.save()
