@@ -36,7 +36,7 @@ def get_products(request):
 
 
 @login_required(login_url='login')
-def post(request,pk):
+def post_product(request,pk):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             if request.method == 'POST':
