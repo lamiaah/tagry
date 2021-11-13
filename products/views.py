@@ -88,6 +88,7 @@ def edit(request ,pk ,seller ):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             Product = Products.objects.get(pk=pk)
+            seller = Seller.objects.get(pk=seller)
             Imageform = ImageForm(request.POST, request.FILES)
             productform = ProductForm(request.POST ,request.FILES , instance= Product)
             if request.method == 'POST':
