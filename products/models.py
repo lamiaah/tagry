@@ -34,7 +34,10 @@ class Products(models.Model):
 
  
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to='product_image_pic/')
+    id = models.AutoField(null=False ,blank= False,primary_key= True)
+    # image = models.ImageField(upload_to='product_image_pic/')
+    images = models.ImageField(upload_to='product_image_pic/')
     product = models.ForeignKey(Products,on_delete= models.RESTRICT ,related_name='+') 
   
-
+    def get_absolute_url(self):
+          return reverse('product_details', kwargs={ "pk": self.pk })   
