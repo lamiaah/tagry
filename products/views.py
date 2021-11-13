@@ -48,8 +48,7 @@ def post(request,pk):
                     return redirect(reverse('seller_user:seller_detail' ,args=(pk,)))
                 else: 
                     #print(form.errors.as_data()) 
-                    return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
-                    
+                    return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})    
             else:
                 Productform = ProductForm()
                 Imageform = ImageForm()
