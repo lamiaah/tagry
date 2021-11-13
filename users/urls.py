@@ -6,5 +6,5 @@ urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('users_list/', views.users , name='users_list'),
     path('logout/', views.logout, name='logout')  ,
-    path('delete/<int:pk>', views.delete, name='delete') 
+    path('delete/<int:pk>', views.delete_user, name='delete') 
 ]

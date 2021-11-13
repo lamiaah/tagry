@@ -31,7 +31,7 @@ def logout(request):
     return redirect('login')
 
 @login_required(login_url='login')  
-def delete(request ,pk):
+def delete_user(request ,pk):
     if request.user.is_authenticated :
         user = CustomUser.objects.get(pk=pk)
         template_name  ='user/delete_user.html'  
