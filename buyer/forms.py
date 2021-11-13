@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class BuyerForm(forms.ModelForm):
     class Meta : 
         model = Buyer
-        fields = '__all__'
+        fields = ['name','about','image','address','country','city','area']
 
 
 
