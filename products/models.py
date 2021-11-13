@@ -34,7 +34,7 @@ class Products(models.Model):
 
  
 class ProductImage(models.Model):
-    image = models.ImageField(upload_to='product_pic/')
+    image = models.ImageField(upload_to='product_image_pic/')
     product = models.ForeignKey(Products,on_delete= models.RESTRICT ,related_name='+') 
   
 
