@@ -163,8 +163,8 @@
                                 <div class="card-body">
                                 <h1><a class ="article-title" >{{product.product_title}}</a></h1> 
                                   <div class="text-center">
-                                    <img src="{{image.image.url}}" class="rounded-circle" width="100" height="100" />
-                                    <div style="display: flex;"class="row justify-content-right mt-5">
+                                    <img src="{{image.image.url}}" class="rounded-circle" width="110" height="100" />
+                                    <div style="display: flex;"class="row justify-content-right mt-4">
                                        <a class="btn btn-outline-danger" href="{% url 'delete_product' product.id  %}">Delete</a>
                                        <a class="btn btn-outline-info ml-3" href="{% url 'edit_product' product.id  %}"> Edit</a>
                                     </div> 
