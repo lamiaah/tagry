@@ -39,13 +39,15 @@ def get_products(request):
 def post_product(request,pk):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
+            seller = Seller.objects.get(pk=pk)
             if request.method == 'POST':
                 Productform = ProductForm(request.POST, request.FILES)
                 Imageform = ImageForm(request.POST, request.FILES)
                 if Productform.is_valid() and Imageform.is_valid() :
+                    ProductForm.instance.seller_id = seller
                     Productform.save()
                     Imageform.save()
-                    return redirect(reverse('seller_user:seller_detail' ,args=(pk,)))
+                    return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
                 else: 
                     #print(form.errors.as_data()) 
                     return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})    
