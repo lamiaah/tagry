@@ -36,7 +36,7 @@ def get_products(request):
 
 
 @login_required(login_url='login')
-def post(request,seller):
+def post(request,pk):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             if request.method == 'POST':
@@ -45,7 +45,7 @@ def post(request,seller):
                 if Productform.is_valid() and Imageform.is_valid() :
                     Productform.save()
                     Imageform.save()
-                    return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
+                    return redirect(reverse('seller_user:seller_detail' ,args=(pk,)))
                 else: 
                     #print(form.errors.as_data()) 
                     return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
