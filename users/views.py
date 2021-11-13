@@ -42,7 +42,7 @@ def delete_user(request ,pk):
             users = CustomUser.objects.get(pk=pk)
             template_name  ='user/delete_user.html'  
             if request.method == "POST":
-                users.is_active = False
+                users.is_achive = False
                 users.save()
                 return redirect('users_list')
             context = {'users':users}
