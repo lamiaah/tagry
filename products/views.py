@@ -49,7 +49,7 @@ def post_product(request,pk):
                     Productform.instance.seller_id = seller
                     Productform.save()
                     product =Productform.instance
-                    Imageform.instance.product_id =product
+                    Imageform.instance.product_id =product.id
                     Imageform.save()
                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
                 else: 
