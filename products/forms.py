@@ -15,4 +15,4 @@ class ImageForm(forms.ModelForm):
  
     class Meta : 
         model = ProductImage
-        fields =["images"]
+        fields =["image"]
