@@ -97,11 +97,11 @@ def edit(request ,pk ,seller ):
                     return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
                 else:
                    
-                    return render(request,'product/product_edit.html',{'Productform':productform,'Imageform':Imageform})   
+                    return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
             else:
                 productform = ProductForm()
                 Imageform = ImageForm()
-            return render(request,'product/product_edit.html',{'Productform':productform,'Imageform':Imageform})
+            return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})
         else:
            return redirect('login')
     else:
