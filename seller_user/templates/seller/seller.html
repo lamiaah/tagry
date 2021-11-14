@@ -151,7 +151,7 @@
                 <div class="card">
                   <div class="card-body">
                      {% block content %}
-                          <form href="{% url 'search' %}" method="POST">
+                          <form action="{% url 'seller_user:search' %}" method="POST">
                             {% csrf_token %} 
                             <input type="text" name="name">
                             <input type="submit" name="submit" value="Search">
