@@ -18,7 +18,7 @@ def seller(request):
             }
             return render(request,'seller/seller.html',context)
         else:
-          return redirect('login')
+            return redirect('login')
     else:
         return redirect('login')
 
