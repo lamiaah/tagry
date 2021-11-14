@@ -160,7 +160,7 @@
                         <h2>Found {{ product|length }} Product{{ product|pluralize }}.</h2>
                         <ul>
                             {% for product in product %}
-                             <h1 class ="article-title"  href="{% url 'product_details' product.id %}">{{product.product_title}}</h1> 
+                             <h1><a class ="article-title"  href="{% url 'product_details' product.id %}">{{product.product_title}}</a></h1> 
                             {% endfor %}
                         </ul>
                         {% else %}
