@@ -1,7 +1,7 @@
 from datetime import date
 from django.shortcuts import redirect, render ,get_object_or_404
 from django.urls.base import reverse
-from products.models import Products ,ProductImage
+from products.models import Products ,Images
 from seller_user.models import Seller
 from.forms import  ProductForm ,ImageForm
 from django.views.generic import ListView
@@ -21,7 +21,7 @@ def get_products(request):
     if request.user.is_authenticated == True:
         if request.user.is_superuser:
             product = Products.objects.filter(is_archived=False)
-            image = ProductImage.objects.filter(product = product)
+            image = Images.objects.filter(product = product)
             context ={
                 'product':product,
                 'image':image,
@@ -120,7 +120,7 @@ def product_details(request, pk):
     if request.user.is_authenticated :
        if request.user.is_superuser:
             product_data = Products.objects.get(pk = pk)
-            image = ProductImage.objects.filter(product = product_data)
+            image = Images.objects.filter(product = product_data)
             context = {
                 'product_data' : product_data,
                 'image':image

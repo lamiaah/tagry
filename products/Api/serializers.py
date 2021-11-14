@@ -1,6 +1,6 @@
 
 from rest_framework import  serializers
-from products.models import Products ,ProductImage
+from products.models import Products ,Images
 from seller_user.models import Seller
 from categories.models import Categories
 from users.models import CustomUser
@@ -13,12 +13,12 @@ class ImageSerializers(serializers.ModelSerializer):
     image = serializers.ImageField()
 
     class Meta:
-            model = ProductImage
+            model = Images
             fields = '__all__'
 
 
     def create(self,validated_data):
-        product_image = ProductImage(
+        product_image = Images(
             image = validated_data['image'],
             product = validated_data['product']
         )

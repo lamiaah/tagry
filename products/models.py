@@ -32,10 +32,15 @@ class Products(models.Model):
     def get_absolute_url(self):
         return reverse('product_details', kwargs={ "pk": self.pk })        
 
- 
-class ProductImage(models.Model):
-    image = models.ImageField(upload_to ='buyer_pic/')
-    product = models.ForeignKey(Products,on_delete= models.RESTRICT ,related_name='+') 
-  
+
+
+class Images(models.Model):
+    id = models.AutoField(null=False ,blank= False,primary_key= True)
+    product= models.ForeignKey(Products, on_delete=models.CASCADE,related_name='+',default='')
+    image = models.ImageField(upload_to='product_pic/') 
+
+    def __str__(self):
+        return str(self.product)
+
     def get_absolute_url(self):
-          return reverse('product_details', kwargs={ "pk": self.pk })   
+        return reverse('product_details', kwargs={ "pk": self.pk })   

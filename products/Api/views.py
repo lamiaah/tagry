@@ -3,7 +3,7 @@ from django.http.response import Http404
 from rest_framework import status ,generics 
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from products.models import Products ,ProductImage
+from products.models import Products ,Images
 from products.Api.serializers import ImageSerializers, ProductSerializer 
 from rest_framework.permissions import IsAuthenticated
 
@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 def add_images_to_products(products):
 
     for product in products:
-        images = ProductImage.objects.filter(product_id = product['id'])
+        images = Images.objects.filter(product_id = product['id'])
         image_serialzers = ImageSerializers(data = images, many= True)
         image_serialzers.is_valid()
         product['images'] = image_serialzers.data
