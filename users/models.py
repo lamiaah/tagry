@@ -42,7 +42,7 @@ class CustomAuth(BaseUserManager):
 
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length= 50, null= False, blank= False,unique= True)
-    # is_archive = models.BooleanField(null=False,blank= False, default= False)
+    is_archive = models.BooleanField(null=False,blank= False, default= False)
 
 
     USERNAME_FIELD = 'email'
