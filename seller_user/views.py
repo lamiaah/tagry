@@ -140,6 +140,6 @@ def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
         product = Products.objects.filter(product_title__icontains=q)
-        return render(request, 'search_results.html', {'product': product, 'query': q})
+        return render(request, 'seller/product_search.html', {'product': product, 'query': q})
     else:
         return print('Please submit a search term.')
