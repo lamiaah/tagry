@@ -155,11 +155,12 @@
                 <div class="card">
                   <div class="card-body">
                      {% block content %}
-                       <h2>You searched for : <h1>{{   query }}</h1></h2>
+                       <h2>You searched for : <h3>{{  query }}</h3></h2>
                         {% if product %}
                         <p><em>Found {{ product|length }} Product{{ product|pluralize }}.</em></p>
                         <ul>
                             {% for product in product %}
+                            <img src="{{image.image.url}}" class="rounded-circle" width="50" height="50" />
                              <h1><a class ="article-title"  href="{% url 'product_details' product.id %}">{{product.product_title}}</a></h1> 
                             {% endfor %}
                         </ul>
