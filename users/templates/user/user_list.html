@@ -170,7 +170,11 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-                                   <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
+                                   <td>
+                                     {%if users.is_active%}
+                                       <i class="fa  fa-check-circle-o  highlight-icon-danger" aria-hidden="true"></i>
+                                        {% comment %} <span style="font-family: wingdings; font-size: 200%;">&#252;</span> {% endcomment %}
+                                      {%endif%}</td>
                                      <td>
                                      {%if users.is_superuser%}
                                         <span style="font-family: wingdings; font-size: 200%;">&#252;</span>
