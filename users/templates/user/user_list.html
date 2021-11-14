@@ -169,7 +169,13 @@
                               <tbody>
                               {% for users in users %}
                                 <tr class="table-secondery">
-                                    <td>{{seller}}</td>
+                                    <td>
+                                    {%if seller%}
+                                     <span style="font-family: wingdings; font-size: 200%;">&#252;</span>
+
+                                     {%if buyer%}
+                                     <span style="font-family: wingdings; font-size: 200%;">&#251;</span>
+                                    </td>
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
