@@ -128,7 +128,7 @@ def edit(request ,pk):
 
 
 
-def search_product(request):
+def search(request):
     if request.method == "POST":
         query_name = request.POST.get('product_title', None)
         if query_name:
