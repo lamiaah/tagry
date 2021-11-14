@@ -128,13 +128,18 @@ def edit(request ,pk):
 
 
 
-def search(request):
-    if request.method == "POST":
-        query_name = request.POST.get('product_title', None)
-        if query_name:
-            results = Products.objects.filter(product_title__contains=query_name)
-            return render(request, 'seller/seller.html', {"results":results})
-        else:
-            return render(request, 'seller/seller.html')
-    return render(request, 'seller/seller.html')
+# def search(request):
+#     if request.method == "POST":
+#         query_name = request.POST.get('product_title', None)
+#         if query_name:
+#             results = Products.objects.filter(product_title__contains=query_name)
+#             return render(request, 'seller/seller.html', {"results":results})
 
+#     return render(request, 'seller/seller.html')
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        product = Products.objects.filter(product_title__icontains=q)
+        return render(request, 'search_results.html', {'product': product, 'query': q})
+    else:
+        return print('Please submit a search term.')

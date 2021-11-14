@@ -151,16 +151,9 @@
                 <div class="card">
                   <div class="card-body">
                      {% block content %}
-                          <form action="{% url 'seller_user:search' %}" method="POST">
-                            {% csrf_token %} 
-                            <input type="text" name="name">
-                            <input type="submit" name="submit" value="Search">
-                          </form>
-                          {% for result in results %}
-
-                              <p>{{result.name}}</p>
-
-                          {% endfor %}
+                      <form type="get" action="{%url 'seller_user:search'%}">
+                        <input type="search" id="q" name="q" placeholder="Search..."/>
+                     </form>
                         <div class="content-fluid">
                           <div class="row">
                             {% for seller in seller %}
