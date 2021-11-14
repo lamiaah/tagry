@@ -155,12 +155,12 @@
                 <div class="card">
                   <div class="card-body">
                      {% block content %}
-                       <h2>You searched for: <strong>{{ query }}</strong></h2>
+                       <h2>You searched for: <strong>{{   query }}</strong></h2>
                         {% if product %}
-                        <h2>Found {{ product|length }} products{{ product|pluralize }}.</h2>
+                        <h2>Found {{ product|length }} Product{{ product|pluralize }}.</h2>
                         <ul>
                             {% for product in product %}
-                             <h1><a class ="article-title"  href="{% url 'product_details' product.id %}">{{product.name}}</a></h1>
+                             <h2>hh</h2>
                             {% endfor %}
                         </ul>
                         {% else %}
