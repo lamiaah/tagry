@@ -32,7 +32,7 @@ SECRET_KEY = config['SECRET_KEY']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['162.0.236.152','tajiry.com']
 #'127.0.0.1'
