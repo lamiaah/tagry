@@ -20,7 +20,7 @@ class CustomAuth(BaseUserManager):
             email=email,
             is_staff=is_staff, 
             is_active=True,
-            # is_archive =False,  
+            is_archive =False,  
             is_superuser=is_superuser, 
             last_login=now,
             date_joined=now,
