@@ -12,8 +12,8 @@ def home_view(request):
         orders = get_orders()
         revenue = get_revenue()
         all_users = CustomUser.objects.all(),
-        sellers = Seller.objects.all()
-        buyer = Buyer.objects.all()
+        sellers = Seller.objects.filter(is_archive=False)
+        buyer = Buyer.objects.filter(is_archive=False)
         context = {
             'orders_lens' : orders['orders_len'],
             'orders' : orders['orders'],
