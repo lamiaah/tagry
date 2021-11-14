@@ -159,6 +159,7 @@
                             <table class="table table-hover">
                               <thead>
                                 <tr class="text">
+                                  <th> S or B </th>
                                   <th> User Name</th>
                                   <th> Email</th>
                                   <th> Delete</th>
@@ -168,15 +169,13 @@
                               <tbody>
                               {% for users in users %}
                                 <tr class="table-secondery">
+                                    <td>{{seller}}</td>
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
                                    <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_user' users.id  %}">Delete</a></td>
                                      <td>
                                      {%if users.is_superuser%}
                                         <span style="font-family: wingdings; font-size: 200%;">&#252;</span>
-                                        {% comment %} <label class="customcheck">
-                                          <input type="checkbox" checked="checked">
-                                        </label> {% endcomment %}
                                       {%endif%}
                                      </td>  
                                   </tr>

@@ -3,6 +3,8 @@ from.forms import RegisterForm ,NewUserForm
 from users.models import CustomUser
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from seller_user.models import Seller
+from buyer.models import Buyer
 
 @login_required(login_url='login')
 def users(request):
@@ -71,3 +73,14 @@ def new_user(request ):
             return redirect('login')
     else:
         return redirect('login')    
+
+
+def check(request,pk):
+    seller = Seller.objects.filter(pk=pk)
+    buyer = Buyer.objects.filter(pk=pk)
+    
+    context ={
+        'seller':seller,
+        'buyer':buyer
+         }
+    return render (request ,'user/user_list.html',context)
