@@ -9,12 +9,13 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
-# def image(products):
-#     for product in products:
-#         image = ProductImage.objects.filter(product_id=product["id"])
-#         image_form = ImageForm(request.POST)
-#         if image_form.is_valid():
-
+# def image(product_id,image):
+#     try: 
+#         new_image = Images.objects.create(product = product_id ,image=image)
+#         new_image.save()
+#         return new_image
+#     except Exception as e:
+#          return False
 
 @login_required(login_url='login')
 def get_products(request):
