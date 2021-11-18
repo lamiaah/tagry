@@ -105,7 +105,7 @@ def edit(request ,pk ,seller ):
                    
                     return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
             else:
-                productform = ProductForm()
+                productform = ProductForm(instance= Product)
                 Imageform = ImageForm()
             return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})
         else:

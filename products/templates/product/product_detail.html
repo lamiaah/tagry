@@ -145,6 +145,36 @@
                   <h5 class="card-title">key Words</h5>
                 </a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'ads' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Ads</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{% url 'copun' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Copun</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Orders</h5>
+                </a>
+              </li>
           </nav>
           <div class="content-wrapper">
             <h1 class="page-heading mb-4">Product </h1>
@@ -162,41 +192,15 @@
                           </div>
                           <div class="row">
                             <div class="col-md-12">
-                              <h2 class="  card-title mb-8">{{product_data.product_title}}</h2>
-                              <h5> Description : </h5>
-                              <h4 class="lead">
-                                {{product_data.product_description}}
-                              </h4>
-                              <h5> Product_price : </h5>
-                              <h4 class="lead">
-                                {{product_data.product_price}}
-                              </h4>
-                              <h5> Product_hight: </h5>
-                              <h4 class="lead">
-                                {{product_data.product_hight}}
-                              </h4>
-                             <h5>  Product_width: </h5>
-                              <h4 class="lead">
-                                {{product_data.product_width}}
-                              </h4>
-                              <h5> Product_weight: </h5>
-                              <h4 class="lead">
-                                {{product_data.product_weight}}
-                              </h4>
-                             <h5> keyword_title : </h5>
-                              <h4 class="lead">
-                                {{product_data.keyword_title}}
-                              </h4>
-                              <h5> Seller : </h5>
-                              <h4 class="lead">
-                                {{product_data.seller_id}}
-                              </h4>
-                               <h5> Category : </h5>
-                              <h4 class="lead">
-                                {{product_data.category_id}}
-                              </h4>
-
-
+                              <h2 class="  card-title mb-8"> {{product_data.product_title}}</h2>
+                              <h5> Description :  {{product_data.product_description}}</h5>
+                              <h5> Product_price :  {{product_data.product_price}} </h5>
+                              <h5> Product_hight :  {{product_data.product_hight}} </h5>
+                             <h5>  Product_width : {{product_data.product_width}}</h5>
+                              <h5> Product_weight : {{product_data.product_weight}} </h5>
+                             <h5> keyword_title : {{product_data.keyword_title}} </h5>
+                              <h5> Seller : {{product_data.seller_id}}</h5>
+                               <h5> Category : {{product_data.category_id}}</h5>
                             </div>
                           </div>
                             </div>  

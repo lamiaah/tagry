@@ -3,6 +3,7 @@ from django.http.response import Http404
 from products.models import Products , Images
 from django.shortcuts import render ,redirect ,get_object_or_404
 from seller_user.models import Seller
+from stores.models import SellerStores
 from.forms import  SellerForm ,RegisterForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -30,10 +31,12 @@ def seller_details(request, pk):
             seller_data = Seller.objects.get(pk = pk)
             seller_products = Products.objects.filter(seller_id = pk ,is_archived=False)
             image = Images.objects.filter(product = seller_products)
+            stores = SellerStores.objects.filter(seller=pk)
             context = {
                 'seller_data' : seller_data,
                 'seller_products' :seller_products,
-                'image':image
+                'image':image,
+                'stores':stores
             }
             return render(request, 'seller/seller_detail.html', context)
         else:

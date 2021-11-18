@@ -145,6 +145,36 @@
                   <h5 class="card-title">key Words</h5>
                 </a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'ads' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Ads</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{% url 'copun' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Copun</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Orders</h5>
+                </a>
+              </li>
           </nav>
           <div class="content-wrapper">
             <h1 class="page-heading mb-4">Buyer!</h1>
@@ -163,14 +193,8 @@
                           <div class="row">
                             <div class="col-md-12">
                               <h3 class="  card-title mb-8">-{{buyer_data.name}}</h3>
-                              <h5> Bio : </h5>
-                              <p class="lead">
-                                {{buyer_data.about}}
-                              </p>
-                              <h5> Address : </h5>
-                              <p class="lead">
-                                {{buyer_data.address}}
-                              </p>
+                              <h5> Bio : {{buyer_data.about}}</h>
+                              <h5> Address : {{buyer_data.address}}</h5>
                             </div>
                           </div>
                         </div>

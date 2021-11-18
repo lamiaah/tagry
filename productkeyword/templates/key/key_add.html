@@ -17,8 +17,7 @@
       <!-- partial:../partials/_navbar.html -->
       <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="bg-white text-center navbar-brand-wrapper">
-          
-          <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
+          <a class="navbar-brand brand-logo-mini" href="#"><img src="{%static 'images/face.png' %}" alt=""></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           
@@ -27,6 +26,7 @@
             <li class="nav-item">
               <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{%static 'images/face.png' %}" alt=""></a>
             </li>
+          
           </ul>
           <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
@@ -74,7 +74,7 @@
                   <h5 class="menu-title">Seller</h5>
                 </a>
               </li>
-               <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="{% url 'buyer_list' %}">
                   <div class="clearfix">
                   <h4 class="text-primary">
@@ -144,6 +144,37 @@
                   <h5 class="card-title">key Words</h5>
                 </a>
               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'ads' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Ads</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{% url 'copun' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Copun</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Orders</h5>
+                </a>
+              </li>
+          </nav>
           </nav>
           <div class="content-wrapper">
             <h1 class="page-heading mb-4">key</h1>

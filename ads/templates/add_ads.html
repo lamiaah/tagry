@@ -78,6 +78,168 @@
 </head>
 
 <body>
+<div class=" container-scroller">
+      <!-- partial:../partials/_navbar.html -->
+      <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="bg-white text-center navbar-brand-wrapper">
+          <a class="navbar-brand brand-logo-mini" href="#"><img src="{%static 'images/face.png' %}" alt=""></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+          
+          </button> 
+          <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+            <li class="nav-item">
+              <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{%static 'images/face.png' %}" alt=""></a>
+            </li>
+          
+          </ul>
+          <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav> 
+      <div class="container-fluid">
+        <div class="row row-offcanvas row-offcanvas-right">
+          <!-- partial:../partials/_sidebar.html -->
+          <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
+            <div class="user-info">
+              <img src="{% static 'images/face.png' %}" alt="">
+              <p class="name">{{user}}</p>
+              <p class="designation">Manager</p>
+              <span class="online"></span>
+            </div>
+            <ul class="nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'base' %}">
+                  <div class="clearfix">
+                    <h4 class="text-primary ">
+                      <i class="fa fa-bar-chart-o highlight-icon" aria-hidden="true"></i>
+                    </h4>
+                  </div>
+                  <h5 class="menu-title">Dashboard</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">
+                  <div class="clearfix">
+                    <h4 class="text-success">
+                      <i class="fa fa-tasks highlight-icon" aria-hidden="true"></i>
+                    </h4>
+                  </div>
+                  <h5 class="menu-title">Categories</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'seller_user:seller_list' %}">
+                  <div class="clearfix">
+                  <h4 class="text-primary ">
+                    <i class="fa fa-users highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div>
+                  <h5 class="menu-title">Seller</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'buyer_list' %}">
+                  <div class="clearfix">
+                  <h4 class="text-primary">
+                    <i class="fa fa-users highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div>
+                  <h5 class="card-title">Buyer</h5>
+                </a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users_list' %}">
+                  <div class="clearfix">
+                  <h4 class="text-primary">
+                    <i class="fa fa-users highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div>
+                  <h5 class="card-title">Users</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'area' %}">
+                   <div class="clearfix">
+                  <h4 class="text-danger">
+                    <i class="fa fa-map-marker highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div>
+                  <h5 class="card-title">Areas</h5>
+                </a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'city' %}">
+                  <div class="clearfix">
+                  <h4 class="text-danger">
+                    <i class="fa fa-home highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div>
+                  <h5 class="card-title">Cities</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'country' %}">
+                  <div class="clearfix">
+                    <h4 class="text-danger">
+                      <i class="fa fa-globe highlight-icon-big" aria-hidden="true"></i>
+                    </h4>
+                  </div>
+                  <h5 class="card-title">Countries</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'languages' %}">
+                   <div class="clearfix">
+                    <h4 class="text-primary">
+                      <i class="fa  fa-language  highlight-icon-big" aria-hidden="true"></i>
+                    </h4>
+                  </div> 
+                  <h5 class="card-title">Languages</h5>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'key' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">key Words</h5>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'ads' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Ads</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{% url 'copun' %}">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Copun</h5>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <div class="clearfix">
+                  <h4 class="text">
+                    <i class="fa  fa-keyboard-o  highlight-icon-big" aria-hidden="true"></i>
+                  </h4>
+                </div> 
+                  <h5 class="card-title">Orders</h5>
+                </a>
+              </li>
+          </nav>
   <div class="container-scroller">
     <div class="container-fluid">
       <div class="row">
