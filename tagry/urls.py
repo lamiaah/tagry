@@ -44,6 +44,7 @@ urlpatterns = [
     path('languages/',include('languages.urls')),
     path('key/',include('productkeyword.urls')),
     path('buyer/',include('buyer.urls')),
+    path('ads/',include('ads.urls')),
     #api
     path('api/buyer/',include('buyer.Api.urls')),
     path('api/language/',include('languages.Api.urls')),

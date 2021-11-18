@@ -119,7 +119,7 @@ def edit(request ,pk):
                     print(form.errors.as_data()) 
                     return render(request,'seller/seller_edit.html',{'form':form})   
             else:
-                form = SellerForm()
+                form = SellerForm(instance= seller)
             return render(request,'seller/seller_edit.html',{'form':form})
         else:
            return redirect('login')

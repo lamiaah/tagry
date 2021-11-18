@@ -90,7 +90,7 @@ def delete(request ,pk):
 @login_required(login_url='login')
 def edit(request ,pk):
     if request.user.is_authenticated ==True :
-        buyer = get_object_or_404(Buyer ,pk=pk)
+        buyer = Buyer.objects.get(id = pk)
         form = BuyerForm(request.POST ,request.FILES , instance= buyer)
         if request.method == 'POST':
             if form.is_valid():
@@ -100,7 +100,7 @@ def edit(request ,pk):
                 print(form.errors.as_data()) 
                 return render(request,'buyer/edit_buyer.html',{'form':form})   
         else:
-            form = BuyerForm()
+            form = BuyerForm(instance= buyer)
         return render(request,'buyer/edit_buyer.html',{'form':form})
     else:
       return redirect('login')
