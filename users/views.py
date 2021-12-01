@@ -10,7 +10,7 @@ from buyer.models import Buyer
 def users(request):
     if request.user.is_authenticated :
         if request.user.is_superuser:
-            users = CustomUser.objects.all()
+            users = CustomUser.objects.filter(is_active=False)
             context={'users':users }
             return render (request ,'user/user_list.html',context)
         else:
@@ -47,7 +47,7 @@ def delete_user(request ,pk):
             users = CustomUser.objects.get(pk=pk)
             template_name  ='user/delete_user.html'  
             if request.method == "POST":
-                users.is_achive = False
+                users.is_active = False
                 users.save()
                 return redirect('users_list')
             context = {'users':users}
