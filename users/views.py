@@ -10,7 +10,7 @@ from buyer.models import Buyer
 def users(request):
     if request.user.is_authenticated :
         if request.user.is_superuser:
-            users = CustomUser.objects.filter(is_active=False)
+            users = CustomUser.objects.filter(is_active= True)
             context={'users':users }
             return render (request ,'user/user_list.html',context)
         else:
