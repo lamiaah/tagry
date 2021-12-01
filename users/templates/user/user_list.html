@@ -191,7 +191,7 @@
                                   <th> User Name</th>
                                   <th> Email</th>
                                   <th> SupserUser</th>
-                                  <th> </th>
+                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -199,6 +199,7 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
+                                     <td><a href="{% url 'delete_user' users.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                                     <td>
                                       {%if users.is_superuser%}
                                        <h4 class="text-primary">
@@ -207,7 +208,6 @@
                                         {% comment %} <span style="font-family: wingdings; font-size: 200%;">&#252;</span> {% endcomment %}
                                       {%endif%}
                                     </td>
-                                    <td><a class="btn btn-outline-danger" href="{% url 'delete_user' users.id  %}">Delete</a></td>
  
                                   </tr>
                                 {% endfor %}
