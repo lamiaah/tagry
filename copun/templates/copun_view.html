@@ -191,7 +191,7 @@
                   <th>Copun_code</th>
                   <th>Copun_value</th>
                   <th>Copun_status</th>
-                  <th></th>
+                  {% comment %} <th></th> {% endcomment %}
                   <th></th>
                 </tr>
               </thead>
@@ -201,7 +201,7 @@
                     <td>{{ copun.copun_text }}</td>
                     <td>{{ copun.copun_value }}</td>
                     <td>{{ copun.copun_status }}</td>
-                    <td><a href="{% url 'delete_copun' copun.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                    {% comment %} <td><a href="{% url 'delete_copun' copun.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td> {% endcomment %}
                     <td><a href="{% url 'edit_copun' copun.id %}" class="btn btn-outline-warning btn-sm">Edit</a></td>
                   </tr>
                 {% endfor %}
