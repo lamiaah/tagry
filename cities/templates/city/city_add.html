@@ -112,30 +112,7 @@
                   <h5 class="card-title">Cities</h5>
                 </a>
               </li>
-              
-          </nav>
-          <div class="content-wrapper">
-          
-            <h1 class="page-heading mb-4">Cities</h1>
-            <div class="row mb-6">
-              <div class="col-lg-12">
-                <div class="card">
-                  <div class="card-body">
-                    {% block content %}
-                      <section class="probootstrap-section">
-                          <div class="container">
-                            <div class="row">
-                              <div class="col-md-8">
-                                <h2 class="page-heading mb-4">New City</h2>
-                                <form method ="POST" enctype="multipart/form-data">
-                                  {% csrf_token %}
-                                  <fieldset class ="form-group">    
-                                      {{ form|crispy }}
-                                  </fieldset>
-                                  <div class="form-group">
-                                  
-                                    <button type="submit" class="btn btn-success btn-lg mr-2">Add</button>
-                                     <li class="nav-item">
+               <li class="nav-item">
                 <a class="nav-link" href="{% url 'country' %}">
                   <div class="clearfix">
                     <h4 class="text-primary">
@@ -195,6 +172,29 @@
                   <h5 class="card-title">Orders</h5>
                 </a>
               </li>
+          </nav>
+          <div class="content-wrapper">
+          
+            <h1 class="page-heading mb-4">Cities</h1>
+            <div class="row mb-6">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    {% block content %}
+                      <section class="probootstrap-section">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-md-8">
+                                <h2 class="page-heading mb-4">New City</h2>
+                                <form method ="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  <fieldset class ="form-group">    
+                                      {{ form|crispy }}
+                                  </fieldset>
+                                  <div class="form-group">
+                                  
+                                    <button type="submit" class="btn btn-success btn-lg mr-2">Add</button>
+                                    
                                   </div>
                                 </form>
                               </div>
