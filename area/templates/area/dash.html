@@ -45,7 +45,7 @@
           <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
             <div class="user-info">
               <img src="{% static 'images/face.png' %}" alt="">
-              <p class="name"href="{% url 'users_detail'user.id %}">{{user}}</p>
+              <p class="name"href="{% url 'user_detail' user.id %}">{{user}}</p>
               <p class="designation">Manager</p>
               <span class="online"></span>
             </div>
