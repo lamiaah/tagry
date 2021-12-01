@@ -23,12 +23,14 @@
             <a class="navbar-brand brand-logo-mini" href="index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
           </div>
           <div class="navbar-menu-wrapper d-flex align-items-center">
+
             <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+
                 <form class="form-inline mt-2 mt-md-0 d-none d-lg-block" type="get" action="{%url 'seller_user:search'%}">
                  <input class="form-control mr-sm-2 search" type="search" id="q" name="q"  placeholder="Search...">
                 </form>
               <li class="nav-item">
-                  <a class="btn btn-success btn mr-2"href="{% url 'logout'  %}" >
+                  <a class="btn btn-info btn mr-2"href="{% url 'logout'  %}" >
                    <i class="fa fa-sign-out icon" ></i> Log out</a> 
               </li>
             </ul>
