@@ -101,7 +101,7 @@ def edit_sub(request ,pk):
                     print(form.errors.as_data()) 
                     return render(request,'sub_category/sub_cate_edit.html',{'form':form})   
             else:
-                form = CategoryForm()
+                form = SubCategoryForm(instance= subcate)
             return render(request,'sub_category/sub_cate_edit.html',{'form':form})
         else:
             return redirect('login')
