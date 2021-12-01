@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from.forms import RegisterForm ,NewUserForm
+from.forms import RegisterForm ,NewUserForm ,ChangePassForm
 from users.models import CustomUser
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -77,6 +77,25 @@ def new_user(request ):
     else:
         return redirect('login')    
 
+@login_required(login_url='login')
+def edit(request ,pk):
+    if request.user.is_authenticated ==True :
+        if request.user.is_superuser:
+            user = CustomUser.objects.get(pk=pk)
+            form = ChangePassForm(request.POST ,request.FILES , instance= user)
+            if request.method == 'POST':
+                if form.is_valid():
+                    return redirect('user/change_pass.html')
+                else:
+                    print(form.errors.as_data()) 
+                    return render(request,'user/change_pass.html',{'form':form})   
+            else:
+                form = ChangePassForm(instance= user)
+            return render(request,'user/change_pass.html',{'form':form})
+        else:
+           return redirect('login')
+    else:
+      return redirect('login')  
 
 @login_required(login_url='login')
 def user_details(request, pk):

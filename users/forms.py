@@ -17,3 +17,11 @@ class NewUserForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2' ,'is_superuser']
+
+
+
+class ChangePassForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ['password1', 'password2']
+
