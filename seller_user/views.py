@@ -31,7 +31,7 @@ def seller_details(request, pk):
             seller_data = Seller.objects.get(pk = pk)
             seller_products = Products.objects.filter(seller_id = pk ,is_archived=False)
             image = Images.objects.filter(product = seller_products)
-            stores = SellerStores.objects.filter(seller=pk)
+            stores = SellerStores.objects.filter(seller=pk,is_archived=False)
             context = {
                 'seller_data' : seller_data,
                 'seller_products' :seller_products,

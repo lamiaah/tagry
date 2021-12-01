@@ -77,7 +77,7 @@ def edit(request ,pk):
                     print(form.errors.as_data()) 
                     return render(request,'categories/category_edit.html',{'form':form})   
             else:
-                form = CategoryForm()
+                form = CategoryForm(instance= cate)
             return render(request,'categories/category_edit.html',{'form':form})
         else:
             return redirect('login')
