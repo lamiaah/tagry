@@ -9,7 +9,7 @@ from copun.models import Copun
 def copun_view(request):
     if request.user.is_authenticated :
         if request.user.is_superuser:
-            copun = Copun.objects.filter(is_archive = False)
+            copun = Copun.objects.all()
             context = {
                 'copun':copun,
             }
