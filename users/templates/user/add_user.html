@@ -42,17 +42,13 @@
                                     {% csrf_token %}
                                     <fieldset class ="form-group">
                                         <h3 class="border-bottom-mb-2">Join</h3>
-                                        {{ form|crispy }}
+                                        {{ newform|crispy }}
                                     </fieldset>
                                     <div class="form-group">
                                         <button class="btn btn-outline-info"type="submit">Sing Up</button>
                                     </div>
                                  </form>
-                                  <div class="border-top pt-3">
-                                    <small class="text-muted">
-                                        Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-                                    </small>
-                                 </div> 
+
                                                                 
                               </div>
                             </div>

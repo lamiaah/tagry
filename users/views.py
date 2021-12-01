@@ -64,26 +64,18 @@ def new_user(request ):
         if request.user.is_superuser:
             template_name  ='user/add_user.html'  
             if request.method == "POST":
-                form = NewUserForm(request.POST)
-                if form.is_valid():
-                    form.save()
-                    return redirect('user_list')
-                return render(request, template_name, {'form':form})  
+                newform = NewUserForm(request.POST)
+                if newform.is_valid():
+                    newform.save()
+                    return redirect('users_list')
+                return render(request, template_name, {'newform':newform})  
             else:
-                form = NewUserForm()
-            return render(request, template_name, {'form':form})          
+                newform = NewUserForm()
+            return render(request, template_name, {'newform':newform})          
         else:
             return redirect('login')
     else:
         return redirect('login')    
 
 
-def check(request,pk):
-    seller = Seller.objects.filter(pk=pk)
-    buyer = Buyer.objects.filter(pk=pk)
-    
-    context ={
-        'seller':seller,
-        'buyer':buyer
-         }
-    return render (request ,'user/user_list.html',context)
+
