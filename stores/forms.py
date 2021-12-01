@@ -9,7 +9,7 @@ class StoresForm(forms.ModelForm):
 
     class Meta:
         model = SellerStores
-        fields = ['store_name','store_address', 'store_country', 'store_city','store_area','is_archived']
+        fields = ['store_name','store_address', 'store_country', 'store_city','store_area']
 
 
 
@@ -17,4 +17,4 @@ class EditStoresForm(forms.ModelForm):
 
     class Meta:
         model = SellerStores
-        fields = ['store_name', 'store_address','store_country', 'store_city','store_area','is_archived']
+        fields = ['store_name', 'store_address','store_country', 'store_city','store_area']
