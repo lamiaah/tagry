@@ -192,7 +192,6 @@
                             <th>Stores_name</th>
                             <th>Stores_country</th>
                             <th>Stores_Address</th>
-                            <th>Archived</th>
                             <th></th>
                             <th></th>
                             </tr>
@@ -203,11 +202,6 @@
                                 <td>{{ stores.store_name }}</td>
                                 <td>{{ stores.store_country }}</td>
                                 <td>{{ stores.store_address }}</td>
-                                {% if ad.is_archived %}
-                                    <td><label class="badge badge-danger">Archived</label></td>
-                                {% else %}
-                                    <td><label class="badge badge-success">UnArchived</label></td>
-                                {% endif %}
                                 <td><a href="{% url 'delete_stores' stores.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
                                 <td><a href="{% url 'edit_stores' stores.id %}" class="btn btn-outline-warning btn-sm">Edit</a></td>
                             </tr>
