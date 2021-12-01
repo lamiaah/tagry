@@ -13,7 +13,7 @@ from stores.models import SellerStores
 def stores_view(request):
     if request.user.is_authenticated :
         if request.user.is_superuser:
-            stores = SellerStores.objects.all()
+            stores = SellerStores.objects.filter(is_archived=False)
             context = {
                 'stores':stores,
             }
