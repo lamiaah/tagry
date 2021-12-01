@@ -199,7 +199,7 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-                                    <td><a href="{% url 'delete_user' users.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                                    {% comment %} <td><a href="{% url 'delete_user' users.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td> {% endcomment %}
                                     <td>
                                       {%if users.is_superuser%}
                                        <h4 class="text-primary">
