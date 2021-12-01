@@ -21,7 +21,10 @@
           <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="{%static 'images/face.png' %}" alt=""></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
-          
+          <li class="nav-item">
+              <a class="btn btn-success btn mr-2"href="{% url 'logout'  %}" >
+                <i class="fa fa-sign-out icon" ></i> Log out</a> 
+            </li>
           </button> 
           <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
             <li class="nav-item">
