@@ -39,7 +39,7 @@
            <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
             <div class="user-info">
               <img src="{% static 'images/face.png' %}" alt="">
-               <a  class ="name"  href="{% url 'user_detail' user.id %}">    Admin :   {{user}}</a>
+              <p class="name">{{user}}</p>
               <p class="designation">Manager</p>
               <span class="online"></span>
             </div>
@@ -191,7 +191,6 @@
                                   <th> User Name</th>
                                   <th> Email</th>
                                   <th> SupserUser</th>
-                                  <th>de</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -199,7 +198,6 @@
                                 <tr class="table-secondery">
                                     <td>{{users.username}}</td>
                                     <td>{{users.email}}</td>
-                                    {% comment %} <td><a href="{% url 'delete_user' users.id %}" class="btn btn-outline-danger btn-sm">Delete</a></td> {% endcomment %}
                                     <td>
                                       {%if users.is_superuser%}
                                        <h4 class="text-primary">
