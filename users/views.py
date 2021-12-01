@@ -18,17 +18,20 @@ def users(request):
     else:
         return redirect('login')
 
-
+@login_required(login_url='login')
 def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('login')
+    if request.user.is_superuser == False:
+        return redirect('login')
     else:
-        form = RegisterForm()
-    return render(request,'user/register.html',{'form':form})    
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                return redirect('login')
+        else:
+            form = RegisterForm()
+        return render(request,'user/register.html',{'form':form})    
 
    
 def logout(request):
