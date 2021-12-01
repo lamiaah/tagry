@@ -65,13 +65,13 @@ def edit_stores(request, stores_id,seller):
         return render(request, 'edit_stores.html', {'form' : form})
 
 @login_required(login_url='login')
-def delete(request ,pk,seller):
+def delete_store(request ,pk,seller):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
             stores = SellerStores.objects.get(pk=pk)
             template_name  ='delete_stores.html'  
             if request.method == "POST":
-                stores.is_archive = True
+                stores.is_archived = True
                 stores.save()
                 return redirect(reverse('seller_user:seller_detail' ,args=(seller,)))
             context = {"stores": stores}
