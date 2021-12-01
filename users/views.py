@@ -78,4 +78,16 @@ def new_user(request ):
         return redirect('login')    
 
 
-
+@login_required(login_url='login')
+def user_details(request, pk):
+    if request.user.is_authenticated :
+        if request.user.is_superuser:
+            user_data =  CustomUser.objects.get(pk = pk)
+            context = {
+                'user_data' : user_data,
+            }
+            return render(request, 'user/user_detail.html', context)
+        else:
+            return redirect('login')
+    else:
+        return redirect('login')
