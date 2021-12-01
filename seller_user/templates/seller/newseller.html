@@ -20,14 +20,15 @@
           <a class="navbar-brand brand-logo-mini" href="../index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
-          
-          </button> 
-          <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
-            <li class="nav-item">
-              <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="{% static 'images/face.png'%}" alt=""></a>
-            </li>
-
-          </ul>
+              <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+                <form class="form-inline mt-4 mt-md-2 d-none d-lg-block" type="get" action="{%url 'seller_user:search'%}">
+                 <input class="form-control mr-sm-2 search" type="search" id="q" name="q"  placeholder="Search...">
+                </form>
+              <li class="nav-item">
+                  <a class="btn btn-danger btn mr-2"href="{% url 'logout'  %}" >
+                   <i class="fa fa-sign-out icon" ></i> Log out</a> 
+              </li>
+            </ul>
           <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
           </button>
