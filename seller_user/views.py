@@ -117,6 +117,7 @@ def edit(request ,pk):
             form = SellerForm(request.POST ,request.FILES , instance= seller)
             if request.method == 'POST':
                 if form.is_valid():
+                    form.save()
                     return redirect('seller_user:seller_list')
                 else:
                     print(form.errors.as_data()) 
@@ -131,14 +132,6 @@ def edit(request ,pk):
 
 
 
-# def search(request):
-#     if request.method == "POST":
-#         query_name = request.POST.get('product_title', None)
-#         if query_name:
-#             results = Products.objects.filter(product_title__contains=query_name)
-#             return render(request, 'seller/seller.html', {"results":results})
-
-#     return render(request, 'seller/seller.html')
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']

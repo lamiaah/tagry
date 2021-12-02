@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,get_object_or_404
 from.forms import RegisterForm ,NewUserForm ,ChangePassForm
 from users.models import CustomUser
 from django.contrib import auth
@@ -81,10 +81,11 @@ def new_user(request ):
 def edit(request ,pk):
     if request.user.is_authenticated ==True :
         if request.user.is_superuser:
-            user = CustomUser.objects.get(pk=pk)
+            user =  get_object_or_404(CustomUser ,pk=pk)
             form = ChangePassForm(request.POST ,request.FILES , instance= user)
             if request.method == 'POST':
                 if form.is_valid():
+                    form.save()
                     return redirect('users_list')
                 else:
                     print(form.errors.as_data()) 
