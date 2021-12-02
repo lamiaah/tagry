@@ -123,7 +123,7 @@ def edit_product(request ,pk,seller):
     if request.user.is_superuser == False:
         return redirect('login')
     else:
-        seller = Seller.objects.get(pk=pk)
+        seller = Seller.objects.get(pk=seller)
         product = Products.objects.get(pk=pk)
         if request.method =='POST':
             form = ProductForm(request.POST,instance= product)
