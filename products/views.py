@@ -97,7 +97,7 @@ def edit_product(request ,pk,seller):
         seller = Seller.objects.get(pk=seller)
         product = Products.objects.get(pk=pk)
         image = Images.objects.filter(product = product)
-        # product.all_images =image
+        product.all_images =image
         if request.method =='POST':
             form = ProductForm(request.POST,instance= product)
             if form.is_valid():
@@ -106,11 +106,10 @@ def edit_product(request ,pk,seller):
                 form.instance.seller_id = seller
                 x= form.save()
                 for i in request.FILES.getlist('img'):
-                    image_form = ImageForm(request.POST ,request.FILES )
+                    image_form = ImageForm(request.POST ,request.FILES ,instance= image )
                     if image_form.is_valid():
                         add_image(x,i)
-                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
-            
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))        
         else:
             form = ProductForm(instance= product)
             image_form =ImageForm(request.POST ,request.FILES)
