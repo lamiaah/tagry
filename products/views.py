@@ -27,6 +27,8 @@ def get_products(request):
     else:
         return redirect('login')    
 
+
+
 def add_product(request ,pk):
     seller = Seller.objects.get(pk=pk)
     if request.method =='POST':
