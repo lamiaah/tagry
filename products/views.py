@@ -9,13 +9,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
-# def image(product_id,image):
-#     try: 
-#         new_image = Images.objects.create(product = product_id ,image=image)
-#         new_image.save()
-#         return new_image
-#     except Exception as e:
-#          return False
+
 
 @login_required(login_url='login')
 def get_products(request):
@@ -33,37 +27,64 @@ def get_products(request):
     else:
         return redirect('login')    
 
-
-
-
-@login_required(login_url='login')
-def post_product(request,pk):
-    if request.user.is_authenticated ==True :
-        if request.user.is_superuser:
-            seller = Seller.objects.get(pk=pk)
-            if request.method == 'POST':
-                Productform = ProductForm(request.POST, request.FILES)
-                Imageform = ImageForm(request.POST, request.FILES)
-                if Productform.is_valid() and Imageform.is_valid() :
-                    Productform.instance.created_user =request.user
-                    Productform.instance.updated_user =request.user
-                    Productform.instance.seller_id = seller
-                    Productform.save()
-                    product = Productform.instance
-                    Imageform.instance.product_id =product.id
-                    Imageform.save()
-                    return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
-                else: 
-                    #print(form.errors.as_data()) 
-                    return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})    
-            else:
-                Productform = ProductForm()
-                Imageform = ImageForm()
-            return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
+def add_product(request ,pk):
+    seller = Seller.objects.get(pk=pk)
+    if request.method =='POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.instance.created_user =request.user
+            form.instance.updated_user =request.user
+            form.instance.seller_id = seller
+            x= form.save()
+            for i in request.FILES.getlist('img'):
+                image_form = ImageForm(request.POST ,request.FILES)
+                if image_form.is_valid():
+                    add_image(x,i)
+            return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))   
         else:
-            return redirect('login')     
-    else:
-        return redirect('login')
+            form = ProductForm()
+            image_form =ImageForm(request.POST, request.FILES)
+        return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,})        
+    
+
+
+def add_image(product_id ,img):
+    try:
+        new_image = Images.objects.create(product =product_id ,image=img )
+        new_image.save()
+        return new_image
+    except Exception as e:
+        print(e)
+        return False    
+
+# @login_required(login_url='login')
+# def post_product(request,pk):
+#     if request.user.is_authenticated ==True :
+#         if request.user.is_superuser:
+#             seller = Seller.objects.get(pk=pk)
+#             if request.method == 'POST':
+#                 Productform = ProductForm(request.POST, request.FILES)
+#                 Imageform = ImageForm(request.POST, request.FILES)
+#                 if Productform.is_valid() and Imageform.is_valid() :
+#                     Productform.instance.created_user =request.user
+#                     Productform.instance.updated_user =request.user
+#                     Productform.instance.seller_id = seller
+#                     Productform.save()
+#                     product = Productform.instance
+#                     Imageform.instance.product_id =product.id
+#                     Imageform.save()
+#                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
+#                 else: 
+                  
+#                     return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})    
+#             else:
+#                 Productform = ProductForm()
+#                 Imageform = ImageForm()
+#             return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
+#         else:
+#             return redirect('login')     
+#     else:
+#         return redirect('login')
 
 
 @login_required(login_url='login')  
@@ -134,20 +155,4 @@ def product_details(request, pk):
 
 
 
-
-# @login_required(login_url='login')
-# def get_bycategory(self, request, category_id):
-#     if request.user.is_authenticated == True:
-#         product = Products.objects.filter(category_id=category_id)
-#         return HttpResponse(product)
-#     else:
-#         return redirect('login')
-
-# @login_required(login_url='login')
-# def get_byproduct(self, request, product_title):
-#     if request.user.is_authenticated == True:
-#         product = Products.objects.filter( product_title=product_title)
-#         return HttpResponse(product)
-#     else: 
-#         return redirect('login')
 
