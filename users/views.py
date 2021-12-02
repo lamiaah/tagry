@@ -85,7 +85,7 @@ def edit(request ,pk):
             form = ChangePassForm(request.POST ,request.FILES , instance= user)
             if request.method == 'POST':
                 if form.is_valid():
-                    return redirect('user/change_pass.html')
+                    return redirect('users_list')
                 else:
                     print(form.errors.as_data()) 
                     return render(request,'user/change_pass.html',{'form':form})   
