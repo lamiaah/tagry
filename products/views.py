@@ -125,8 +125,8 @@ def edit_product(request ,pk,seller):
     else:
         seller = Seller.objects.get(pk=seller)
         product = Products.objects.get(pk=pk)
-        image = Images.objects.get(product = product)
-        product.all_images =image
+        image = Images.objects.filter(product = product)
+        # product.all_images =image
         if request.method =='POST':
             form = ProductForm(request.POST,instance= product)
             if form.is_valid():
