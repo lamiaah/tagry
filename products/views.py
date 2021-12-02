@@ -31,26 +31,30 @@ def get_products(request):
 
 
 
+@login_required(login_url='login') 
 def add_product(request ,pk):
-    seller = Seller.objects.get(pk=pk)
-    if request.method =='POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.instance.created_user =request.user
-            form.instance.updated_user =request.user
-            form.instance.seller_id = seller
-            x= form.save()
-            for i in request.FILES.getlist('img'):
-                image_form = ImageForm(request.POST ,request.FILES)
-                if image_form.is_valid():
-                    add_image(x,i)
-            return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
-          
+    if request.user.is_superuser == False:
+        return redirect('login')
     else:
-        form = ProductForm()
-        image_form =ImageForm(request.POST, request.FILES)
-    return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,})        
-    
+        seller = Seller.objects.get(pk=pk)
+        if request.method =='POST':
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                form.instance.created_user =request.user
+                form.instance.updated_user =request.user
+                form.instance.seller_id = seller
+                x= form.save()
+                for i in request.FILES.getlist('img'):
+                    image_form = ImageForm(request.POST ,request.FILES)
+                    if image_form.is_valid():
+                        add_image(x,i)
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
+            
+        else:
+            form = ProductForm()
+            image_form =ImageForm(request.POST, request.FILES)
+        return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,})        
+        
 
 
 def add_image(product_id ,img):
@@ -62,34 +66,7 @@ def add_image(product_id ,img):
         print(e)
         return False    
 
-# @login_required(login_url='login')
-# def post_product(request,pk):
-#     if request.user.is_authenticated ==True :
-#         if request.user.is_superuser:
-#             seller = Seller.objects.get(pk=pk)
-#             if request.method == 'POST':
-#                 Productform = ProductForm(request.POST, request.FILES)
-#                 Imageform = ImageForm(request.POST, request.FILES)
-#                 if Productform.is_valid() and Imageform.is_valid() :
-#                     Productform.instance.created_user =request.user
-#                     Productform.instance.updated_user =request.user
-#                     Productform.instance.seller_id = seller
-#                     Productform.save()
-#                     product = Productform.instance
-#                     Imageform.instance.product_id =product.id
-#                     Imageform.save()
-#                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
-#                 else: 
-                  
-#                     return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})    
-#             else:
-#                 Productform = ProductForm()
-#                 Imageform = ImageForm()
-#             return render(request,'product/new_product.html',{'Productform':Productform,'Imageform':Imageform})
-#         else:
-#             return redirect('login')     
-#     else:
-#         return redirect('login')
+
 
 
 @login_required(login_url='login')  
@@ -110,35 +87,61 @@ def delete(request ,pk ,seller):
       return redirect('login')
 
 
-@login_required(login_url='login')
-def edit(request ,pk ,seller ):
-    if request.user.is_authenticated ==True :
-        if request.user.is_superuser:
-            Product = Products.objects.get(pk=pk)
-            seller = Seller.objects.get(pk=seller)
-            Imageform = ImageForm(request.POST, request.FILES)
-            productform = ProductForm(request.POST ,request.FILES , instance= Product)
-            if request.method == 'POST':
-                if Imageform.is_valid() and  productform.is_valid() :
-                    productform.instance.created_user =request.user
-                    productform.instance.updated_user =request.user
-                    productform.instance.seller_id = seller
-                    productform.save()
-                    product = productform.instance
-                    Imageform.instance.product_id =product.id
-                    Imageform.save()
-                    return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
-                else:
+# @login_required(login_url='login')
+# def edit(request ,pk ,seller ):
+#     if request.user.is_authenticated ==True :
+#         if request.user.is_superuser:
+#             Product = Products.objects.get(pk=pk)
+#             seller = Seller.objects.get(pk=seller)
+#             Imageform = ImageForm(request.POST, request.FILES)
+#             productform = ProductForm(request.POST ,request.FILES , instance= Product)
+#             if request.method == 'POST':
+#                 if Imageform.is_valid() and  productform.is_valid() :
+#                     productform.instance.created_user =request.user
+#                     productform.instance.updated_user =request.user
+#                     productform.instance.seller_id = seller
+#                     productform.save()
+#                     product = productform.instance
+#                     Imageform.instance.product_id =product.id
+#                     Imageform.save()
+#                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
+#                 else:
                    
-                    return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
-            else:
-                productform = ProductForm(instance= Product)
-                Imageform = ImageForm()
-            return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})
-        else:
-           return redirect('login')
+#                     return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
+#             else:
+#                 productform = ProductForm(instance= Product)
+#                 Imageform = ImageForm()
+#             return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})
+#         else:
+#            return redirect('login')
+#     else:
+#       return redirect('login')        
+
+
+@login_required(login_url='login') 
+def edit_product(request ,pk,seller):
+    if request.user.is_superuser == False:
+        return redirect('login')
     else:
-      return redirect('login')        
+        seller = Seller.objects.get(pk=pk)
+        product = Products.objects.get(pk=pk)
+        if request.method =='POST':
+            form = ProductForm(request.POST,instance= product)
+            if form.is_valid():
+                form.instance.created_user =request.user
+                form.instance.updated_user =request.user
+                form.instance.seller_id = seller
+                x= form.save()
+                for i in request.FILES.getlist('img'):
+                    image_form = ImageForm(request.POST ,request.FILES,instance= product)
+                    if image_form.is_valid():
+                        add_image(x,i)
+                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
+            
+        else:
+            form = ProductForm(instance= product)
+            image_form =ImageForm(request.POST, request.FILES,instance= product)
+        return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,}) 
 
 
 
