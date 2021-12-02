@@ -148,6 +148,7 @@ def product_details(request, pk):
        if request.user.is_superuser:
             product_data = Products.objects.get(pk = pk)
             image = Images.objects.filter(product = product_data)
+            product_data.all_images =image
             context = {
                 'product_data' : product_data,
                 'image':image
