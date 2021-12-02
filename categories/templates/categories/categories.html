@@ -24,7 +24,7 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
-            <li class="nav-item mt-4 mt-md-2 d-none d-lg-block">
+            <li class="nav-item mt-4 mt-md-2  d-none d-lg-block">
               <a class="btn btn-danger btn mr-4"href="{% url 'logout'  %}" >
                 <i class="fa fa-sign-out icon" ></i> Log out</a> 
             </li>
@@ -40,7 +40,7 @@
            <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
             <div class="user-info">
               <img src="{% static 'images/face.png' %}" alt="">
-               <a  class ="name"  href="{% url 'user_detail' user.id %}">    Admin :   {{user}}</a>
+               <a  class ="name"  href="{% url 'user_detail' user.id %}">      Admin :   {{user}}</a>
               <p class="designation">Manager</p>
               <span class="online"></span>
             </div>
