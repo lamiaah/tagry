@@ -87,35 +87,6 @@ def delete(request ,pk ,seller):
       return redirect('login')
 
 
-# @login_required(login_url='login')
-# def edit(request ,pk ,seller ):
-#     if request.user.is_authenticated ==True :
-#         if request.user.is_superuser:
-#             Product = Products.objects.get(pk=pk)
-#             seller = Seller.objects.get(pk=seller)
-#             Imageform = ImageForm(request.POST, request.FILES)
-#             productform = ProductForm(request.POST ,request.FILES , instance= Product)
-#             if request.method == 'POST':
-#                 if Imageform.is_valid() and  productform.is_valid() :
-#                     productform.instance.created_user =request.user
-#                     productform.instance.updated_user =request.user
-#                     productform.instance.seller_id = seller
-#                     productform.save()
-#                     product = productform.instance
-#                     Imageform.instance.product_id =product.id
-#                     Imageform.save()
-#                     return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))
-#                 else:
-                   
-#                     return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})   
-#             else:
-#                 productform = ProductForm(instance= Product)
-#                 Imageform = ImageForm()
-#             return render(request,'product/product_edit.html',{'productform':productform,'Imageform':Imageform})
-#         else:
-#            return redirect('login')
-#     else:
-#       return redirect('login')        
 
 
 @login_required(login_url='login') 
