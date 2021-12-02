@@ -42,11 +42,14 @@ def add_product(request ,pk):
                 image_form = ImageForm(request.POST ,request.FILES)
                 if image_form.is_valid():
                     add_image(x,i)
-            return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))   
-        else:
-            form = ProductForm()
-            image_form =ImageForm(request.POST, request.FILES)
-        return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,})        
+            return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
+        else: 
+                  
+          return render(request,'product/new_product.html',{'form':form})     
+    else:
+        form = ProductForm()
+        image_form =ImageForm(request.POST, request.FILES)
+    return render(request, 'product/new_product.html',{'form':form,'image_form':image_form,})        
     
 
 
