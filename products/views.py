@@ -142,7 +142,7 @@ def edit_product(request ,pk,seller):
             
         else:
             form = ProductForm(instance= product)
-            image_form =ImageForm(instance=image)
+            image_form =ImageForm(instance=product.all_images)
         return render(request, 'product/product_edit.html',{'form':form,'image_form':image_form,}) 
 
 
