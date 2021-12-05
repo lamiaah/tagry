@@ -3,9 +3,9 @@ from products.Api.views import ProductApiList ,SearchApiCategory,SearchApiProduc
 
 urlpatterns = [
     path ('all/',ProductApiList.as_view()),
-    path ('search/<int:category_id>/',SearchApiCategory.as_view()),
-    path ('searchtitle/<str:product_title>/',SearchApiProduct.as_view()),
+    path ('search_by_category/<int:category_id>/',SearchApiCategory.as_view()),
+    path ('search_by_title/<str:product_title>/',SearchApiProduct.as_view()),
     path ('add/', AddProduct.as_view()),
-    path ('put/<int:id>/', PutProduct.as_view()),
+    path ('updata/<int:id>/', PutProduct.as_view()),
     path ('delete/<int:id>/', PutProduct.as_view()),
 ]
