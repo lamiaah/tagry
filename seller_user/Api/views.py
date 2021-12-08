@@ -79,7 +79,7 @@ class Get_Product(APIView):
 class Get_Seller(APIView):
     permission_classes = [IsAuthenticated]
     # serializer_class  = SellerSerializer
-    def get_queryset(self):
+    def get(self):
         try:
             seller = Seller.objects.all()
             serializer = SellerSerializer(seller, many = True)
