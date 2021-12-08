@@ -38,7 +38,7 @@ class Products(models.Model):
 class Images(models.Model):
     id = models.AutoField(null=False ,blank= False,primary_key= True)
     product= models.ForeignKey(Products, on_delete=models.CASCADE,related_name='+',default='')
-    image = models.ImageField(upload_to='product_pic/') 
+    image = models.ImageField(upload_to='product_pic/' , default='uploads/default.jpg',blank=True) 
 
     def __str__(self):
         return str(self.product)
