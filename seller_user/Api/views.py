@@ -2,6 +2,10 @@ from rest_framework.views import APIView
 from users.Api.api_register import register
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rest_framework.permissions import IsAuthenticated
+from products.models import Products 
+from products.Api.serializers import ImageSerializers, ProductSerializer 
+
 from seller_user.Api.api_register_seller import register_seller_user
 
 
@@ -58,6 +62,14 @@ class RegisterSeller(APIView):
     
 
  
+class Get_Product(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self,request,pk):
+        try:
+            product = Products.objects.filter(is_archived=False,seller_id = pk)
+            return Response(product)
+        except Products.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 

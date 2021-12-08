@@ -1,9 +1,10 @@
 from django.urls import path
-from seller_user.Api.views import RegisterSeller
+from seller_user.Api.views import Get_Product, RegisterSeller
 
 
 urlpatterns = [
-    path('register', RegisterSeller.as_view())
+    path('register', RegisterSeller.as_view()),
+    path('get_product/<int:pk>', Get_Product.as_view())
 ]
 
 # from  django.urls import path
