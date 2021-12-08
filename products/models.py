@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import NullBooleanField
 from categories.models import Categories
 from seller_user.models import Seller
 from users.models import CustomUser
