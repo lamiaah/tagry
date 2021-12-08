@@ -81,5 +81,5 @@ class Get_Seller(APIView):
         try:
             seller = Seller.objects.get()
             return Response(seller)
-        except seller.DoesNotExist:
+        except Seller.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
