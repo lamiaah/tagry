@@ -19,7 +19,7 @@ class UserLogin(APIView):
             if validate:
                 login(request, validate)
                 return Response(
-                    {   'id':CustomUser.objects.filter(request.user),
+                    {   'id':CustomUser.objects.filter(pk =request.user),
                         'token' : validate.auth_token.key,
                         'email' : request.data['email']
                     },
