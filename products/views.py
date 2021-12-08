@@ -45,7 +45,7 @@ def add_product(request ,pk):
                 form.instance.seller_id = seller
                 x= form.save()
                 for i in request.FILES.getlist('img'):
-                    image_form = ImageForm(request.POST ,request.FILES)
+                    image_form = ImageForm(request.POST ,request.FILES or None)
                     if image_form.is_valid():
                         add_image(x,i)
                 return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
