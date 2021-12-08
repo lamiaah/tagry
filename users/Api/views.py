@@ -19,7 +19,7 @@ class UserLogin(APIView):
             if validate:
                 login(request, validate)
                 return Response(
-                    {   'id' :request.id,
+                    {   'id' :request.data['id'],
                         'token' : validate.auth_token.key,
                         'email' : request.data['email']
                     },
