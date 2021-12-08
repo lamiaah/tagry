@@ -37,8 +37,8 @@ def seller_details(request, pk):
             context = {
                 'seller_data' : seller_data,
                 'seller_products' :seller_products,
-                'images':image,
-                'stores':stores
+                'stores':stores ,
+                'images':image
             }
             return render(request, 'seller/seller_detail.html', context)
         else:
