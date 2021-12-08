@@ -33,13 +33,13 @@ def seller_details(request, pk):
             
             for i in seller_products:
                image = Images.objects.filter(product = i)
-               i.all_images[0]= image
+               i.all_images= image
 
             stores = SellerStores.objects.filter(seller=pk,is_archived=False)
             context = {
                 'seller_data' : seller_data,
                 'seller_products' :seller_products,
-                'image':image,
+                'image':image[0],
                 'stores':stores
             }
             return render(request, 'seller/seller_detail.html', context)
