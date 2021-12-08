@@ -31,6 +31,7 @@ def seller_details(request, pk):
             seller_data = Seller.objects.get(pk = pk)
             seller_products = Products.objects.filter(seller_id = pk ,is_archived=False)
             for i in seller_products:
+                image = None
                 image = Images.objects.filter(product = i or None)
                 i.all_images= image
             stores = SellerStores.objects.filter(seller=pk,is_archived=False)
