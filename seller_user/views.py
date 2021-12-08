@@ -30,8 +30,9 @@ def seller_details(request, pk):
         if request.user.is_superuser:
             seller_data = Seller.objects.get(pk = pk)
             seller_products = Products.objects.filter(seller_id = pk ,is_archived=False)
+            
             for i in seller_products:
-               image = Images.objects.filter(product = i)
+               image = Images.objects.get(product = i)
                i.all_images = image
 
             stores = SellerStores.objects.filter(seller=pk,is_archived=False)
