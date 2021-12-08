@@ -77,7 +77,7 @@ class Get_Product(APIView):
                  
 class Get_Seller(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self,request,pk):
+    def get(self,request):
         try:
             seller = Seller.objects.get()
             return Response(seller)
