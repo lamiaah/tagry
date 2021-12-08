@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate, logout, login
 from users.models import CustomUser
 from rest_framework.permissions import IsAuthenticated
-from seller_user.models import Seller
+
 
 
 class UserLogin(APIView):
@@ -18,8 +18,9 @@ class UserLogin(APIView):
 
             if validate:
                 login(request, validate)
+                us = CustomUser.objects.get(email = email)
                 return Response(
-                    {   'id': Seller.objects.get(user = email).id,
+                    {   'id': us.id,
                         'token' : validate.auth_token.key,
                         'email' : request.data['email']
                     },
