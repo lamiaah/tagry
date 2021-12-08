@@ -79,7 +79,7 @@ class Get_Seller(APIView):
     permission_classes = [IsAuthenticated]
     def get(self,request):
         try:
-            seller = Seller.objects.get()
+            seller = Seller.objects.all()
             return Response(seller)
         except Seller.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
