@@ -33,7 +33,7 @@ class SellerStoresAdd(APIView):
         seller = Seller.objects.filter(pk=pk)
         serializer = SellerStoresSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.seller=seller
+            serializer.seller=seller.id
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
