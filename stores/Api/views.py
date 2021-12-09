@@ -31,9 +31,9 @@ class SellerStoresAdd(APIView):
 
     def post(self, request,pk):
         seller = Seller.objects.get(pk=pk)
-        serializer = SellerStoresSerializer(data = request.data)
+        serializer = SellerStoresSerializer(seller,data = request.data)
         if serializer.is_valid():
-            serializer.seller= seller(request.data['seller'])
+            
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
