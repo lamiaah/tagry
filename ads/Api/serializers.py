@@ -6,8 +6,8 @@ from users.models import CustomUser
 
 class AdsSerializer(serializers.ModelSerializer):
  
-  start_date =serializers.DateTimeField(read_only=False)
-  end_date =serializers.DateTimeField(read_only=False)
+  start_date =serializers.DateField(read_only=False)
+  end_date =serializers.DateField(read_only=False)
   product = serializers.PrimaryKeyRelatedField(queryset = Products.objects.all())
   added_by = serializers.PrimaryKeyRelatedField(queryset = CustomUser.objects.all())
  
