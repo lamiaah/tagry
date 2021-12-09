@@ -38,7 +38,7 @@ def seller_details(request, pk):
                 'seller_data' : seller_data,
                 'seller_products' :seller_products,
                 'stores':stores ,
-                'images':image
+                'images':i.all_images
             }
             return render(request, 'seller/seller_detail.html', context)
         else:
