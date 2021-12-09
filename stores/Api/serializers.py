@@ -29,4 +29,4 @@ class SellerStoresSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = SellerStores
-    fields = '__all__'
+    fields = ['store_name','store_address','store_city','store_country','store_area']
