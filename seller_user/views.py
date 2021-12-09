@@ -33,8 +33,7 @@ def seller_details(request, pk):
             image = None
             for i in seller_products:
                 image = Images.objects.filter(product = i or None)
-                i.all_images= image
-                
+                i.all_images= image    
             stores = SellerStores.objects.filter(seller=pk,is_archived=False)
             context = {
                 'seller_data' : seller_data,
