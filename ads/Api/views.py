@@ -1,4 +1,4 @@
-from rest_framework import status ,generics 
+from rest_framework import serializers, status ,generics 
 from django.http import Http404 
 from rest_framework.response import Response
 from ads.models import Ads
@@ -16,10 +16,12 @@ class AdsList(generics.ListAPIView):
 
     def get(self,request):
         try:
-            return Ads.objects.all()
+           ads = Ads.objects.all()
+           serializer =AdsSerializer(ads,many = True)
+           return Response(serializer.data)
         except Ads.DoesNotExist:
             return Http404    
-
+                 
 
 
 class AdsAdd(APIView):
