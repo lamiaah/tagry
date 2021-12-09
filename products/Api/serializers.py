@@ -27,7 +27,9 @@ class ImageSerializers(serializers.ModelSerializer):
 
         
 class ProductSerializer(serializers.ModelSerializer):
-    seller_id =  serializers.PrimaryKeyRelatedField(queryset = Seller.objects.all())
+    seller_id =  serializers.ReadOnlyField(source='seller_id.id')
+
+    # seller_id =  serializers.PrimaryKeyRelatedField(queryset = Seller.objects.all())
     category_id = serializers.PrimaryKeyRelatedField(queryset = Categories.objects.all())
     product_title = serializers.CharField(read_only=False)
     product_description = serializers.CharField(read_only=False)

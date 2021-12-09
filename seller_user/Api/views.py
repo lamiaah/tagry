@@ -67,14 +67,13 @@ class RegisterSeller(APIView):
 class Get_Product(APIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProductSerializer
-    def get(self,pk):
+    def get(self,seller_id):
         try:
-            product = Products.objects.filter(seller_id = pk,is_archived=False,)
+            product = Products.objects.filter(seller_id = seller_id,is_archived=False)
             serializer = ProductSerializer(product, many = True)
             return Response(serializer.data)
         except Products.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
 
                  
 class Get_Seller(APIView):
