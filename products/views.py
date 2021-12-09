@@ -48,8 +48,7 @@ def add_product(request ,pk):
                     image_form = ImageForm(request.POST ,request.FILES or None)
                     if image_form.is_valid():
                         add_image(x,i)
-                return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))  
-            
+            return redirect(reverse('seller_user:seller_detail' ,args=(seller.id,)))      
         else:
             form = ProductForm()
             image_form =ImageForm(request.POST, request.FILES)
