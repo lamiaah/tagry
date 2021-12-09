@@ -17,6 +17,7 @@ class SellerSerializer(serializers.ModelSerializer):
     city_name =  serializers.IntegerField()
     country_name =  serializers.IntegerField()
     area_name =  serializers.IntegerField()
+    category_id = serializers.ReadOnlyField(source='category_id.category_title')
 
     class Meta:
         model=Seller
