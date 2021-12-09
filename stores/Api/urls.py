@@ -1,10 +1,10 @@
 
 from django.urls import path
-from ads.Api.views import AdsAdd, AdsList, PutAds
+from stores.Api.views import SellerStoresList,SellerStoresAdd,PutSellerStores
 
 urlpatterns = [
-    path('all_ads/', AdsList.as_view()),
-    path('add/',AdsAdd.as_view()),
-    path('put/<int:id>/',PutAds.as_view()),
-    path('delete/<int:id>/',PutAds.as_view()),
+    path('all_stores/', SellerStoresList.as_view()),
+    path('add/',SellerStoresAdd.as_view()),
+    path('put/<int:id>/',PutSellerStores.as_view()),
+    path('delete/<int:id>/',PutSellerStores.as_view()),
 ]
