@@ -5,9 +5,9 @@ from users.models import CustomUser
 
 
 class AdsSerializer(serializers.ModelSerializer):
-  
-  start_data =serializers.DateTimeField()
-  end_data =serializers.DateTimeField()
+ 
+  start_data =serializers.DateTimeField(read_only=False)
+  end_data =serializers.DateTimeField(read_only=False)
   product = serializers.PrimaryKeyRelatedField(queryset = Products.objects.all())
   
   added_by = serializers.PrimaryKeyRelatedField(queryset = CustomUser.objects.all())
