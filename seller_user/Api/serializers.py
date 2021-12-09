@@ -17,7 +17,7 @@ class SellerSerializer(serializers.ModelSerializer):
     city_name =  serializers.IntegerField()
     country_name =  serializers.IntegerField()
     area_name =  serializers.IntegerField()
-    category_id = serializers.ReadOnlyField(source='category_id.category_title')
+    # category_id = serializers.ReadOnlyField(source='category_id.category_title')
 
     class Meta:
         model=Seller
@@ -36,7 +36,7 @@ class SellerSerializer(serializers.ModelSerializer):
             country_name = Countries.objects.get(pk = validated_data['country_name']),
             area_name = Area.objects.get(pk = validated_data['area_name']),
             image = validated_data['image'],
-            category_id = Categories.objects.get(pk= validated_data['category_id']),
+            category_id = Categories.objects.get(pk= validated_data['category_id.category_title']),
         )
 
         seller.save()
