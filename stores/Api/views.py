@@ -1,6 +1,7 @@
 from rest_framework import serializers, status ,generics 
 from django.http import Http404 
 from rest_framework.response import Response
+from seller_user.models import Seller
 from stores.models import SellerStores
 from rest_framework.views import APIView
 from stores.Api.serializers import SellerStoresSerializer
@@ -28,11 +29,11 @@ class SellerStoresAdd(APIView):
     
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-
+    def post(self, request,pk):
+        seller = Seller.objects.filter(pk=pk)
         serializer = SellerStoresSerializer(data = request.data)
-
         if serializer.is_valid():
+            serializer.seller=seller
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
