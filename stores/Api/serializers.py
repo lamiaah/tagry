@@ -14,19 +14,8 @@ class SellerStoresSerializer(serializers.ModelSerializer):
   store_country =  serializers.ReadOnlyField(source='store_country.country_name')
   store_area = serializers.ReadOnlyField(source='store_area.area_name')
 
-  def create(self, validated_data):
-    
-
-    seller = SellerStores(
-      store_address = validated_data['seller_address'],
-      store_city = Cities.objects.get(pk = validated_data['store_city']),
-      store_country = Countries.objects.get(pk = validated_data['store_country']),
-      store_area = Area.objects.get(pk = validated_data['store_area']),
-    )
-
-    seller.save()
-    return seller
-
+  def create(self, validate_data):
+    return SellerStores.objects.create(**validate_data)  
   class Meta:
     model = SellerStores
     fields = ['store_name','store_address','store_city','store_country','store_area']
