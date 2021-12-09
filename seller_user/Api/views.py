@@ -67,7 +67,7 @@ class RegisterSeller(APIView):
 class Get_Product(APIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProductSerializer
-    def get(self,seller_id):
+    def get(self,request,seller_id):
         try:
             product = Products.objects.filter(seller_id = seller_id,is_archived=False)
             serializer = ProductSerializer(product, many = True)
