@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class AreaApiList(APIView):
     permission_classes =[IsAuthenticated]
-    def get(self):
+    def get(self,requset):
         
         try:
             area = Area.objects.all()
