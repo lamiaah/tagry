@@ -17,7 +17,7 @@ def get_products(request):
         if request.user.is_superuser:
             product = Products.objects.filter(is_archived=False)
             for i in product:
-                image = Images.objects.filter(product = i)
+                image = Images.objects.filter(product = i or None)
                 i.all_images =image
             context ={
                 'product':product,
