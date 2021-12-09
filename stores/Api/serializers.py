@@ -18,7 +18,7 @@ class SellerStoresSerializer(serializers.ModelSerializer):
     
 
     seller = SellerStores(
-      seller_address = validated_data['seller_address'],
+      store_address = validated_data['seller_address'],
       store_city = Cities.objects.get(pk = validated_data['store_city']),
       store_country = Countries.objects.get(pk = validated_data['store_country']),
       store_area = Area.objects.get(pk = validated_data['store_area']),
