@@ -50,6 +50,7 @@ urlpatterns = [
     #api
     path('api/buyer/',include('buyer.Api.urls')),
     path('api/ads/',include('ads.Api.urls')),
+    path('api/copun/',include('copun.Api.urls')),
     path('api/language/',include('languages.Api.urls')),
     path('api/category/',include('categories.Api.urls')),
     path('api/offer/',include('offers.Api.urls')),
