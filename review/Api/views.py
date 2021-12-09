@@ -17,7 +17,6 @@ class ReviewApiList(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.kwargs.get ('user_id')
-        second = self.request.query_params.get('user_id')
         try:
             return Review.objects.filter(user_id=user_id)
         except Review.DoesNotExist:
@@ -31,7 +30,6 @@ class ReviewProductList(generics.ListAPIView):
 
     def get_queryset(self):
         product_id = self.kwargs.get ('product_id')
-        second = self.request.query_params.get('product_id')
         try:
             return Review.objects.filter(products_id=product_id)
         except Review.DoesNotExist:

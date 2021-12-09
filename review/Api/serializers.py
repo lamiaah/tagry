@@ -18,14 +18,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     return Review.objects.create(**validate_data)  
 
 
-  # def update(self, instance, validate_data):
-  #   instance.description = validate_data.get('description', instance.description)
-  #   instance.rate = validate_data.get('rate', instance.rate)
-  #   instance.products_id = validate_data.get('products_id', instance.products_id)
-  #   instance.user_id= validate_data.get('user_id', instance.user_id)
-  #   instance.created_user = validate_data.get('created_user', instance.created_user)
-  #   instance.updated_user = validate_data.get('updated_user', instance.updated_user )
-
     
 
   class Meta:

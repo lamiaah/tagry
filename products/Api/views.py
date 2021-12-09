@@ -69,6 +69,7 @@ class AddProduct(APIView):
         serializer = ProductSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
+           
             image_data = {
                 'image' : request.data['images'],
                 'product' : str(serializer.data['id'])
