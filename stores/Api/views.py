@@ -30,10 +30,10 @@ class SellerStoresAdd(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request,pk):
-        seller = Seller.objects.filter(pk=pk)
+        seller = Seller.objects.get(pk=pk)
         serializer = SellerStoresSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.seller=seller.id
+            serializer.seller=seller
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
