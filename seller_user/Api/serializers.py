@@ -7,7 +7,7 @@ from area.models import Area
 from users.models import CustomUser
 
 class SellerSerializer(serializers.ModelSerializer):
-    user = serializers.IntegerField()
+    # user = serializers.IntegerField()
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
@@ -26,7 +26,7 @@ class SellerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         seller = Seller(
-            user = CustomUser.objects.get(pk = validated_data['user']),
+            # user = CustomUser.objects.get(pk = validated_data['user']),
             name = validated_data['name'],
             website = validated_data['website'],
             about = validated_data['about'],
