@@ -17,7 +17,7 @@ class SellerStoresList(generics.ListAPIView):
     def get(self,request):
         try:
            stores = SellerStores.objects.all()
-           serializer =SellerStoresSerializer(SellerStores,many = True)
+           serializer =SellerStoresSerializer(stores,many = True)
            return Response(serializer.data)
         except SellerStores.DoesNotExist:
             return Http404    
