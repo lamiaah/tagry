@@ -8,6 +8,7 @@ urlpatterns = [
     path('add/',ReivewView.as_view()),
     path('review_product/<int:product_id>/', ReviewProductList.as_view()),
     path('put/<int:id>/',PutReview.as_view()),
+    path('delete/<int:id>/',PutReview.as_view()),
     
 
     
