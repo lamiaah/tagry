@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from countries.models import Countries
 
-class CountriesSerailizer(serializers.ModleSerializer):
+class CountriesSerailizer(serializers.ModelSerializer):
     id = serializers.PrimaryKeyRelatedField(read_only =True)
     user_id = serializers.PrimaryKeyRelatedField(read_only = True)
     code = serializers.CharField(read_only = True)
