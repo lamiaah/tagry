@@ -55,7 +55,7 @@ urlpatterns = [
     path('api/language/',include('languages.Api.urls')),
     path('api/category/',include('categories.Api.urls')),
     path('api/offer/',include('offers.Api.urls')),
-    path('api/area/',include('area.Api.urls')),
+    path('api/countries/',include('countries.Api.urls')),
     path('api/product/',include('products.Api.urls')),
     path('api/seller/',include('seller_user.Api.urls')),
     path('api/shoppingcart/',include('shopping_cart.Api.urls')),
