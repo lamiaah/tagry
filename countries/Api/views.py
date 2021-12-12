@@ -5,7 +5,7 @@ from countries.models import Countries
 from cities.models import Cities
 from area.models import Area
 from area.Api.serializers import AreaSerializer
-from countries.Api.serializers import CountriesSerailizer
+# from countries.Api.serializers import CountriesSerailizer
 from cities.Api.serializers import CitiesSerailizer
 
 # class CountriesApiList(APIView):
