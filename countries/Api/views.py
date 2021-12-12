@@ -5,7 +5,7 @@ from countries.models import Countries
 from cities.models import Cities
 from area.models import Area
 from area.Api.serializers import AreaSerializer
-# from countries.Api.serializers import CountriesSerailizer
+from countries.Api.serializers import CountriesSerailizer
 from cities.Api.serializers import CitiesSerailizer
 
 # class CountriesApiList(APIView):
@@ -26,3 +26,11 @@ from cities.Api.serializers import CitiesSerailizer
 #        except Exception as e :
 #             return Response({'error':'some thing went wrong'},status= status.HTTP_400_BAD_REQUEST)
 
+class CountriesApiList(APIView):
+    def get(self,requset):
+        try:
+           city = Cities.objects.all()
+           serializer = CitiesSerailizer(city, many = True)
+           return Response(serializer.data)
+        except Cities.DoesNotExist:
+           return Response(status=status.HTTP_404_NOT_FOUND)    
