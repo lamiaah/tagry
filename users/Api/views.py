@@ -1,12 +1,22 @@
-from users.Api.serializers import CustomUserSerializer
+from users.Api.serializers import CustomUserSerializer ,LoginSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, logout, login
 from users.models import CustomUser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import GenericAPIView
 
+class RegisterView(GenericAPIView):
+    serializer_class = CustomUserSerializer
 
+    def post(self, request):
+        serializer = CustomUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserLogin(APIView):
 

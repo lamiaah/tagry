@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 
 class CustomAuth(BaseUserManager):
 
-    def _create_user(self, email,  password, is_staff, is_superuser, **extra_fields):
+    def _create_user(self, email,  password,is_staff, is_superuser, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
         now = timezone.now()
