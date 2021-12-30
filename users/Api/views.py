@@ -1,5 +1,5 @@
 from datetime import date
-from users.Api.serializers import UserSerializer
+from users.Api.serializers import UserSerializer ,RegisterSerializer
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.views import APIView
@@ -9,20 +9,30 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 
-
 class RegisterAPI(generics.GenericAPIView):
-    serializer_class = UserSerializer
+    serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = UserSerializer(data=request.data)
-        data ={}
-        if serializer.is_valid():
-            user =serializer.save()
-            data['email']= user.email
-            data['username']=user.username
+        serializer = RegisterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+
+        if CustomUser.objects.filter(id=data['id']).exists():
+            user =CustomUser.objects.get(id=data['id'])
+            is_new = "false"
+            resp_status = status.HTTP_200_OK
         else:
-            data = serializer.errors
-        return Response(data)        
+            user = CustomUser.objects.create(id=data['id'],
+                                       username=data[' username'],
+                                       email=data['email'],
+                                       password=data['password'],
+                                       )
+            user.save()
+            is_new = "true"
+            resp_status = status.HTTP_201_CREATED
+        resp = {"user": serializer.get_serialized(user),
+                "isnew": is_new}
+        return Response(resp, status=resp_status)
 # class UserLogin(APIView):
 
 #     def post(self, request):
