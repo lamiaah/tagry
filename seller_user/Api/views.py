@@ -8,56 +8,56 @@ from seller_user.models import Seller
 from seller_user.Api.serializers import SellerSerializer
 from products.Api.serializers import ImageSerializers, ProductSerializer 
 
-from seller_user.Api.api_register_seller import register_seller_user
 
 
-class RegisterSeller(APIView):
+
+# class RegisterSeller(APIView):
 
    
-    def post(self, request):
+#     def post(self, request):
 
-        try:
-            custom_user_data = {
-                'email' : request.data.get('email'),
-                'password' : request.data.get('password'),
-                'username' : request.data.get('username'),
-            }
+#         try:
+#             custom_user_data = {
+#                 'email' : request.data.get('email'),
+#                 'password' : request.data.get('password'),
+#                 'username' : request.data.get('username'),
+#             }
            
-            custom_user_register = register(custom_user_data)
-            print(custom_user_register)
-            if custom_user_register['error_code'] == 2:
-                return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
-            elif custom_user_register['error_code'] == 4:
-                return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
-            elif custom_user_register['error_code'] == 1 or custom_user_register['error_code'] == 3:
-                couser_data = {
-                    'user' : custom_user_register['serializer_msg'],
-                    'name' : request.data.get('name'),
-                    'website' : request.data.get('website'),
-                    'about' : request.data.get('about'),
-                    'seller_address' : request.data.get('seller_address'),
-                    'city_name' : request.data.get('city_name'),
-                    'country_name' : request.data.get('country_name'),
-                    'image' : request.data.get('image'),
-                    'category_id': request.data.get('category_id'),
-                    'area_name' : request.data.get('area_name'),
-                  }
+#             custom_user_register = register(custom_user_data)
+#             print(custom_user_register)
+#             if custom_user_register['error_code'] == 2:
+#                 return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
+#             elif custom_user_register['error_code'] == 4:
+#                 return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
+#             elif custom_user_register['error_code'] == 1 or custom_user_register['error_code'] == 3:
+#                 couser_data = {
+#                     'user' : custom_user_register['serializer_msg'],
+#                     'name' : request.data.get('name'),
+#                     'website' : request.data.get('website'),
+#                     'about' : request.data.get('about'),
+#                     'seller_address' : request.data.get('seller_address'),
+#                     'city_name' : request.data.get('city_name'),
+#                     'country_name' : request.data.get('country_name'),
+#                     'image' : request.data.get('image'),
+#                     'category_id': request.data.get('category_id'),
+#                     'area_name' : request.data.get('area_name'),
+#                   }
 
-                seller_user_register = register_seller_user(couser_data)
+#                 seller_user_register = register_seller_user(couser_data)
                
-                if seller_user_register['error_code'] == 2:
-                    return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
-                elif seller_user_register['error_code'] == 4:
-                    return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
-                elif seller_user_register['error_code'] == 1:
-                    return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
-                else:
-                    return Response(seller_user_register['serializer_msg'], status = status.HTTP_201_CREATED)
+#                 if seller_user_register['error_code'] == 2:
+#                     return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
+#                 elif seller_user_register['error_code'] == 4:
+#                     return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
+#                 elif seller_user_register['error_code'] == 1:
+#                     return Response(seller_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
+#                 else:
+#                     return Response(seller_user_register['serializer_msg'], status = status.HTTP_201_CREATED)
 
 
 
-        except Exception as e:
-            return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
+#         except Exception as e:
+#             return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
 
 
 

@@ -1,6 +1,6 @@
 
 from rest_framework.views import APIView
-from users.Api.api_register import register
+
 from rest_framework.response import Response
 from users.models import CustomUser
 from rest_framework import status
