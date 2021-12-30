@@ -8,12 +8,13 @@ from users.models import CustomUser
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
-from django.views.decorators.csrf import csrf_exempt
+
 
 
 class RegisterAPI(generics.GenericAPIView):
+    
     serializer_class = RegisterSerializer
-    @csrf_exempt
+    
     def post(self, request, *args, **kwargs):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
