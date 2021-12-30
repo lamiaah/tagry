@@ -11,7 +11,7 @@ from rest_framework.generics import GenericAPIView
 from django.views.decorators.csrf import csrf_exempt
 
 
-class RegisterAPI(generics.GenericAPIView):
+class RegisterAPI(APIView):
     serializer_class =  RegistrationSerializer
     
     def post(self, request, *args, **kwargs):
