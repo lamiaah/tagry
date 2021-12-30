@@ -12,10 +12,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 class RegisterAPI(APIView):
-    serializer_class =  RegistrationSerializer
+
     
     def post(self, request, *args, **kwargs):
-        serializer =  RegistrationSerializer(data=request.data)
+        
         if request.method == 'POST':
             serializer = RegistrationSerializer(data=request.data)
             data = {}
