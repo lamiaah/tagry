@@ -1,5 +1,5 @@
 from datetime import date
-from users.Api.serializers import RegistrationSerializer
+from users.Api.serializers import RegisterSerializer
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.views import APIView
@@ -17,7 +17,7 @@ class RegisterAPI(APIView):
     def post(self, request, *args, **kwargs):
         
         if request.method == 'POST':
-            serializer = RegistrationSerializer(data=request.data)
+            serializer = RegisterSerializer(data=request.data)
             data = {}
             serializer.is_valid(raise_exception=True)
             if CustomUser.objects.filter(id=data['id']).exists():
