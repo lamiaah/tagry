@@ -1,4 +1,4 @@
-from users.Api.serializers import CustomUserSerializer
+from users.Api.serializers import UserSerializer
 from users.models import CustomUser
 
 from rest_framework.generics import GenericAPIView
@@ -40,7 +40,7 @@ def register(request_data):
         user_exist = check_user_exist(request_data['email'])
 
         if user_exist == None:
-            serializer = CustomUserSerializer(data = request_data)
+            serializer = UserSerializer(data = request_data)
             if serializer.is_valid() == False:
                 response_data['error_code'] = 2
                 response_data['serializer_msg'] = serializer.error_messages
