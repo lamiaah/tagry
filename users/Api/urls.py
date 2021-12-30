@@ -1,6 +1,6 @@
 
 from django.urls import path
-from users.Api.views import UserLogin, UserLogout, UserData, UpdateUserPassword ,RegisterAPI
+from users.Api.views import RegisterAPI
 
 from rest_framework.authtoken.views import obtain_auth_token
 
