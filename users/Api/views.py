@@ -20,8 +20,8 @@ class RegisterAPI(APIView):
             serializer = RegisterSerializer(data=request.data)
             data = {}
             serializer.is_valid(raise_exception=True)
-            if CustomUser.objects.filter(id=data['id']).exists():
-                user =CustomUser.objects.get(id=data['id'])
+            if CustomUser.objects.filter(id=data['pk']).exists():
+                user =CustomUser.objects.get(id=data['pk'])
                 is_new = "false"
                 resp_status = status.HTTP_200_OK
             else:     
