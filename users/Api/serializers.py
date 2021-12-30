@@ -14,7 +14,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ['email', 'username', 'password']
     
 
-    def create(self):
+    def save(self):
         account = CustomUser(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
