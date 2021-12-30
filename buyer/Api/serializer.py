@@ -7,7 +7,8 @@ from users.models import CustomUser
 
 
 class BuyerSerializer(serializers.ModelSerializer):
-    user = serializers.IntegerField()
+
+    user_id= serializers.CharField()
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
@@ -24,7 +25,7 @@ class BuyerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         buyer = Buyer(
-            user = CustomUser.objects.get(pk = validated_data['user']),
+            user_id = CustomUser.objects.get(pk = validated_data['user_id']),
             name = validated_data['name'],
             about = validated_data['about'],
             address = validated_data['address'],

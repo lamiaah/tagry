@@ -1,23 +1,28 @@
-from users.Api.serializers import CustomUserSerializer ,LoginSerializer
+from datetime import date
+from users.Api.serializers import UserSerializer
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import serializers, status
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, logout, login
 from users.models import CustomUser
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 
-class RegisterView(GenericAPIView):
-    serializer_class = CustomUserSerializer
 
-    def post(self, request):
-        serializer = CustomUserSerializer(data=request.data)
+class RegisterAPI(generics.GenericAPIView):
+    serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = UserSerializer(data=request.data)
+        data ={}
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            user =serializer.save()
+            data['email']= user.email
+            data['username']=user.username
+        else:
+            data = serializer.errors
+        return Response(data)        
 class UserLogin(APIView):
 
     def post(self, request):
@@ -52,7 +57,7 @@ class UserData(APIView):
 
         try:
             user_data = CustomUser.objects.get(pk = pk)
-            serializer = CustomUserSerializer(user_data)
+            serializer = UserSerializer(user_data)
             return Response(serializer.data, status.HTTP_200_OK)
         except CustomUser.DoesNotExist:
             return Response(
