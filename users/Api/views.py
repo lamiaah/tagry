@@ -24,8 +24,7 @@ class RegisterAPI(APIView):
                 user =CustomUser.objects.get(id=data['id'])
                 is_new = "false"
                 resp_status = status.HTTP_200_OK
-            else:
-          
+            else:     
                 user = CustomUser.objects.create(id=data['id'],
                                         username=data[' username'],
                                         email=data['email'],
