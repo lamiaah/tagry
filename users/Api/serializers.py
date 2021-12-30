@@ -7,16 +7,14 @@ from django.contrib.auth.models import User
   
 class RegistrationSerializer(serializers.ModelSerializer):
 
-   
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = CustomUser
         fields = ['email', 'username', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+    
 
-    def save(self):
+    def create(self):
         account = CustomUser(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
