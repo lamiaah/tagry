@@ -1,9 +1,9 @@
 from django.urls import path
-from seller_user.Api.views import Get_Product, Get_Seller, RegisterSeller
+from seller_user.Api.views import Get_Product, Get_Seller
 
 
 urlpatterns = [
-    path('register', RegisterSeller.as_view()),
+
     path('get_product/<int:seller_id>', Get_Product.as_view()),
     path('get_seller', Get_Seller.as_view()),
 ]
