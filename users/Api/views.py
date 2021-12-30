@@ -8,11 +8,10 @@ from users.models import CustomUser
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 class RegisterAPI(generics.GenericAPIView):
-    
     serializer_class = RegisterSerializer
     
     def post(self, request, *args, **kwargs):
