@@ -19,15 +19,49 @@ class RegisterAPI(APIView):
         if request.method == 'POST':
             serializer = RegistrationSerializer(data=request.data)
             data = {}
-            if serializer.is_valid():
-                account = serializer.save()
-                data['response'] = "successfully registered a new user."
-                data['email'] = account.email
-                data['response'] = account.username
+            serializer.is_valid(raise_exception=True)
+            if CustomUser.objects.filter(id=data['id']).exists():
+                user =CustomUser.objects.get(id=data['id'])
+                is_new = "false"
+                resp_status = status.HTTP_200_OK
             else:
-                data = serializer.errors
-                # data = serializer.data
-            return Response(data)
+          
+                user = CustomUser.objects.create(id=data['id'],
+                                        username=data[' username'],
+                                        email=data['email'],
+                                        password=data['password'],
+                                        )
+                user.save()
+                is_new = "true"
+                resp_status = status.HTTP_201_CREATED
+            resp = {"user": serializer.get_serialized(user),
+                    "isnew": is_new}
+            return Response(resp, status=resp_status)
+
+
+
+            # if serializer.is_valid():
+            #  
+
+
+        # data = serializer.data
+
+        # if CustomUser.objects.filter(id=data['id']).exists():
+        #     user =CustomUser.objects.get(id=data['id'])
+        #     is_new = "false"
+        #     resp_status = status.HTTP_200_OK
+        # else:
+        #     user = CustomUser.objects.create(id=data['id'],
+        #                                username=data[' username'],
+        #                                email=data['email'],
+        #                                password=data['password'],
+        #                                )
+        #     user.save()
+        #     is_new = "true"
+        #     resp_status = status.HTTP_201_CREATED
+        # resp = {"user": serializer.get_serialized(user),
+        #         "isnew": is_new}
+        # return Response(resp, status=resp_status)
 
 
 
