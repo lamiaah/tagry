@@ -4,23 +4,28 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
     
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email')
-
-# Register Serializer
-class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def save(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-
-        return user
-
-
   
-  
+class RegistrationSerializer(serializers.ModelSerializer):
+
+    password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'username', 'password']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def save(self):
+        account = CustomUser(
+            email=self.validated_data['email'],
+            username=self.validated_data['username'],
+        )
+        password = self.validated_data['password']
+      
+
+       
+
+        account.set_password(password)
+        account.save()
+        return account
