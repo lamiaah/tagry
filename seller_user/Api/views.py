@@ -1,12 +1,12 @@
 from rest_framework.views import APIView
-from users.Api.api_register import register
+
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.permissions import IsAuthenticated
 from products.models import Products 
 from seller_user.models import Seller
 from seller_user.Api.serializers import SellerSerializer
-from products.Api.serializers import ImageSerializers, ProductSerializer 
+from products.Api.serializers import  ProductSerializer 
 
 
 
