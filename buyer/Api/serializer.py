@@ -39,3 +39,6 @@ class BuyerSerializer(serializers.ModelSerializer):
         buyer.save()
 
         return buyer
+    def to_representation(self, instance):
+        self.fields['user'] =  RegistrationSerializer(read_only=True)
+        return super(BuyerSerializer, self).to_representation(instance)
