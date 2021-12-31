@@ -48,7 +48,9 @@ class UserLogin(APIView):
                         'token' : validate.auth_token.key,
                         'email' : request.data['email']
                     }
-                return data
+                return Response(
+                 data, status.HTTP_200_OK
+                )
             else:
                 return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
