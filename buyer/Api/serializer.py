@@ -27,7 +27,7 @@ class BuyerSerializer(serializers.ModelSerializer):
 
         buyer = Buyer(
     
-            user_id =validated_data.pop('user_id',''),
+            user_id =validated_data.pop('user_id',None),
             name = validated_data['name'],
             about = validated_data['about'],
             address = validated_data['address'],
