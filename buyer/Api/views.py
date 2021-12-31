@@ -33,11 +33,10 @@ class BuyerLogin(APIView):
 class BuyerInfo(APIView):
   
   
-    def post(self, request, user_id):
-        try:
-            user = CustomUser.objects.get(id=user_id)            
-        except CustomUser.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND) 
+    def post(self, request):
+      
+        user = self.context['request'].id          
+     
 
         if request.method == 'POST':
             
@@ -48,6 +47,7 @@ class BuyerInfo(APIView):
                 serializer.save()  
                 return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)      
             else:
+
                 return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
         
        
