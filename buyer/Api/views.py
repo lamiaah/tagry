@@ -1,10 +1,15 @@
 
+from buyer.Api.serializer import BuyerSerializer
+from rest_framework.response import Response
+from rest_framework import serializers, status
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, logout, login
-from rest_framework.response import Response
 from users.models import CustomUser
-from rest_framework import status
-from buyer.Api.serializer import BuyerSerializer
+from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import GenericAPIView
+from django.views.decorators.csrf import csrf_exempt
+
 
 class BuyerLogin(APIView):
 
@@ -26,8 +31,7 @@ class BuyerLogin(APIView):
               
                 serializer =BuyerSerializer(data = request.data ,many= True)
                 request.data["user_id"] = x
-                if serializer.is_valid():
-                
+                if serializer.is_valid():      
                     serializer.save()  
                     return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)      
                 else:
