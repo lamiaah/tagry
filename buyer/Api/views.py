@@ -32,9 +32,9 @@ class BuyerLogin(APIView):
 
 class BuyerInfo(APIView):
   
-    def post(self, request, *args, **kwargs):
-        id = self.kwargs.get("user_id")
-        us = CustomUser.objects.get(id=id)
+    def post(self, request, user_id,*args, **kwargs):
+        user_id = self.kwargs.get("user_id")
+        us = CustomUser.objects.get(id=user_id)
 
         serializer =BuyerSerializer(data = request.data)
         if serializer.is_valid():
