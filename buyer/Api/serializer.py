@@ -14,31 +14,28 @@ class BuyerSerializer(serializers.ModelSerializer):
     about = serializers.CharField ()
     image= serializers.ImageField ()
     address = serializers.CharField()
-    city =  serializers.IntegerField(queryset = Cities.objects.all())
-    country =  serializers.IntegerField(queryset = Countries.objects.all())
-    area =  serializers.IntegerField(queryset = Area.objects.all())
+    city =  serializers.IntegerField()
+    country =  serializers.IntegerField()
+    area =  serializers.IntegerField()
 
     class Meta:
         model= Buyer
         fields='__all__'
 
+
     def create(self, validate_data):
-      return Buyer.objects.create(**validate_data)     
 
+        buyer = Buyer(
+            
+            name = validate_data['name'],
+            about = validate_data['about'],
+            address = validate_data['address'],
+            city = Cities.objects.get(pk = validate_data['city']),
+            country = Countries.objects.get(pk = validate_data['country']),
+            area = Area.objects.get(pk = validate_data['area']),
+            image = validate_data['image'],
+        )
 
-    # def create(self, validated_data):
+        buyer.save()
 
-    #     buyer = Buyer(
-    #         user_id =validated_data['user_id'],
-    #         name = validated_data['name'],
-    #         about = validated_data['about'],
-    #         address = validated_data['address'],
-    #         city = Cities.objects.get(pk = validated_data['city']),
-    #         country = Countries.objects.get(pk = validated_data['country']),
-    #         area = Area.objects.get(pk = validated_data['area']),
-    #         image = validated_data['image'],
-    #     )
-
-    #     buyer.save()
-
-    #     return buyer
+        return buyer
