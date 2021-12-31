@@ -35,7 +35,7 @@ class BuyerInfo(APIView):
   
     def post(self, request):
       
-        user = self.context['request'].id          
+        user = self.request.id          
      
 
         if request.method == 'POST':
