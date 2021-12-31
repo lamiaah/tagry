@@ -42,13 +42,13 @@ class BuyerInfo(APIView):
         if request.method == 'POST':
             
             serializer =BuyerSerializer(data = request.data ,many= True)
-            request.data["user_id"] = self.request.user.id
+            request.data["user_id"] = self.request.id
             if serializer.is_valid():
             
                 serializer.save()  
                 return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)      
             else:
-
+              
                 return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
         
        
