@@ -33,15 +33,16 @@ class BuyerLogin(APIView):
 class BuyerInfo(APIView):
   
   
-    def post(self, request):
-      
-        x= BuyerLogin()     
-     
+    def post(self, request, user_id):
+        # try:
+        #     user = CustomUser.objects.filter(id=user_id)            
+        # except CustomUser.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND) 
 
         if request.method == 'POST':
             
             serializer =BuyerSerializer(data = request.data ,many= True)
-            request.data["user_id"] = x.request.id
+            request.data["user_id"] = request.id
             if serializer.is_valid():
             
                 serializer.save()  
