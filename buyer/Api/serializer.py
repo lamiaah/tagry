@@ -14,9 +14,9 @@ class BuyerSerializer(serializers.ModelSerializer):
     about = serializers.CharField ()
     image= serializers.ImageField ()
     address = serializers.CharField()
-    city =  serializers.IntegerField()
-    country =  serializers.IntegerField()
-    area =  serializers.IntegerField()
+    city =  serializers.IntegerField(queryset = Cities.objects.all())
+    country =  serializers.IntegerField(queryset = Countries.objects.all())
+    area =  serializers.IntegerField(queryset = Area.objects.all())
 
     class Meta:
         model= Buyer
