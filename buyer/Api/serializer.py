@@ -9,7 +9,7 @@ from users.models import CustomUser
 
 class BuyerSerializer(serializers.ModelSerializer):
 
-    user_id= RegistrationSerializer(read_oniy = True)
+    user_id= RegistrationSerializer(read_only=True)
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
