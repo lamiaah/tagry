@@ -42,7 +42,7 @@ class BuyerInfo(APIView):
         if request.method == 'POST':
             
             serializer =BuyerSerializer(data = request.data ,many= True)
-            request.data["user_id"] = request.id
+            request.data["user_id"] = self.request.user.id
             if serializer.is_valid():
             
                 serializer.save()  
