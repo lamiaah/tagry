@@ -23,12 +23,12 @@ class BuyerSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
-    def create(self, validate_data):
+    def create(self, validated_data):
 
      
-            user_id =validate_data.pop('user_id')
-            user_instance= CustomUser.objects.get(id=user_id)
-            byer = Buyer.objects.create(**validate_data, user_id=user_instance )
+            user_id =validated_data.pop('user_id')
+            user_instance, created= CustomUser.objects.get(id=user_id)
+            byer = Buyer.objects.create(**validated_data, user_id=user_instance )
             return byer
 
 
