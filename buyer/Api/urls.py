@@ -1,8 +1,8 @@
 from django.urls import path
-from buyer.Api.views import BuyerInfo
+from buyer.Api.views import  BuyerLogin
 
 
 urlpatterns = [
-    path('info/', BuyerInfo.as_view()),
+    path('info/',  BuyerLogin.as_view()),
     
 ]
