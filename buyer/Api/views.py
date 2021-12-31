@@ -32,7 +32,7 @@ class BuyerLogin(APIView):
 
 class BuyerInfo(APIView):
   
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         id = self.kwargs.get("user_id")
         us = CustomUser.objects.get(id=id)
 
