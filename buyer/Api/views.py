@@ -33,7 +33,7 @@ class BuyerLogin(APIView):
 class BuyerInfo(APIView):
   
   
-    def post(self, request, user_id):
+    def post(self, request):
         # try:
         #     user = CustomUser.objects.filter(id=user_id)            
         # except CustomUser.DoesNotExist:
