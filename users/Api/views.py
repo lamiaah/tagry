@@ -33,28 +33,26 @@ class RegisterAPI(APIView):
 
 
 
-# class UserLogin(APIView):
+class UserLogin(APIView):
 
-#     def post(self, request):
-#         try:
-#             email = request.data.get('email')
-#             password = request.data.get('password')
-#             validate = authenticate(email= email, password = password)
+    def post(self, request):
+        try:
+            email = request.data.get('email')
+            password = request.data.get('password')
+            validate = authenticate(email= email, password = password)
 
-#             if validate:
-#                 login(request, validate)
-#                 us = CustomUser.objects.get(email = email)
-#                 return Response(
-#                     {   'id': us.id,
-#                         'token' : validate.auth_token.key,
-#                         'email' : request.data['email']
-#                     },
-#                     status.HTTP_200_OK
-#                 )
-#             else:
-#                 return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
-#         except Exception as e:
-#             return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
+            if validate:
+                login(request, validate)
+                us = CustomUser.objects.get(email = email)
+                data =  {   'id': us.id,
+                        'token' : validate.auth_token.key,
+                        'email' : request.data['email']
+                    }
+                return data
+            else:
+                return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
+        except Exception as e:
+            return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
 
 
 
