@@ -22,20 +22,23 @@ class BuyerSerializer(serializers.ModelSerializer):
         model= Buyer
         fields='__all__'
 
+    def create(self, validate_data):
+      return Buyer.objects.create(**validate_data)     
 
-    def create(self, validated_data):
 
-        buyer = Buyer(
-            user_id =validated_data['user_id'],
-            name = validated_data['name'],
-            about = validated_data['about'],
-            address = validated_data['address'],
-            city = Cities.objects.get(pk = validated_data['city']),
-            country = Countries.objects.get(pk = validated_data['country']),
-            area = Area.objects.get(pk = validated_data['area']),
-            image = validated_data['image'],
-        )
+    # def create(self, validated_data):
 
-        buyer.save()
+    #     buyer = Buyer(
+    #         user_id =validated_data['user_id'],
+    #         name = validated_data['name'],
+    #         about = validated_data['about'],
+    #         address = validated_data['address'],
+    #         city = Cities.objects.get(pk = validated_data['city']),
+    #         country = Countries.objects.get(pk = validated_data['country']),
+    #         area = Area.objects.get(pk = validated_data['area']),
+    #         image = validated_data['image'],
+    #     )
 
-        return buyer
+    #     buyer.save()
+
+    #     return buyer
