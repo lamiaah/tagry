@@ -48,7 +48,7 @@ class BuyerInfo(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND) 
 
         serializer =BuyerSerializer(data = request.data ,many= True)
-        serializer['user_id'] =user.id
+        request['user_id'] =user.id
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
