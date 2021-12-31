@@ -23,9 +23,9 @@ class BuyerLogin(APIView):
                 }
             x=  datax['id']
             if request.method == 'POST':
-                user = CustomUser.objects.get(id= x)
+              
                 serializer =BuyerSerializer(data = request.data ,many= True)
-                request.data["user_id"] = user.id
+                request.data["user_id"] = x
                 if serializer.is_valid():
                 
                     serializer.save()  
