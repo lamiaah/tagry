@@ -17,15 +17,15 @@ class BuyerLogin(APIView):
         if validate:
             login(request, validate)
             us = CustomUser.objects.get(email = email)
-            data =  {'id': us.id,
+            datax =  {'id': us.id,
                     'token' : validate.auth_token.key,
                     'email' : request.data['email']
                 }
-            x=  data['id']
+            x=  datax['id']
             if request.method == 'POST':
                 user = CustomUser.objects.filter(id= x)
                 serializer =BuyerSerializer(data = request.data ,many= True)
-                request.data["user_id"] = user.id
+                request.data["user_id"] = user
                 if serializer.is_valid():
                 
                     serializer.save()  
