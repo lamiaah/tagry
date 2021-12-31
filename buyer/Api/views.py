@@ -41,16 +41,15 @@ from django.views.decorators.csrf import csrf_exempt
 class BuyerInfo(APIView):
   
   
-    def post(self, request):
-        # try:
-        #     user = CustomUser.objects.filter(id=user_id)            
-        # except CustomUser.DoesNotExist:
-        #     return Response(status=status.HTTP_404_NOT_FOUND) 
+    def post(self, request ,user_id):
+        try:
+            user = CustomUser.objects.filter(id=user_id)            
+        except CustomUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND) 
 
-            serializer =BuyerSerializer(data = request.data ,many= True)
-           
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-  
+        serializer =BuyerSerializer(data = request.data ,many= True)
+        serializer['user_id'] =user.id
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
