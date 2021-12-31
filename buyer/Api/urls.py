@@ -3,6 +3,6 @@ from buyer.Api.views import BuyerInfo
 
 
 urlpatterns = [
-    path('info/<intid>', BuyerInfo.as_view()),
+    path('info/<int:id>', BuyerInfo.as_view()),
     
 ]
