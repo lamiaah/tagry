@@ -25,20 +25,12 @@ class BuyerSerializer(serializers.ModelSerializer):
 
     def create(self, validate_data):
 
-        buyer = Buyer(
-            
-            name = validate_data['name'],
-            about = validate_data['about'],
-            address = validate_data['address'],
-            city = Cities.objects.get(pk = validate_data['city']),
-            country = Countries.objects.get(pk = validate_data['country']),
-            area = Area.objects.get(pk = validate_data['area']),
-            image = validate_data['image'],
-        )
+     
+            user_id =validate_data.pop('user_id')
+            user_instance= CustomUser.objects.get(id=user_id)
+            byer = Buyer.objects.create(**validate_data, user_id=user_instance )
+            return byer
 
-        buyer.save()
 
-        return buyer
-    def to_representation(self, instance):
-        self.fields['user'] =  RegistrationSerializer(read_only=True)
-        return super(BuyerSerializer, self).to_representation(instance)
+
+    
