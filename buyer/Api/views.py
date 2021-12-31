@@ -35,13 +35,13 @@ class BuyerInfo(APIView):
   
     def post(self, request):
       
-        user = self.request.id          
+        x= BuyerLogin()     
      
 
         if request.method == 'POST':
             
             serializer =BuyerSerializer(data = request.data ,many= True)
-            request.data["user_id"] = user.id
+            request.data["user_id"] = x.id
             if serializer.is_valid():
             
                 serializer.save()  
