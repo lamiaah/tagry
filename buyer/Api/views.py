@@ -1,16 +1,39 @@
 
 from rest_framework.views import APIView
-
+from django.contrib.auth import authenticate, logout, login
 from rest_framework.response import Response
 from users.models import CustomUser
 from rest_framework import status
 from buyer.Api.serializer import BuyerSerializer
 
+class BuyerLogin(APIView):
+
+    def post(self, request):
+        try:
+            email = request.data.get('email')
+            password = request.data.get('password')
+            validate = authenticate(email= email, password = password)
+
+            if validate:
+                login(request, validate)
+                us = CustomUser.objects.get(email = email)
+                data =  {'id': us.id,
+                        'token' : validate.auth_token.key,
+                        'email' : request.data['email']
+                    }
+
+                return Response(
+                 data, status.HTTP_200_OK
+                )
+            else:
+                return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
+        except Exception as e:
+            return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
 
 class BuyerInfo(APIView):
   
-    def post(self, request,pk):
-        id = CustomUser.objects.filter(pk=pk)
+    def post(self, request,id):
+        id = CustomUser.objects.filter(id=id)
         serializer =BuyerSerializer(id,data = request.data)
         if serializer.is_valid():
            serializer.instance['user_id'] = id

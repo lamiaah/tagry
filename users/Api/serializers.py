@@ -29,7 +29,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField()
     class Meta:
         model = CustomUser
-        fields = ['email', 'username', 'password']
+        fields = [ 'id','email', 'username', 'password']
+        read_only_fields = ('id',)
   
 
     def save(self):
