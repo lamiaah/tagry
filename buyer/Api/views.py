@@ -40,7 +40,8 @@ class BuyerInfo(APIView):
         serializer =BuyerSerializer(data = request.data)
         if serializer.is_valid():
         
-            serializer.save()        
+            serializer.save()  
+            return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)      
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
        

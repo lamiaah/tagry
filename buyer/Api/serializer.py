@@ -9,7 +9,7 @@ from users.models import CustomUser
 
 class BuyerSerializer(serializers.ModelSerializer):
 
-    user_id= RegistrationSerializer(read_only=True)
+    user_id = RegistrationSerializer(read_only=True)
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
@@ -26,7 +26,7 @@ class BuyerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         buyer = Buyer(
-            
+            user_id =validated_data['user_id'],
             name = validated_data['name'],
             about = validated_data['about'],
             address = validated_data['address'],
