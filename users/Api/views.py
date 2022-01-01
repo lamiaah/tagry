@@ -9,52 +9,99 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 from django.views.decorators.csrf import csrf_exempt
+from users.Api.api_register import validate_token
 
 
-class RegisterAPI(APIView):
 
+def login_user(request):
     
-    def post(self, request, *args, **kwargs):
-        
-        if request.method == 'POST':
-            serializer = RegistrationSerializer(data=request.data)
-            data = {}
-            if serializer.is_valid():
-                account = serializer.save()
-                data['response'] = "successfully registered a new user."
-                data['email'] = account.email
-                data['response'] = account.username
-            else:
-                data = serializer.errors
-                # data = serializer.data
-            return Response(data)
+    res = {}
+
+    try:
+        email = request.data.get('email')
+        password = request.data.get('password')
+        validate = authenticate(email= email, password = password)
+
+        if validate:
+            login(request, validate)
+            res['token'] = validate.auth_token.key
+            res['status_code'] = '200'
+            res['response_msg'] = 'success login'
+            return res
+        else:
+            res['status_code'] = '401'
+            res['response_msg'] = 'Invalid Login'
+            return res
+    except Exception as e:
+        res['status_code'] = '400'
+        res['response_msg'] = str(e)
+        return res
 
 
 
+class UserLogout(APIView):
 
+    permission_classes = [IsAuthenticated]
 
-class UserLogin(APIView):
-
-    def post(self, request):
+    def post(self, request, user_id):
         try:
-            email = request.data.get('email')
-            password = request.data.get('password')
-            validate = authenticate(email= email, password = password)
+            token_validation = validate_token(request, user_id)
+            if token_validation == True:
+                logout(request)
+                # request.auth.delete()
+                return Response('Success', status.HTTP_200_OK)
+            else:
+                return Response('invalid data', status = status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({'error' : str(e)}, status.HTTP_406_NOT_ACCEPTABLE)
 
-            if validate:
-                login(request, validate)
-                us = CustomUser.objects.get(email = email)
-                data =  {   'id': us.id,
-                        'token' : validate.auth_token.key,
-                        'email' : request.data['email']
-                    }
+
+
+
+
+class UpdateUserPassword(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+
+    def put(self, request, user_id):
+
+        try:
+            try:
+                user_data = CustomUser.objects.get(pk = user_id)
+            except CustomUser.DoesNotExist:
                 return Response(
-                 data, status.HTTP_200_OK
+                    {
+                        'error' : 'no user found',
+                    },
+                    status.HTTP_404_NOT_FOUND
                 )
             else:
-                return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
+                token_validation = validate_token(request, user_id)
+                if token_validation == True:
+                    user_data.set_password(request.data.get('new_password'))
+                    user_data.save()
+                    return Response(
+                        {
+                            'response' : 'password updated success',
+                        },
+                        status.HTTP_200_OK
+                    )
+                else:
+                    return Response(
+                        {
+                            'error' : 'invalid data',
+                        },
+                        status.HTTP_406_NOT_ACCEPTABLE
+                    )
+
         except Exception as e:
-            return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {
+                    'error' : 'some thing went wrong {}'.format(e),
+                },
+                status.HTTP_400_BAD_REQUEST
+            )
 
 
 
