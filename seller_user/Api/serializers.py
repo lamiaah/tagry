@@ -6,28 +6,30 @@ from countries.models import Countries
 from area.models import Area
 from users.models import CustomUser
 
+ 
+
 class SellerSerializer(serializers.ModelSerializer):
-    # user = serializers.IntegerField()
+    user = serializers.CharField ()
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
     website = serializers.URLField()
     seller_address = serializers.CharField()
-    category_id =  serializers.IntegerField()
-    city_name =  serializers.ReadOnlyField(source='city_name.city_name')
-    country_name =  serializers.ReadOnlyField(source='country_name.country_name')
-    area_name =  serializers.ReadOnlyField(source='area_name.area_name')
-    category_id = serializers.ReadOnlyField(source='category_id.category_title')
+    category_id =  serializers.CharField ()
+    city_name =  serializers.CharField ()
+    country_name =  serializers.CharField ()
+    area_name =  serializers.CharField ()
+    
 
     class Meta:
-        model=Seller
+        model= Seller
         fields='__all__'
 
 
     def create(self, validated_data):
 
         seller = Seller(
-            # user = CustomUser.objects.get(pk = validated_data['user']),
+            user = CustomUser.objects.get(pk = validated_data['user']),
             name = validated_data['name'],
             website = validated_data['website'],
             about = validated_data['about'],

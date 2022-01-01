@@ -7,8 +7,6 @@ from django.contrib.auth import authenticate, logout, login
 from users.models import CustomUser
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
-
-
 from buyer.models import Buyer
 from users.Api.api_register import register, validate_token
 from buyer.Api.api_register_buyer import register_buyer
@@ -24,28 +22,29 @@ class LoginBuyer(APIView):
             res = login_user(request)
 
             if res['status_code'] == '200':
-                user_id = CustomUser.objects.get(email = request.data.get('email'))
-                user = Buyer.objects.get(user_id = user_id.id)
+                user_ido = CustomUser.objects.get(email = request.data.get('email'))
+                user = Buyer.objects.get(user = user_ido.id)
+                print("uu")
                 res['user_data'] = {
-                    'id' : user_id.id,
-                    'email' : user_id.email,
-                    'username' : user_id.username,
-                    # 'user_address' : '{}, {}, {}'.format(user.area.country.country_name, user.area.city.city_name, user.area.area_name),
+                   
+                    'id' : user_ido.id,
+                    'email' : user_ido.email,
+                    'username' : user_ido.username,
                     'name' : user.name,
-                    'about' : user.about,
-                    'image' : user.image,
-                    'city' :user.city,
-                    'country':user.country,
-                    'area':user.area,
+                    'about' : user.about,   
                     'address':user.address,
                     
                 }
+                
                 return Response(res, status = status.HTTP_200_OK)
+               
             elif res['status_code'] == '401':
+               
                 return Response(res, status = status.HTTP_401_UNAUTHORIZED)
             else:
                 return Response(res, status = status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
             return Response(str(e), status = status.HTTP_404_NOT_FOUND)
 
 
@@ -64,14 +63,16 @@ class RegisterBuyer(APIView):
             }
 
             custom_user_register = register(custom_user_data)
-
+          
             if custom_user_register['error_code'] == 2:
                 return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
             elif custom_user_register['error_code'] == 4:
+               
                 return Response(custom_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
             elif custom_user_register['error_code'] == 1 or custom_user_register['error_code'] == 3:
+                print("here2")
                 end_user_data = {
-                    'user_id' : custom_user_register['serializer_msg']['user_id'],
+                    'user' : custom_user_register['serializer_msg']['user_id'],
                     'name' : request.data.get('name'),
                     'about' : request.data.get('about'),
                     'image' : request.data.get('image'),
@@ -81,16 +82,21 @@ class RegisterBuyer(APIView):
                     'country' : request.data.get('country'),
                     
                 }
+                print("here3")
 
                 end_user_register = register_buyer(end_user_data)
 
                 if end_user_register['error_code'] == 2:
+                    print("here3sdfghj")
                     return Response(end_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
                 elif end_user_register['error_code'] == 4:
+                    print("hererrrrrrewsxcvfd")
                     return Response(end_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
                 elif end_user_register['error_code'] == 1:
+                    print("hererrrrrr")
                     return Response(end_user_register['serializer_msg'], status = status.HTTP_400_BAD_REQUEST)
                 else:
+                    print("hereiiiiiiiiii")
                     end_user_register['serializer_msg']['user_name'] = custom_user_register['serializer_msg']['user_name']
                     return Response(end_user_register['serializer_msg'], status = status.HTTP_201_CREATED)
 
@@ -110,7 +116,7 @@ class GetBuyerData(APIView):
     def get(self, request, user_id):
 
         try:
-            token_validator = validate_token(request, user_id)
+            token_validator = validate_token(request)
 
             if token_validator == True:
                 user_data = {}
@@ -133,105 +139,12 @@ class GetBuyerData(APIView):
             print(e)
             return Response({'error' : 'some thing went wrong'}, status = status.HTTP_400_BAD_REQUEST)
 
-# class BuyerLogin(APIView):
-
-#     def post(self, request):
-    
-#         email = request.data.get('email')
-#         password = request.data.get('password')
-#         validate = authenticate(email= email, password = password)
-
-#         if validate:
-#             login(request, validate)
-#             us = CustomUser.objects.get(email = email)
-#             datax =  {'id': us.id,
-#                     'token' : validate.auth_token.key,
-#                     'email' : request.data['email']
-#                 }
-#             x=  datax['id']
-#             if request.method == 'POST':
-              
-#                 serializer =BuyerSerializer(data = request.data ,many= True)
-#                 request.data["user_id"] = x
-#                 if serializer.is_valid():      
-#                     serializer.save()  
-#                     return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)      
-#                 else:
-                
-#                     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
-        
-# class BuyerInfo(APIView):
-  
-  
-#     def post(self, request ,user_id):
-#         try:
-#             user = CustomUser.objects.filter(id=user_id)            
-#         except CustomUser.DoesNotExist:
-#             return Response(status=status.HTTP_404_NOT_FOUND) 
-
-#         serializer =BuyerSerializer(data = request.data ,many= True)
-#         request['user_id'] =user.id
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class RegisterBuyer(APIView):
-
-    
-#     def post(self, request, *args, **kwargs):
-
-        
-#         if request.method == 'POST':
-#             serializer = RegistrationSerializer(data=request.data)
-#             data = {}
-#             if serializer.is_valid():
-#                 account = serializer.save()
-#                 for i in request.FILES.getlist('name','about'):
-#                     buyer = BuyerSerializer(data=request.data)
-#                     if buyer.is_valid():
-#                         buyerinfo(account,i)
-#                 data['response'] = "successfully registered a new user."
-#                 data['email'] = account.email
-#                 data['response'] = account.username
-#             else:
-#                 data = serializer.errors
-#                 # data = serializer.data
-#             return Response(data)
-
-
-# def buyerinfo(user_id,info):
-#     new_buyer = Buyer.objects.create(user_id=user_id,name=info,about= info)
-#     new_buyer.save()
-#     return new_buyer
 
 
 
 
 
 
-# class BuyerLogin(APIView):
 
-#     def post(self, request):
-#         try:
-#             email = request.data.get('email')
-#             password = request.data.get('password')
-#             validate = authenticate(email= email, password = password)
-
-#             if validate:
-#                 login(request, validate)
-#                 us = CustomUser.objects.get(email = email)
-#                 data =  {   'id': us.id,
-#                         'token' : validate.auth_token.key,
-#                         'email' : request.data['email']
-#                     }
-                    
-#                 return Response(
-#                  data, status.HTTP_200_OK
-#                 )
-#             else:
-#                 return Response('Invalid Login', status = status.HTTP_401_UNAUTHORIZED)
-#         except Exception as e:
-#             return Response(str(e), status = status.HTTP_400_BAD_REQUEST)
 
 

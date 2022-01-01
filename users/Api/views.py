@@ -24,7 +24,9 @@ def login_user(request):
 
         if validate:
             login(request, validate)
+    
             res['token'] = validate.auth_token.key
+           
             res['status_code'] = '200'
             res['response_msg'] = 'success login'
             return res
@@ -33,6 +35,7 @@ def login_user(request):
             res['response_msg'] = 'Invalid Login'
             return res
     except Exception as e:
+        print("oiuytre")
         res['status_code'] = '400'
         res['response_msg'] = str(e)
         return res

@@ -6,7 +6,7 @@ from users.models import CustomUser
 
 class Buyer(models.Model):
     id = models.AutoField(null=False,blank=False,primary_key=True)
-    user_id = models.ForeignKey(CustomUser, on_delete= models.RESTRICT, related_name='+')
+    user = models.ForeignKey(CustomUser, on_delete= models.RESTRICT, related_name='+')
     name = models.CharField(null= False,blank=False,default='',max_length=75)
     about = models.CharField(null= False,blank=False ,max_length=225)
     image = models.ImageField(upload_to='buyer_pic/')

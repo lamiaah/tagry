@@ -8,17 +8,14 @@ from users.models import CustomUser
 
 class BuyerSerializer(serializers.ModelSerializer):
 
-    user_id = serializers.CharField()
+    user = serializers.CharField()
     name = serializers.CharField ()
     about = serializers.CharField ()
     image= serializers.ImageField ()
     address = serializers.CharField()
     area = serializers.CharField()
-    city =  serializers.IntegerField()
-    country =  serializers.IntegerField()
-  
-
-
+    city =  serializers.CharField()
+    country =  serializers.CharField()
 
     class Meta:
         model = Buyer
@@ -29,7 +26,8 @@ class BuyerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         buyer = Buyer(
-            user_id = CustomUser.objects.get(pk = validated_data['user_id']),
+            user = CustomUser.objects.get(pk = validated_data['user']),
+           
             name = validated_data['name'],
             about = validated_data['about'],
             image = validated_data['image'],            
@@ -38,8 +36,9 @@ class BuyerSerializer(serializers.ModelSerializer):
             city = Cities.objects.get(pk = validated_data['city']),
             country =Countries.objects.get(pk = validated_data['country']),
         )
-
+        
         buyer.save()
+        print("lklfklhere")
 
         return buyer
 

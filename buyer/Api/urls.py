@@ -1,9 +1,9 @@
 from django.urls import path
-from buyer.Api.views import   RegisterBuyer ,LoginBuyer , GetBuyerData
+from buyer.Api.views import   RegisterBuyer  , GetBuyerData ,LoginBuyer
 
 
 urlpatterns = [
-    path('info_buyer/<int:user_id>',   GetBuyerData.as_view()),
+    path('info_buyer/<int:user_id>', GetBuyerData.as_view()),
     path('register_buyer/',RegisterBuyer.as_view()),
     path('login_buyer/',LoginBuyer.as_view()),
     

@@ -61,8 +61,9 @@ def validate_token(request):
     
     try:
         user_token = Token.objects.get(user = request.data.get('user_id'))
-
-        if user_token.user.id == int(request.data.get('user_id')) and str(request.auth) == str(user_token.key):
+        
+        print(user_token)
+        if user_token.user.id == int(request.data.get('user_id')) and str(request.auth) == str(user_token.key) :
             return True
         else:
             return False
