@@ -39,26 +39,27 @@ from buyer.models import Buyer
                 
 #                     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
         
-# class BuyerInfo(APIView):
+class BuyerInfo(APIView):
   
   
-#     def post(self, request ,user_id):
-#         try:
-#             user = CustomUser.objects.filter(id=user_id)            
-#         except CustomUser.DoesNotExist:
-#             return Response(status=status.HTTP_404_NOT_FOUND) 
+    def post(self, request ,user_id):
+        try:
+            user = CustomUser.objects.filter(id=user_id)            
+        except CustomUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND) 
 
-#         serializer =BuyerSerializer(data = request.data ,many= True)
-#         request['user_id'] =user.id
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer =BuyerSerializer(data = request.data ,many= True)
+        request['user_id'] =user.id
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RegisterBuyer(APIView):
 
     
     def post(self, request, *args, **kwargs):
+        
         
         if request.method == 'POST':
             serializer = RegistrationSerializer(data=request.data)
@@ -77,7 +78,7 @@ class RegisterBuyer(APIView):
                 # data = serializer.data
             return Response(data)
 
-            
+
 def buyerinfo(user_id,info):
     new_buyer = Buyer.objects.create(user_id=user_id,name=info,about= info,address= info)
     new_buyer.save()
