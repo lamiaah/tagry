@@ -59,14 +59,14 @@ class RegisterBuyer(APIView):
 
     
     def post(self, request, *args, **kwargs):
-        
+
         
         if request.method == 'POST':
             serializer = RegistrationSerializer(data=request.data)
             data = {}
             if serializer.is_valid():
                 account = serializer.save()
-                for i in request.FILES.getlist('name','about','address'):
+                for i in request.FILES.getlist('name','about'):
                     buyer = BuyerSerializer(data=request.data)
                     if buyer.is_valid():
                         buyerinfo(account,i)
@@ -80,7 +80,7 @@ class RegisterBuyer(APIView):
 
 
 def buyerinfo(user_id,info):
-    new_buyer = Buyer.objects.create(user_id=user_id,name=info,about= info,address= info)
+    new_buyer = Buyer.objects.create(user_id=user_id,name=info,about= info)
     new_buyer.save()
     return new_buyer
 
