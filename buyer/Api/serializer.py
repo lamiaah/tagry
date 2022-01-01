@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from buyer.models import Buyer
-from users.Api.serializers import RegistrationSerializer
+
 from cities.models import Cities
 from countries.models import Countries
 from area.models import Area
