@@ -45,7 +45,7 @@ class UserLogout(APIView):
 
     def post(self, request, user_id):
         try:
-            token_validation = validate_token(request, user_id)
+            token_validation = validate_token(request)
             if token_validation == True:
                 logout(request)
                 # request.auth.delete()
