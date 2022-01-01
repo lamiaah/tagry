@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 from users.Api.serializers import RegistrationSerializer
 from django.views.decorators.csrf import csrf_exempt
-
+from buyer.models import Buyer
 
 # class BuyerLogin(APIView):
 
@@ -39,21 +39,21 @@ from django.views.decorators.csrf import csrf_exempt
                 
 #                     return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
         
-class BuyerInfo(APIView):
+# class BuyerInfo(APIView):
   
   
-    def post(self, request ,user_id):
-        try:
-            user = CustomUser.objects.filter(id=user_id)            
-        except CustomUser.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND) 
+#     def post(self, request ,user_id):
+#         try:
+#             user = CustomUser.objects.filter(id=user_id)            
+#         except CustomUser.DoesNotExist:
+#             return Response(status=status.HTTP_404_NOT_FOUND) 
 
-        serializer =BuyerSerializer(data = request.data ,many= True)
-        request['user_id'] =user.id
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         serializer =BuyerSerializer(data = request.data ,many= True)
+#         request['user_id'] =user.id
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class RegisterBuyer(APIView):
 
@@ -65,6 +65,10 @@ class RegisterBuyer(APIView):
             data = {}
             if serializer.is_valid():
                 account = serializer.save()
+                for i in request.FILES.getlist('name','about','address'):
+                    buyer = BuyerSerializer(data=request.data)
+                    if buyer.is_valid():
+                        buyerinfo(account,i)
                 data['response'] = "successfully registered a new user."
                 data['email'] = account.email
                 data['response'] = account.username
@@ -72,6 +76,13 @@ class RegisterBuyer(APIView):
                 data = serializer.errors
                 # data = serializer.data
             return Response(data)
+
+            
+def buyerinfo(user_id,info):
+    new_buyer = Buyer.objects.create(user_id=user_id,name=info,about= info,address= info)
+    new_buyer.save()
+    return new_buyer
+
 
 
 
@@ -92,6 +103,7 @@ class BuyerLogin(APIView):
                         'token' : validate.auth_token.key,
                         'email' : request.data['email']
                     }
+                    
                 return Response(
                  data, status.HTTP_200_OK
                 )
