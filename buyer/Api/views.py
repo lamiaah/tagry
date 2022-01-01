@@ -72,13 +72,14 @@ class RegisterBuyer(APIView):
             elif custom_user_register['error_code'] == 1 or custom_user_register['error_code'] == 3:
                 end_user_data = {
                     'user_id' : custom_user_register['serializer_msg']['user_id'],
-                    'area' : request.data.get('area'),
-                    'address' : request.data.get('address'),
                     'name' : request.data.get('name'),
                     'about' : request.data.get('about'),
+                    'image' : request.data.get('image'),
+                    'area' : request.data.get('area'),
+                    'address' : request.data.get('address'),
                     'city' : request.data.get('city'),
                     'country' : request.data.get('country'),
-                    'image' : request.data.get('image'),
+                    
                 }
 
                 end_user_register = register_buyer(end_user_data)
