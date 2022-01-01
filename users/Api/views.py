@@ -62,49 +62,49 @@ def login_user(request):
 
 
 
-# class UpdateUserPassword(APIView):
+class UpdateUserPassword(APIView):
 
-#     permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
-#     def put(self, request, user_id):
+    def put(self, request, user_id):
 
-#         try:
-#             try:
-#                 user_data = CustomUser.objects.get(pk = user_id)
-#             except CustomUser.DoesNotExist:
-#                 return Response(
-#                     {
-#                         'error' : 'no user found',
-#                     },
-#                     status.HTTP_404_NOT_FOUND
-#                 )
-#             else:
-#                 token_validation = validate_token(request)
-#                 if token_validation == True:
-#                     user_data.set_password(request.data.get('new_password'))
-#                     user_data.save()
-#                     return Response(
-#                         {
-#                             'response' : 'password updated success',
-#                         },
-#                         status.HTTP_200_OK
-#                     )
-#                 else:
-#                     return Response(
-#                         {
-#                             'error' : 'invalid data',
-#                         },
-#                         status.HTTP_406_NOT_ACCEPTABLE
-#                     )
+        try:
+            try:
+                user_data = CustomUser.objects.get(pk = user_id)
+            except CustomUser.DoesNotExist:
+                return Response(
+                    {
+                        'error' : 'no user found',
+                    },
+                    status.HTTP_404_NOT_FOUND
+                )
+            else:
+                token_validation = validate_token(request)
+                if token_validation == True:
+                    user_data.set_password(request.data.get('new_password'))
+                    user_data.save()
+                    return Response(
+                        {
+                            'response' : 'password updated success',
+                        },
+                        status.HTTP_200_OK
+                    )
+                else:
+                    return Response(
+                        {
+                            'error' : 'invalid data',
+                        },
+                        status.HTTP_406_NOT_ACCEPTABLE
+                    )
 
-#         except Exception as e:
-#             return Response(
-#                 {
-#                     'error' : 'some thing went wrong {}'.format(e),
-#                 },
-#                 status.HTTP_400_BAD_REQUEST
-#             )
+        except Exception as e:
+            return Response(
+                {
+                    'error' : 'some thing went wrong {}'.format(e),
+                },
+                status.HTTP_400_BAD_REQUEST
+            )
 
 
 
